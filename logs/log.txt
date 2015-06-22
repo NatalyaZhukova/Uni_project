@@ -1,0 +1,2 @@
+22-06-2015 19:31:16 ERROR ConnectorDB:31 - config\config.properties (Системе не удается найти указанный путь)
+22-06-2015 19:32:34 ERROR ConnectorDB:31 - config\config (Системе не удается найти указанный путь)
