@@ -15,7 +15,12 @@ import by.zhukova.uni.entity.Entity;
 public class FacultyDAO extends AbstractDAO {
 
 	static Logger logger = Logger.getLogger(FacultyDAO.class);
-
+	private final String SELECT_ALL = "SELECT * FROM faculties";
+	private final String SELECT_BY_ID = "SELECT * FROM faculties WHERE id=?";;
+	private final String DELETE = "DELETE FROM faculties WHERE id=?";
+	private final String CREATE = "INSERT INTO faculties (id_faculty, faculty_name, faculty_plan, discipline_1, discipline_2, discipline_3) VALUES (?, ?, ?, ?, ?, ?)";
+	private final String UPDATE = "UPDATE disciplines SET  faculty_name=?, faculty_plan=?, discipline_1=?, discipline_2=?, discipline_3=? WHERE id_faculty=?";
+	
 	public FacultyDAO(Connection connection) {
 		super(connection);
 
@@ -24,9 +29,8 @@ public class FacultyDAO extends AbstractDAO {
 	@Override
 	public List<Faculty> findAll() {
 		List<Faculty> list = new ArrayList<Faculty>();
-		String query = "SELECT * FROM disciplines";
 		try {
-			PreparedStatement pst = connection.prepareStatement(query);
+			PreparedStatement pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Faculty fac = new Faculty();
@@ -38,10 +42,12 @@ public class FacultyDAO extends AbstractDAO {
 				fac.setThirdDiscipline(res.getInt(5));
 				list.add(fac);
 			}
-			super.close(pst);
+			
 
 		} catch (SQLException e) {
 			logger.error(e);
+		} finally {
+			close(pst);
 		}
 		return list;
 
@@ -49,11 +55,10 @@ public class FacultyDAO extends AbstractDAO {
 
 	@Override
 	public Faculty findEntityById(int id) {
-		String query = "SELECT * FROM faculties WHERE id=?";
 		PreparedStatement pst;
 		Faculty fac = null;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(SELECT_BY_ID);
 			pst.setInt(1, id);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
@@ -64,9 +69,11 @@ public class FacultyDAO extends AbstractDAO {
 				fac.setSecondDiscipline(res.getInt(5));
 				fac.setThirdDiscipline(res.getInt(5));
 			}
-			super.close(pst);
+			
 		} catch (SQLException e) {
 			logger.error(e);
+		} finally {
+			close(pst);
 		}
 
 		return fac;
@@ -74,21 +81,22 @@ public class FacultyDAO extends AbstractDAO {
 
 	@Override
 	public boolean delete(int id) {
-		String query = "DELETE FROM faculties WHERE id=?";
 		PreparedStatement pst;
 		boolean result;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+			
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			close(pst);
 		}
 		return result;
 	}
@@ -97,20 +105,21 @@ public class FacultyDAO extends AbstractDAO {
 	public boolean delete(Entity entity) {
 		boolean result;
 		int id = entity.getId();
-		String query = "DELETE FROM faculties WHERE id=?";
 		PreparedStatement pst;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+			
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			close(pst);	
 		}
 		return result;
 
@@ -119,11 +128,10 @@ public class FacultyDAO extends AbstractDAO {
 	@Override
 	public boolean create(Entity entity) {
 		boolean result;
-		String query = "INSERT INTO faculties (id_faculty, faculty_name, faculty_plan, discipline_1, discipline_2, discipline_3) VALUES (?, ?, ?, ?, ?, ?)";
 		PreparedStatement pst;
 		Faculty fac = (Faculty) entity;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(CREATE);
 			pst.setInt(1, fac.getId());
 			pst.setString(2, fac.getName());
 			pst.setInt(3, fac.getFacultyPlan());
@@ -136,10 +144,12 @@ public class FacultyDAO extends AbstractDAO {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+			
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			close(pst);
 		}
 		return result;
 	}
@@ -148,10 +158,9 @@ public class FacultyDAO extends AbstractDAO {
 	public boolean update(Entity entity) {
 		boolean result;
 		Faculty fac = (Faculty) entity;
-		String query = "UPDATE disciplines SET  faculty_name=?, faculty_plan=?, discipline_1=?, discipline_2=?, discipline_3=? WHERE id_faculty=?";
 		PreparedStatement pst;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(UPDATE);
 
 			pst.setString(1, fac.getName());
 			pst.setInt(2, fac.getFacultyPlan());
@@ -164,11 +173,13 @@ public class FacultyDAO extends AbstractDAO {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+			
 
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			close(pst);
 		}
 		return result;
 	}
