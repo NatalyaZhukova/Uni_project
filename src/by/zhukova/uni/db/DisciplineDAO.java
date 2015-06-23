@@ -14,6 +14,11 @@ import by.zhukova.uni.entity.Entity;
 public class DisciplineDAO extends AbstractDAO {
 
 	static Logger logger = Logger.getLogger(DisciplineDAO.class);
+	private final String SELECT_ALL = "SELECT * FROM disciplines";
+	private final String SELECT_BY_ID = "SELECT * FROM disciplines WHERE id=?";
+	private final String DELETE = "DELETE FROM disciplines WHERE id=?";
+	private final String CREATE = "INSERT INTO disciplines (id, name) VALUES (?, ?)";
+	private final String UPDATE = "UPDATE disciplines SET  name=? WHERE id=?";
 
 	public DisciplineDAO(Connection connection) {
 		super(connection);
@@ -22,9 +27,8 @@ public class DisciplineDAO extends AbstractDAO {
 	@Override
 	public List<Discipline> findAll() {
 		List<Discipline> list = new ArrayList<Discipline>();
-		String query = "SELECT * FROM disciplines";
 		try {
-			PreparedStatement pst = connection.prepareStatement(query);
+			PreparedStatement pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Discipline dis = new Discipline();
@@ -32,10 +36,12 @@ public class DisciplineDAO extends AbstractDAO {
 				dis.setName(res.getString(2));
 				list.add(dis);
 			}
-			super.close(pst);
+		
 
 		} catch (SQLException e) {
 			logger.error(e);
+		} finally {
+		  	super.close(pst);
 		}
 		return list;
 
@@ -43,11 +49,10 @@ public class DisciplineDAO extends AbstractDAO {
 
 	@Override
 	public Discipline findEntityById(int id) {
-		String query = "SELECT * FROM disciplines WHERE id=?";
 		PreparedStatement pst;
 		Discipline dis = null;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(SELECT_BY_ID);
 			pst.setInt(1, id);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
@@ -55,9 +60,10 @@ public class DisciplineDAO extends AbstractDAO {
 				dis.setId(res.getInt(1));
 				dis.setName(res.getString(2));
 			}
-			super.close(pst);
 		} catch (SQLException e) {
 			logger.error(e);
+		} finally {
+			super.close(pst);
 		}
 
 		return dis;
@@ -65,21 +71,23 @@ public class DisciplineDAO extends AbstractDAO {
 
 	@Override
 	public boolean delete(int id) {
-		String query = "DELETE FROM disciplines WHERE id=?";
 		PreparedStatement pst;
 		boolean result;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+			
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		}
+		finally {
+			super.close(pst);
 		}
 		return result;
 	}
@@ -88,20 +96,21 @@ public class DisciplineDAO extends AbstractDAO {
 	public boolean delete(Entity entity) {
 		boolean result;
 		int id = entity.getId();
-		String query = "DELETE FROM disciplines WHERE id=?";
 		PreparedStatement pst;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+			
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			super.close(pst);
 		}
 		return result;
 
@@ -110,11 +119,10 @@ public class DisciplineDAO extends AbstractDAO {
 	@Override
 	public boolean create(Entity entity) {
 		boolean result;
-		String query = "INSERT INTO disciplines (id, name) VALUES (?, ?)";
 		PreparedStatement pst;
 		Discipline dis = (Discipline) entity;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(CREATE);
 			pst.setInt(1, dis.getId());
 			pst.setString(2, dis.getName());
 			int check = pst.executeUpdate();
@@ -122,10 +130,12 @@ public class DisciplineDAO extends AbstractDAO {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+			
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			super.close(pst);
 		}
 		return result;
 	}
@@ -134,10 +144,9 @@ public class DisciplineDAO extends AbstractDAO {
 	public boolean update(Entity entity) {
 		boolean result;
 		Discipline dis = (Discipline) entity;
-		String query = "UPDATE disciplines SET  name=? WHERE id=?";
 		PreparedStatement pst;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(UPDATE);
 			pst.setString(1, dis.getName());
 			pst.setInt(2, dis.getId());
 			int check = pst.executeUpdate();
@@ -145,11 +154,14 @@ public class DisciplineDAO extends AbstractDAO {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+		
 
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		}
+		finally {
+			super.close(pst);
 		}
 		return result;
 	}
