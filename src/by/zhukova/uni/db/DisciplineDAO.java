@@ -41,7 +41,7 @@ public class DisciplineDAO extends AbstractDAO {
 		} catch (SQLException e) {
 			logger.error(e);
 		} finally {
-		  	super.close(pst);
+		  	close(pst);
 		}
 		return list;
 
@@ -63,7 +63,7 @@ public class DisciplineDAO extends AbstractDAO {
 		} catch (SQLException e) {
 			logger.error(e);
 		} finally {
-			super.close(pst);
+			close(pst);
 		}
 
 		return dis;
@@ -87,7 +87,7 @@ public class DisciplineDAO extends AbstractDAO {
 			result = false;
 		}
 		finally {
-			super.close(pst);
+			close(pst);
 		}
 		return result;
 	}
@@ -110,7 +110,7 @@ public class DisciplineDAO extends AbstractDAO {
 			logger.error(e);
 			result = false;
 		} finally {
-			super.close(pst);
+			close(pst);
 		}
 		return result;
 
@@ -135,7 +135,7 @@ public class DisciplineDAO extends AbstractDAO {
 			logger.error(e);
 			result = false;
 		} finally {
-			super.close(pst);
+			close(pst);
 		}
 		return result;
 	}
@@ -161,7 +161,7 @@ public class DisciplineDAO extends AbstractDAO {
 			result = false;
 		}
 		finally {
-			super.close(pst);
+			close(pst);
 		}
 		return result;
 	}
