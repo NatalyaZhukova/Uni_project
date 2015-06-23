@@ -15,6 +15,15 @@ import by.zhukova.uni.entity.Entity;
 public class AbiturientDAO extends AbstractDAO {
 
 	static Logger logger = Logger.getLogger(AbiturientDAO.class);
+	private final String SELECT_ALL = "SELECT * FROM abiturients";
+	private final String SELECT_BY_ID = "SELECT * FROM abiturients WHERE id=?";
+	private final String SELECT_BY_USERNAME = "SELECT * FROM abiturients WHERE username=?"; // specific Abiturient method
+	private final String SELECT_BY_FACULTY = "SELECT * FROM abiturients WHERE chosen_faculty=?"; //specific Abiturient method
+	private final String DELETE = "DELETE FROM abiturients WHERE id=?";
+	private final String CREATE = "INSERT INTO abiturients (id, username, first_name, middle_name, last_name, discipline1_score, discipline2_score, "
+				+ "discipline3_score, school_score, score_sum) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private final String UPDATE = "UPDATE abiturients SET username=?, first_name=?, middle_name=?, last_name=?, discipline1_score=?, discipline2_score=?, "
+				+ "discipline3_score=?, school_score=?, score_sum=?  WHERE id=?";
 
 	public AbiturientDAO(Connection connection) {
 		super(connection);
@@ -24,9 +33,8 @@ public class AbiturientDAO extends AbstractDAO {
 	@Override
 	public List<Abiturient> findAll() {
 		List<Abiturient> list = new ArrayList<Abiturient>();
-		String query = "SELECT * FROM abiturients";
 		try {
-			PreparedStatement pst = connection.prepareStatement(query);
+			PreparedStatement pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Abiturient ab = new Abiturient();
@@ -42,10 +50,43 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setOverallScore(res.getInt(10));
 				list.add(ab);
 			}
-			super.close(pst);
+			
 
 		} catch (SQLException e) {
 			logger.error(e);
+		} finally {
+			close(pst);
+		}
+		return list;
+
+	}
+	
+	public List<Abiturient> findAbitursByFaculty(int facultyId) {
+		List<Abiturient> list = new ArrayList<Abiturient>();
+		try {
+			PreparedStatement pst = connection.prepareStatement(SELECT_BY_FACULTY);
+			pst.setInt(1, facultyId);
+			ResultSet res = pst.executeQuery();
+			while (res.next()) {
+				Abiturient ab = new Abiturient();
+				ab.setId(res.getInt(1));
+				ab.setUsername(res.getString(2));
+				ab.setFirstName(res.getString(3));
+				ab.setMiddlName(res.getString(4));
+				ab.setLastName(res.getString(5));
+				ab.setFirstScore(res.getInt(6));
+				ab.setSecondScore(res.getInt(7));
+				ab.setThirdScore(res.getInt(8));
+				ab.setSchoolScore(res.getInt(9));
+				ab.setOverallScore(res.getInt(10));
+				list.add(ab);
+			}
+			
+
+		} catch (SQLException e) {
+			logger.error(e);
+		} finally {
+			close(pst);
 		}
 		return list;
 
@@ -53,11 +94,10 @@ public class AbiturientDAO extends AbstractDAO {
 
 	@Override
 	public Abiturient findEntityById(int id) {
-		String query = "SELECT * FROM abiturients WHERE id=?";
 		PreparedStatement pst;
 		Abiturient ab = null;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(SELECT_BY_ID);
 			pst.setInt(1, id);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
@@ -73,9 +113,38 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setSchoolScore(res.getInt(9));
 				ab.setOverallScore(res.getInt(10));
 			}
-			super.close(pst);
 		} catch (SQLException e) {
 			logger.error(e);
+		} finally {
+			close(pst);
+		}
+
+		return ab;
+	}
+		public Abiturient findAbiturByUsername(String username) {
+		PreparedStatement pst;
+		Abiturient ab = null;
+		try {
+			pst = connection.prepareStatement(SELECT_BY_USERNAME);
+			pst.setString(1, username);
+			ResultSet res = pst.executeQuery();
+			while (res.next()) {
+				ab = new Abiturient();
+				ab.setId(res.getInt(1));
+				ab.setUsername(res.getString(2));
+				ab.setFirstName(res.getString(3));
+				ab.setMiddlName(res.getString(4));
+				ab.setLastName(res.getString(5));
+				ab.setFirstScore(res.getInt(6));
+				ab.setSecondScore(res.getInt(7));
+				ab.setThirdScore(res.getInt(8));
+				ab.setSchoolScore(res.getInt(9));
+				ab.setOverallScore(res.getInt(10));
+			}
+		} catch (SQLException e) {
+			logger.error(e);
+		} finally {
+			close(pst);
 		}
 
 		return ab;
@@ -83,21 +152,22 @@ public class AbiturientDAO extends AbstractDAO {
 
 	@Override
 	public boolean delete(int id) {
-		String query = "DELETE FROM abiturients WHERE id=?";
 		PreparedStatement pst;
 		boolean result;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+		
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			close(pst);
 		}
 		return result;
 	}
@@ -106,20 +176,21 @@ public class AbiturientDAO extends AbstractDAO {
 	public boolean delete(Entity entity) {
 		boolean result;
 		int id = entity.getId();
-		String query = "DELETE FROM abiturients WHERE id=?";
 		PreparedStatement pst;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+		
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			close(pst);
 		}
 		return result;
 	}
@@ -127,12 +198,10 @@ public class AbiturientDAO extends AbstractDAO {
 	@Override
 	public boolean create(Entity entity) {
 		boolean result;
-		String query = "INSERT INTO abiturients (id, username, first_name, middle_name, last_name, discipline1_score, discipline2_score, "
-				+ "discipline3_score, school_score, score_sum) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pst;
 		Abiturient ab = (Abiturient) entity;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(CREATE);
 			pst.setInt(1, ab.getId());
 			pst.setString(2, ab.getUsername());
 			pst.setString(3, ab.getFirstName());
@@ -148,10 +217,12 @@ public class AbiturientDAO extends AbstractDAO {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+		
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			close(pst);
 		}
 		return result;
 	}
@@ -160,11 +231,9 @@ public class AbiturientDAO extends AbstractDAO {
 	public boolean update(Entity entity) {
 		boolean result;
 		Abiturient ab = (Abiturient) entity;
-		String query = "UPDATE abiturients SET username=?, first_name=?, middle_name=?, last_name=?, discipline1_score=?, discipline2_score=?, "
-				+ "discipline3_score=?, school_score=?, score_sum=?  WHERE id=?";
 		PreparedStatement pst;
 		try {
-			pst = connection.prepareStatement(query);
+			pst = connection.prepareStatement(UPDATE);
 			pst.setInt(10, ab.getId());
 			pst.setString(1, ab.getUsername());
 			pst.setString(2, ab.getFirstName());
@@ -180,11 +249,13 @@ public class AbiturientDAO extends AbstractDAO {
 				result = false;
 			}
 			result = true;
-			super.close(pst);
+		
 
 		} catch (SQLException e) {
 			logger.error(e);
 			result = false;
+		} finally {
+			close(pst);
 		}
 		return result;
 	}
