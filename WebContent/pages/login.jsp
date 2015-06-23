@@ -14,15 +14,20 @@
 	
 	<body>
 		<div class="login">
-			<form action="Login" method="POST">
+			<form action="controller" method="POST">
+			<input type="hidden"name="command" value="login"/>
 			<label> <fmt:message key="login.user" bundle="${ rb }" />:</label><br>
 			<input type="text" name="username"> <br>
 			<label><fmt:message key="login.password" bundle="${ rb }" />:</label><br>
 			<input type="password" name="password"> <br>
 			<input type="submit" value="<fmt:message key="login.submit" bundle="${ rb }" />"> <br>
-			
-			
-			
+			<br/>
+                         ${errorLoginPassMessage}
+                         <br/>
+			${wrongAction}
+			<br/>
+			${nullPage}
+			<br/>
 			</form>
 		</div>
 	</body>
