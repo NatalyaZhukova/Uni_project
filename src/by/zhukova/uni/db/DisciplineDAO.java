@@ -27,8 +27,9 @@ public class DisciplineDAO extends AbstractDAO {
 	@Override
 	public List<Discipline> findAll() {
 		List<Discipline> list = new ArrayList<Discipline>();
+		PreparedStatement pst = null;
 		try {
-			PreparedStatement pst = connection.prepareStatement(SELECT_ALL);
+			 pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Discipline dis = new Discipline();
@@ -49,7 +50,7 @@ public class DisciplineDAO extends AbstractDAO {
 
 	@Override
 	public Discipline findEntityById(int id) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		Discipline dis = null;
 		try {
 			pst = connection.prepareStatement(SELECT_BY_ID);
@@ -71,7 +72,7 @@ public class DisciplineDAO extends AbstractDAO {
 
 	@Override
 	public boolean delete(int id) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		boolean result;
 		try {
 			pst = connection.prepareStatement(DELETE);
@@ -96,7 +97,7 @@ public class DisciplineDAO extends AbstractDAO {
 	public boolean delete(Entity entity) {
 		boolean result;
 		int id = entity.getId();
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
@@ -119,7 +120,7 @@ public class DisciplineDAO extends AbstractDAO {
 	@Override
 	public boolean create(Entity entity) {
 		boolean result;
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		Discipline dis = (Discipline) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
@@ -144,7 +145,7 @@ public class DisciplineDAO extends AbstractDAO {
 	public boolean update(Entity entity) {
 		boolean result;
 		Discipline dis = (Discipline) entity;
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);
 			pst.setString(1, dis.getName());

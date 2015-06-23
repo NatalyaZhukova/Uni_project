@@ -33,8 +33,9 @@ public class AbiturientDAO extends AbstractDAO {
 	@Override
 	public List<Abiturient> findAll() {
 		List<Abiturient> list = new ArrayList<Abiturient>();
+		PreparedStatement pst = null;
 		try {
-			PreparedStatement pst = connection.prepareStatement(SELECT_ALL);
+			 pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Abiturient ab = new Abiturient();
@@ -63,8 +64,9 @@ public class AbiturientDAO extends AbstractDAO {
 	
 	public List<Abiturient> findAbitursByFaculty(int facultyId) {
 		List<Abiturient> list = new ArrayList<Abiturient>();
+		PreparedStatement pst = null;
 		try {
-			PreparedStatement pst = connection.prepareStatement(SELECT_BY_FACULTY);
+			 pst = connection.prepareStatement(SELECT_BY_FACULTY);
 			pst.setInt(1, facultyId);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
@@ -94,7 +96,7 @@ public class AbiturientDAO extends AbstractDAO {
 
 	@Override
 	public Abiturient findEntityById(int id) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		Abiturient ab = null;
 		try {
 			pst = connection.prepareStatement(SELECT_BY_ID);
@@ -122,7 +124,7 @@ public class AbiturientDAO extends AbstractDAO {
 		return ab;
 	}
 		public Abiturient findAbiturByUsername(String username) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		Abiturient ab = null;
 		try {
 			pst = connection.prepareStatement(SELECT_BY_USERNAME);
@@ -152,7 +154,7 @@ public class AbiturientDAO extends AbstractDAO {
 
 	@Override
 	public boolean delete(int id) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		boolean result;
 		try {
 			pst = connection.prepareStatement(DELETE);
@@ -176,7 +178,7 @@ public class AbiturientDAO extends AbstractDAO {
 	public boolean delete(Entity entity) {
 		boolean result;
 		int id = entity.getId();
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
@@ -198,7 +200,7 @@ public class AbiturientDAO extends AbstractDAO {
 	@Override
 	public boolean create(Entity entity) {
 		boolean result;
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		Abiturient ab = (Abiturient) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
@@ -231,7 +233,7 @@ public class AbiturientDAO extends AbstractDAO {
 	public boolean update(Entity entity) {
 		boolean result;
 		Abiturient ab = (Abiturient) entity;
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);
 			pst.setInt(10, ab.getId());

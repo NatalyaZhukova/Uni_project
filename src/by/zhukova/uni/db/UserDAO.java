@@ -30,8 +30,9 @@ public class UserDAO extends AbstractDAO {
 	@Override
 	public List<User> findAll() {
 		List<User> list = new ArrayList<User>();
+		PreparedStatement pst = null;
 		try {
-			PreparedStatement pst = connection.prepareStatement(SELECT_ALL);
+			 pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				User user = new User();
@@ -55,7 +56,7 @@ public class UserDAO extends AbstractDAO {
 	@Override
 	public User findEntityById(int id) {
 		
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		User user = null;
 		try {
 			pst = connection.prepareStatement(SELECT_BY_ID);
@@ -80,7 +81,7 @@ public class UserDAO extends AbstractDAO {
 	
 	public User findUserByUsername(String username) {
 		
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		User user = null;
 		try {
 			pst = connection.prepareStatement(SELECT_BY_USERNAME);
@@ -105,7 +106,7 @@ public class UserDAO extends AbstractDAO {
 
 	@Override
 	public boolean delete(int id) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		boolean result;
 		try {
 			pst = connection.prepareStatement(DELETE);
@@ -129,7 +130,7 @@ public class UserDAO extends AbstractDAO {
 	public boolean delete(Entity entity) {
 		boolean result;
 		int id = entity.getId();
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
@@ -151,7 +152,7 @@ public class UserDAO extends AbstractDAO {
 	@Override
 	public boolean create(Entity entity) {
 		boolean result;
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		User user = (User) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
@@ -178,7 +179,7 @@ public class UserDAO extends AbstractDAO {
 	public boolean update(Entity entity) {
 		boolean result;
 		User user = (User) entity;
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);
 			pst.setString(1, user.getUsername());

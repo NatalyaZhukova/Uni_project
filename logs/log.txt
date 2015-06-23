@@ -1,2 +1,11 @@
 22-06-2015 19:31:16 ERROR ConnectorDB:31 - config\config.properties (Системе не удается найти указанный путь)
 22-06-2015 19:32:34 ERROR ConnectorDB:31 - config\config (Системе не удается найти указанный путь)
+23-06-2015 20:47:30 ERROR ConnectionPool:24 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+23-06-2015 20:48:41 ERROR ConnectionPool:24 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+23-06-2015 20:49:07 ERROR ConnectionPool:24 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+23-06-2015 20:49:13 ERROR ConnectionPool:24 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+23-06-2015 20:50:05 ERROR ConnectionPool:24 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+23-06-2015 20:56:54 ERROR ConnectionPool:24 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+23-06-2015 20:57:31 ERROR ConnectionPool:24 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+23-06-2015 21:01:01 ERROR ConnectionPool:26 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+23-06-2015 22:48:52 ERROR ConnectionPool:26 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial

@@ -18,16 +18,10 @@ public class TestRun {
 
 	public static void main(String[] args) {
 		
-		 final String SQL_SELECT = 
-		          "SELECT * FROM disciplines";
+		 final String SQL_SELECT = "SELECT * FROM disciplines";
 		   Connection connect=null;
-		    try {
-				connect = ConnectorDB.getConnection();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} 
-		
+				connect = ConnectionPool.getConnection();
+			
 	
 		    PreparedStatement ps = null;
 		  try {

@@ -29,8 +29,9 @@ public class FacultyDAO extends AbstractDAO {
 	@Override
 	public List<Faculty> findAll() {
 		List<Faculty> list = new ArrayList<Faculty>();
+		PreparedStatement pst = null;
 		try {
-			PreparedStatement pst = connection.prepareStatement(SELECT_ALL);
+			 pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Faculty fac = new Faculty();
@@ -55,13 +56,14 @@ public class FacultyDAO extends AbstractDAO {
 
 	@Override
 	public Faculty findEntityById(int id) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		Faculty fac = null;
 		try {
 			pst = connection.prepareStatement(SELECT_BY_ID);
 			pst.setInt(1, id);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
+				fac = new Faculty();
 				fac.setId(res.getInt(1));
 				fac.setName(res.getString(2));
 				fac.setFacultyPlan(res.getInt(3));
@@ -81,7 +83,7 @@ public class FacultyDAO extends AbstractDAO {
 
 	@Override
 	public boolean delete(int id) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		boolean result;
 		try {
 			pst = connection.prepareStatement(DELETE);
@@ -105,7 +107,7 @@ public class FacultyDAO extends AbstractDAO {
 	public boolean delete(Entity entity) {
 		boolean result;
 		int id = entity.getId();
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
@@ -128,7 +130,7 @@ public class FacultyDAO extends AbstractDAO {
 	@Override
 	public boolean create(Entity entity) {
 		boolean result;
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		Faculty fac = (Faculty) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
@@ -158,7 +160,7 @@ public class FacultyDAO extends AbstractDAO {
 	public boolean update(Entity entity) {
 		boolean result;
 		Faculty fac = (Faculty) entity;
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);
 
