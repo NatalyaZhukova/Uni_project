@@ -1,6 +1,7 @@
 package by.zhukova.uni.command;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.logic.LoginLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
@@ -12,14 +13,21 @@ public class LoginCommand implements ActionCommand {
 
 	public String execute(HttpServletRequest request) {
 		String page = null;
-		// извлечение из запроса логина и пароля
+		
 		String login = request.getParameter(PARAM_NAME_LOGIN);
 		String pass = request.getParameter(PARAM_NAME_PASSWORD);
-		// проверка логина и пароля
+		
 		if (LoginLogic.checkLogin(login, pass)) {
-			request.setAttribute("user", login);
-			// определение пути к main.jsp
-			page = ConfigurationManager.getProperty("path.page.main");
+			HttpSession session = request.getSession(true);
+			session.setAttribute("user", login);
+			if (LoginLogic.isAdmin(login)) {
+			page = ConfigurationManager.getProperty("path.page.main_admin");
+			session.setAttribute("role", "admin");
+			}
+			else {
+				session.setAttribute("role", "abiturient");
+				page = ConfigurationManager.getProperty("path.page.main_user");
+			}
 		} else {
 			request.setAttribute("errorLoginPassMessage",
 					MessageManager.getProperty("message.loginerror"));

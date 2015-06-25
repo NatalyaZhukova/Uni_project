@@ -1,32 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setLocale value="ru_RU" scope="session" />
-<fmt:setBundle basename="message" var="rb" />
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="css\styles.css">
-</head>
-
-<body>
+    <%@include file="header.jsp" %>
 	<div class="login">
 		<form action="controller" method="POST">
 			<input type="hidden" name="command" value="login" /> <label>
 				<fmt:message key="login.user" bundle="${ rb }" />:
-			</label><br> <input type="text" name="login"> <br> <label><fmt:message
-					key="login.password" bundle="${ rb }" />:</label><br> <input
-				type="password" name="password"> <br> <input
-				type="submit"
-				value="<fmt:message key="login.submit" bundle="${ rb }" />">
-			<br><span class="error">${errorLoginPassMessage}</span>  <br />
-			
-			 ${wrongAction} <br />
-			${nullPage} <br />
+			</label><br> <input type="text" name="login"
+				pattern="[A-Za-z0-9_-]{5,50}"
+				title="<fmt:message key="validation.login" bundle="${ rb }" />"
+				required> <br> 
+				<label><fmt:message key="login.password" bundle="${ rb }" />:</label><br> 
+				<input type="password" name="password" pattern=".{5,20}" title="<fmt:message
+				key="login.password" bundle="${ rb }" />" required> <br> 
+				<input type="submit" value="<fmt:message key="login.submit" bundle="${ rb }" />">
+				<a href="/controller?command=register"><fmt:message key="login.register" bundle="${ rb }" /></a>
+			<br> <span class="error">${errorLoginPassMessage}</span> 
 		</form>
 	</div>
+	<%@include file="footer.jsp" %>
 </body>
 </html>
