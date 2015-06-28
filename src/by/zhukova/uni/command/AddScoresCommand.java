@@ -1,5 +1,6 @@
 package by.zhukova.uni.command;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,8 @@ public class AddScoresCommand implements ActionCommand {
 		
 		
 		String first_name = request.getParameter("first_name");
+		
+		
 		String middle_name = request.getParameter("middle_name");
 		if (middle_name==null) {
 			middle_name="";

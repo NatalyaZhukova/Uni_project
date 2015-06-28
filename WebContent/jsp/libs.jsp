@@ -10,5 +10,4 @@
 <fmt:setLocale value="en_US" scope="session" />
 </c:if>
 <fmt:setLocale value="${param.locale}" scope="session" />
-<fmt:requestEncoding value="UTF-8"/>
 <fmt:setBundle basename="message" var="rb" />

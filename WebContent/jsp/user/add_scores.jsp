@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css\styles.css">
 <title><fmt:message key="header.title" bundle="${rb}" /></title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 
 </head>
 <body>
@@ -45,6 +45,15 @@
 				${errorMessage}
 		</form>
 	</div>
-
+     <div>
+     Путь к контексту : ${ pageContext.request.contextPath } <br/>
+   Имя хоста : ${ header["host"] }<br/>
+   Тип и кодировка контента : ${pageContext.response.contentType}<br/>
+   Кодировка ответа : ${pageContext.response.characterEncoding}<br/>
+   ID сессии : ${pageContext.request.session.id}<br/>
+   Время создания сессии в мсек : ${pageContext.request.session.creationTime}<br/>
+   Время последнего доступа к сессии : ${pageContext.request.session.lastAccessedTime}<br/> 
+   Имя сервлета : ${pageContext.servletConfig.servletName}
+    </div>
 </body>
 </html>

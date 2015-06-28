@@ -1,4 +1,5 @@
 <%@include file="..\libs.jsp"%>
+
 <!DOCTYPE html>
 <jsp:useBean id="facList" class="by.zhukova.uni.entity.Faculty" scope="session"></jsp:useBean>
 
@@ -13,7 +14,7 @@
 
 <%@include file="..\header.jsp"%>
 <div class="choosefaculty">
-		<form action="controller" method="POST" >
+		<form action="controller" method="POST"  accept-charset="UTF-8">
 			<input type="hidden" name="command" value="chfac" /> 
 			<label><fmt:message key="chfaculty.first_name" bundle="${rb}" /></label><br> 
 			<input type="text" name="first_name" value=""   required /> <br/>
