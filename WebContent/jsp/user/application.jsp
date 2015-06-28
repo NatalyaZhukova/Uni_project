@@ -1,7 +1,7 @@
 <%@include file="..\libs.jsp"%>
 <!DOCTYPE html>
-<jsp:useBean id="facList" class="by.zhukova.uni.entity.Faculty" scope="session"></jsp:useBean>
-
+<jsp:useBean id="faculty" class="by.zhukova.uni.entity.Faculty" scope="session"></jsp:useBean>
+<jsp:useBean id="appl" class="by.zhukova.uni.entity.Abiturient" scope="session"></jsp:useBean>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css\styles.css">
@@ -12,6 +12,29 @@
 <body>
 
 <%@include file="..\header.jsp"%>
-
+<div class="content-wrapper">
+			<div class="menu">
+			<h2><fmt:message key="usermain.menu" bundle="${rb}" /></h2>
+			<ul>
+			<li><a href="/Uni_project/controller?command=fac"><fmt:message key="usermain.fac_list" bundle="${rb}" /></a></li>
+			<c:if test="${application==null}">
+			<li><a href="/Uni_project/controller?command=chfac"><fmt:message key="usermain.register_fac" bundle="${rb}" /></a></li>
+			</c:if>
+			<c:if test="${application!=null}">
+			<li><a href="/Uni_project/controller?command=applic"><fmt:message key="usermain.application" bundle="${rb}" /></a></li>
+			</c:if>
+			</ul>		
+			</div>
+			<div class="content">
+			${appl.firstName } ${appl.middlName } ${appl.lastName }<br>
+			<fmt:message key="application.overall" bundle="${rb}" /> ${appl.overallScore} <br>
+			<fmt:message key="application.faculty" bundle="${rb}" /> ${faculty.name}. <br>
+			<fmt:message key="application.num_appl" bundle="${rb}" />
+			${faculty_registered} / ${faculty.facultyPlan}
+			
+			<a href="/Uni_project/controller?command=applic&act=del"><fmt:message key="application.delete" bundle="${rb}" /></a>
+			
+			</div>
+		</div>
 </body>
 </html>

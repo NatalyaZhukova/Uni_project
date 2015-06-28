@@ -65,8 +65,52 @@ public class AbiturientLogic {
 		return result;
 	}
 	
+	public static Abiturient getAbiturApplication(String username) {
+		Abiturient abitur = null;
+		
+		Connection con = ConnectionPool.getConnection();
+		AbiturientDAO abiturDao = new AbiturientDAO(con);
+		 abitur = abiturDao.findAbiturByUsername(username);
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			logger.error(e);
+		}
+		
+		return abitur;
+	}
 	
+	public static List<Abiturient> getAbitursByFaculty(int id) {
+		Connection con = ConnectionPool.getConnection();
+		AbiturientDAO abiturDao = new AbiturientDAO(con);
+		List<Abiturient> list = abiturDao.findAbitursByFaculty(id);
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			logger.error(e);
+		}
+		
+		return list;
+		
+	}
 	
+	public static boolean deleteApplication(int id) {
+		boolean result = false;
+		Connection con = ConnectionPool.getConnection();
+		AbiturientDAO abiturDao = new AbiturientDAO(con);
+		result = abiturDao.delete(id);
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			logger.error(e);
+		}
+		
+		return result;
+		
+	}
 	
 
 }

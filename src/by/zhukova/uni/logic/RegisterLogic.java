@@ -2,11 +2,13 @@ package by.zhukova.uni.logic;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.db.UserDAO;
+import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.User;
 
 public class RegisterLogic {

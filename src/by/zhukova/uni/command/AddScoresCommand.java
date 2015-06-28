@@ -70,8 +70,8 @@ public class AddScoresCommand implements ActionCommand {
 					
 					if (AbiturientLogic.createApplication(abitur)) {
 						page = ConfigurationManager
-								.getProperty("path.page.application");
-						request.setAttribute("application", abitur);
+								.getProperty("path.page.success_application");
+	
 						
 					}
 					else {

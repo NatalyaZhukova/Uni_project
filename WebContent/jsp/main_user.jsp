@@ -10,7 +10,6 @@
 <%@include file="header.jsp"%>
 		<div class="content-wrapper">
 			<div class="menu">
-			 ${application}
 			<h2><fmt:message key="usermain.menu" bundle="${rb}" /></h2>
 			<ul>
 			<li><a href="/Uni_project/controller?command=fac"><fmt:message key="usermain.fac_list" bundle="${rb}" /></a></li>

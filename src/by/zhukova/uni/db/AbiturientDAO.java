@@ -145,6 +145,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setThirdScore(res.getInt(8));
 				ab.setSchoolScore(res.getInt(9));
 				ab.setOverallScore(res.getInt(10));
+				ab.setChosenFaculty(res.getInt(11));
 			}
 		} catch (SQLException e) {
 			logger.error(e);
