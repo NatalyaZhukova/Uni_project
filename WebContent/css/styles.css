@@ -76,6 +76,12 @@ font-family: Verdana;
 	font-weight:bold;
 }
 
+.success {
+	width:100%;
+	min-height:400px;
+	padding:20px;
+}
+
 .register {
 width: 300px;
 min-height:250px;

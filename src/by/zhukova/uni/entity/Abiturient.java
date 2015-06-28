@@ -109,7 +109,7 @@ public class Abiturient extends User {
 
 	@Override
 	public String toString() {
-		return "Abiturient [firstName=" + firstName + ", middlName="
+		return "Abiturient [id "+ getId()+"username "+ getUsername() + " firstName=" + firstName + ", middlName="
 				+ middlName + ", lastName=" + lastName + ", firstScore="
 				+ firstScore + ", secondScore=" + secondScore + ", thirdScore="
 				+ thirdScore + ", schoolScore=" + schoolScore

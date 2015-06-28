@@ -19,7 +19,7 @@ public class UserDAO extends AbstractDAO {
 	private final String SELECT_BY_ID = "SELECT * FROM users WHERE id=?";
 	private final String SELECT_BY_USERNAME = "SELECT * FROM users WHERE username=?"; // specific User method
 	private final String DELETE = "DELETE FROM users WHERE id=?";
-	private final String CREATE = "INSERT INTO users (id, username, password, user_type) VALUES (?, ?, ?, ?)";
+	private final String CREATE = "INSERT INTO users (username, password, user_type) VALUES (?, ?, ?)";
 	private final String UPDATE = "UPDATE users SET  username=?, password=?, user_type=? WHERE id=?";
 
 	public UserDAO(Connection connection) {
@@ -156,10 +156,9 @@ public class UserDAO extends AbstractDAO {
 		User user = (User) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
-			pst.setInt(1, user.getId());
-			pst.setString(2, user.getUsername());
-			pst.setString(3, user.getPassword());
-			pst.setString(4, user.getUserType());
+			pst.setString(1, user.getUsername());
+			pst.setString(2, user.getPassword());
+			pst.setString(3, user.getUserType());
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;

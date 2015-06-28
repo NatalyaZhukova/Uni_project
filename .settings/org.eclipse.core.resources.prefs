@@ -1,3 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/jsp/header.jsp=UTF-8
+encoding//WebContent/jsp/main_user.jsp=UTF-8
+encoding//WebContent/jsp/user/add_scores.jsp=UTF-8
+encoding//WebContent/jsp/user/choose_faculty.jsp=UTF-8
+encoding//WebContent/jsp/user/faculties.jsp=UTF-8
+encoding//WebContent/jsp/user/register.jsp=UTF-8
 encoding/<project>=UTF-8

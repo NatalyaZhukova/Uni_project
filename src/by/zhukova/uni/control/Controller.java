@@ -23,7 +23,7 @@ import by.zhukova.uni.resource.MessageManager;
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
 	static {
-		PropertyConfigurator.configure("resources/log4j.properties");
+		PropertyConfigurator.configure("resources\\log4j.properties");
 	}
 	
 	public Controller() {
@@ -58,7 +58,6 @@ public class Controller extends HttpServlet {
 		
 			dispatcher.forward(request, response);
 		} else {
-		
 			page = ConfigurationManager.getProperty("path.page.index");
 			request.getSession().setAttribute("nullPage",
 					MessageManager.getProperty("message.nullpage"));

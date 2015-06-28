@@ -15,12 +15,25 @@ public enum CommandEnum {
 		{
 			this.command = new LangCommand();
 		}
-	//},
-	//ENLOCALE{
-//		{
-	//		this.command = new LocaleEnCommand();
-	//	}
-	};
+	},
+	REGISTER {
+		{
+			this.command = new RegisterCommand();
+		}
+	},
+	CHFAC {
+		{
+			this.command = new ChooseFacultyCommand();
+		}
+	},
+	ADDSCORES {{
+		 this.command = new AddScoresCommand();
+		
+	}},
+	
+	APPLIC {{
+		this.command = new ApplicationActionCommand();
+	}};
 
 	ActionCommand command;
 

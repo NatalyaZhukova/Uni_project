@@ -6,7 +6,10 @@ public  class User extends Entity {
 	private String password;
 	private String userType;
 	
-	public User() {}
+	public User() {
+		
+		this.userType = "abiturient";
+	}
 	
 	public User(int id, String username, String password, String userType) {
 		super(id);
@@ -41,7 +44,7 @@ public  class User extends Entity {
 
 	@Override
 	public String toString() {
-		return "AbstractUser [username=" + username + ", password=" + password
+		return "User [username=" + username + ", password=" + password
 				+ ", userType=" + userType + "]";
 	}
 

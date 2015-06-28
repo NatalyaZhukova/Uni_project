@@ -16,8 +16,8 @@ public class FacultyDAO extends AbstractDAO {
 
 	static Logger logger = Logger.getLogger(FacultyDAO.class);
 	private final String SELECT_ALL = "SELECT * FROM faculties";
-	private final String SELECT_BY_ID = "SELECT * FROM faculties WHERE id=?";;
-	private final String DELETE = "DELETE FROM faculties WHERE id=?";
+	private final String SELECT_BY_ID = "SELECT * FROM faculties WHERE id_faculty=?";;
+	private final String DELETE = "DELETE FROM faculties WHERE id_faculty=?";
 	private final String CREATE = "INSERT INTO faculties (id_faculty, faculty_name, faculty_plan, discipline_1, discipline_2, discipline_3) VALUES (?, ?, ?, ?, ?, ?)";
 	private final String UPDATE = "UPDATE disciplines SET  faculty_name=?, faculty_plan=?, discipline_1=?, discipline_2=?, discipline_3=? WHERE id_faculty=?";
 	
@@ -40,7 +40,7 @@ public class FacultyDAO extends AbstractDAO {
 				fac.setFacultyPlan(res.getInt(3));
 				fac.setFirstDiscipline(res.getInt(4));
 				fac.setSecondDiscipline(res.getInt(5));
-				fac.setThirdDiscipline(res.getInt(5));
+				fac.setThirdDiscipline(res.getInt(6));
 				list.add(fac);
 			}
 			
@@ -69,7 +69,7 @@ public class FacultyDAO extends AbstractDAO {
 				fac.setFacultyPlan(res.getInt(3));
 				fac.setFirstDiscipline(res.getInt(4));
 				fac.setSecondDiscipline(res.getInt(5));
-				fac.setThirdDiscipline(res.getInt(5));
+				fac.setThirdDiscipline(res.getInt(6));
 			}
 			
 		} catch (SQLException e) {

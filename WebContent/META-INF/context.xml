@@ -8,7 +8,7 @@
  maxIdle="8"
  maxWait="10000" 
  username="root" 
- password="" 
+ password="secret" 
  driverClassName="com.mysql.jdbc.Driver" 
  url="jdbc:mysql://localhost:3306/abitur"
    />

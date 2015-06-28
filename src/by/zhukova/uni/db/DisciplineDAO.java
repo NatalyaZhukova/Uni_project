@@ -15,10 +15,10 @@ public class DisciplineDAO extends AbstractDAO {
 
 	static Logger logger = Logger.getLogger(DisciplineDAO.class);
 	private final String SELECT_ALL = "SELECT * FROM disciplines";
-	private final String SELECT_BY_ID = "SELECT * FROM disciplines WHERE id=?";
-	private final String DELETE = "DELETE FROM disciplines WHERE id=?";
-	private final String CREATE = "INSERT INTO disciplines (id, name) VALUES (?, ?)";
-	private final String UPDATE = "UPDATE disciplines SET  name=? WHERE id=?";
+	private final String SELECT_BY_ID = "SELECT * FROM disciplines WHERE id_discipline=?";
+	private final String DELETE = "DELETE FROM disciplines WHERE id_discipline=?";
+	private final String CREATE = "INSERT INTO disciplines (id_discipline, discipline_name) VALUES (?, ?)";
+	private final String UPDATE = "UPDATE disciplines SET  discipline_name=? WHERE id_discipline=?";
 
 	public DisciplineDAO(Connection connection) {
 		super(connection);

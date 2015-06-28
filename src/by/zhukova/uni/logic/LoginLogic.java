@@ -11,7 +11,7 @@ import by.zhukova.uni.entity.User;
 
 public class LoginLogic {
 
-	static Logger logger = Logger.getLogger(UserDAO.class);
+	static Logger logger = Logger.getLogger(LoginLogic.class);
 
 	public static boolean checkLogin(String enterLogin, String enterPass) {
 		boolean result = false;

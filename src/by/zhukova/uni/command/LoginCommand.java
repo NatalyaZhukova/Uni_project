@@ -3,6 +3,7 @@ package by.zhukova.uni.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import by.zhukova.uni.logic.AbiturientLogic;
 import by.zhukova.uni.logic.LoginLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
@@ -10,6 +11,8 @@ import by.zhukova.uni.resource.MessageManager;
 public class LoginCommand implements ActionCommand {
 	private static final String PARAM_NAME_LOGIN = "login";
 	private static final String PARAM_NAME_PASSWORD = "password";
+	private static final String ROLE_USER = "abiturient";
+	private static final String ROLE_ADMIN = "admin";
 
 	public String execute(HttpServletRequest request) {
 		String page = null;
@@ -22,11 +25,14 @@ public class LoginCommand implements ActionCommand {
 			session.setAttribute("user", login);
 			if (LoginLogic.isAdmin(login)) {
 			page = ConfigurationManager.getProperty("path.page.main_admin");
-			session.setAttribute("role", "admin");
+			session.setAttribute("role", ROLE_ADMIN);
 			}
 			else {
-				session.setAttribute("role", "abiturient");
+				session.setAttribute("role", ROLE_USER);
 				page = ConfigurationManager.getProperty("path.page.main_user");
+				if (AbiturientLogic.isApplicationExists(login)) {
+					session.setAttribute("application", "exists");
+				}
 			}
 		} else {
 			request.setAttribute("errorLoginPassMessage",

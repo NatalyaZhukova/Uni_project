@@ -21,9 +21,9 @@ public class AbiturientDAO extends AbstractDAO {
 	private final String SELECT_BY_FACULTY = "SELECT * FROM abiturients WHERE chosen_faculty=?"; //specific Abiturient method
 	private final String DELETE = "DELETE FROM abiturients WHERE id=?";
 	private final String CREATE = "INSERT INTO abiturients (id, username, first_name, middle_name, last_name, discipline1_score, discipline2_score, "
-				+ "discipline3_score, school_score, score_sum) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "discipline3_score, school_score, score_sum, chosen_faculty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String UPDATE = "UPDATE abiturients SET username=?, first_name=?, middle_name=?, last_name=?, discipline1_score=?, discipline2_score=?, "
-				+ "discipline3_score=?, school_score=?, score_sum=?  WHERE id=?";
+				+ "discipline3_score=?, school_score=?, score_sum=?, chosen_faculty=? WHERE id=?";
 
 	public AbiturientDAO(Connection connection) {
 		super(connection);
@@ -49,6 +49,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setThirdScore(res.getInt(8));
 				ab.setSchoolScore(res.getInt(9));
 				ab.setOverallScore(res.getInt(10));
+				ab.setChosenFaculty(res.getInt(11));
 				list.add(ab);
 			}
 			
@@ -81,6 +82,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setThirdScore(res.getInt(8));
 				ab.setSchoolScore(res.getInt(9));
 				ab.setOverallScore(res.getInt(10));
+				ab.setChosenFaculty(res.getInt(11));
 				list.add(ab);
 			}
 			
@@ -114,6 +116,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setThirdScore(res.getInt(8));
 				ab.setSchoolScore(res.getInt(9));
 				ab.setOverallScore(res.getInt(10));
+				ab.setChosenFaculty(res.getInt(11));
 			}
 		} catch (SQLException e) {
 			logger.error(e);
@@ -214,6 +217,7 @@ public class AbiturientDAO extends AbstractDAO {
 			pst.setInt(8, ab.getThirdScore());
 			pst.setInt(9, ab.getSchoolScore());
 			pst.setInt(10, ab.getOverallScore());
+			pst.setInt(11, ab.getChosenFaculty());
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;
@@ -236,7 +240,7 @@ public class AbiturientDAO extends AbstractDAO {
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);
-			pst.setInt(10, ab.getId());
+			pst.setInt(11, ab.getId());
 			pst.setString(1, ab.getUsername());
 			pst.setString(2, ab.getFirstName());
 			pst.setString(3, ab.getMiddlName());
@@ -246,6 +250,7 @@ public class AbiturientDAO extends AbstractDAO {
 			pst.setInt(7, ab.getThirdScore());
 			pst.setInt(8, ab.getSchoolScore());
 			pst.setInt(9, ab.getOverallScore());
+			pst.setInt(10, ab.getChosenFaculty());
 			int check = pst.executeUpdate();
 			if (check == 0) {
 				result = false;
