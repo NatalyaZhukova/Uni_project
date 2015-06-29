@@ -154,9 +154,10 @@ color:#FFF8E1;
 margin-top:5px;
 margin-left:5px;
 padding:10px;
+margin-right:50px;
 
 min-width:190px;
-width:20%;
+width:10%;
 min-height:370px;
 background-color:#FFECB3;
 border-right:1px solid #757575;
@@ -178,9 +179,9 @@ min-height:400px;
 }
 
 .content {
-width:80%;
+width:90%;
 padding:20px;
-text-align:center;
+text-align:left;
 }
 .content .fio {
 font-weight:bold;
@@ -203,6 +204,28 @@ font-style:italic;
 .content a {
 color:#FF6F00;
 
+}
+.content h2 {
+text-align:center;
+padding-bottom:10px;
+}
+
+.faculty {
+width:100%;
+border-top:1px solid #FF6F00;
+border-bottom: 1px solid #FF6F00;
+padding:10px;
+}
+
+.pages {
+margin-top:10px;
+}
+.pages a {
+display:inline-block;
+width:20px;
+height:20px;
+text-align:center;
+background-color:#FFF8E1;
 }
 .footer {
 width:100%;
