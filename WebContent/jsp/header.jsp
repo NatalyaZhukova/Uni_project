@@ -5,8 +5,8 @@
 			<fmt:message key="header.title" bundle="${ rb }" />
 		</h1>
 		<div class="locale">
-			<a href="/${pageContext.request.contextPath}/controller?command=lang&locale=ru_RU">RU</a> | <a
-				href="/Uni_project/controller?command=lang&locale=en_US">EN</a>
+			<a href="${pageContext.request.contextPath}/controller?command=lang&locale=ru_RU">RU</a> | <a
+				href="${ pageContext.request.contextPath }/controller?command=lang&locale=en_US">EN</a>
 		</div>
 		<div class="lg">
 			<c:if test="${user!=null}">
