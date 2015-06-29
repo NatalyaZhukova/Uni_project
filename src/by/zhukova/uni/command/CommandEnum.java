@@ -33,6 +33,9 @@ public enum CommandEnum {
 	
 	APPLIC {{
 		this.command = new ApplicationActionCommand();
+	}},
+	FAC {{
+		this.command = new FacultiesCommand();
 	}};
 
 	ActionCommand command;

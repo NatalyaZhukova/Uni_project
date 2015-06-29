@@ -23,34 +23,17 @@ public class ChooseFacultyCommand implements ActionCommand {
 
 		List<Faculty> list = FacultyLogic.getFacultiesList();
 		request.setAttribute("facList", list);
-	//	try {
-	//		request.setCharacterEncoding("utf-8");
-	//	} catch (UnsupportedEncodingException e) {
-	//		// TODO Auto-generated catch block
-	//		e.printStackTrace();
-	//	}
 
 		String fName=request.getParameter("first_name");
-
-		
 		String mName = request.getParameter("middle_name");
 		String lName = request.getParameter("last_name");
 		
-	//	System.out.println(fName);
+	
 
 		if ((fName != null) || (mName != null) || (lName != null)) {
 			
 			if (Validation.isAllFieldFilled(fName, lName)) {
-				String myUTF8 = null;
-				try {
-				 myUTF8 = new String(fName.getBytes("ISO-8859-1"),"UTF-8");
-				System.out.println(myUTF8);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace(); }
-				
-			
-			//	if (Validation.validFIO(fName, mName, lName)) {
+				if (Validation.validFIO(fName, mName, lName)) {
 					request.setAttribute("fName", fName);
 					request.setAttribute("mName", mName);
 					request.setAttribute("lName", lName);
@@ -65,11 +48,11 @@ public class ChooseFacultyCommand implements ActionCommand {
 					request.setAttribute("disciplines", discList);
 					page = ConfigurationManager
 							.getProperty("path.page.add_scores");
-			//	} 
-			//else {
-				//	request.setAttribute("errorMessage",
-					//		MessageManager.getProperty("validation.format"));
-			//	}
+				} 
+			else {
+					request.setAttribute("errorMessage",
+							MessageManager.getProperty("validation.format"));
+				}
 			} else {
 				request.setAttribute("errorMessage",
 						MessageManager.getProperty("validation.notfilled"));

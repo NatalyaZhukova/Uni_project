@@ -1,7 +1,6 @@
 <%@include file="..\libs.jsp"%>
+<jsp:useBean id="facList" class="by.zhukova.uni.entity.Faculty" scope="session"></jsp:useBean>
 <!DOCTYPE html>
-<jsp:useBean id="faculty" class="by.zhukova.uni.entity.Faculty" scope="session"></jsp:useBean>
-<jsp:useBean id="appl" class="by.zhukova.uni.entity.Abiturient" scope="session"></jsp:useBean>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css\styles.css">
@@ -26,14 +25,26 @@
 			</ul>		
 			</div>
 			<div class="content">
-		<span class="fio">	${appl.firstName } ${appl.middlName } ${appl.lastName } </span> <br>
-			<fmt:message key="application.overall" bundle="${rb}" /><span class="score"> ${appl.overallScore} </span><br>
-			<fmt:message key="application.faculty" bundle="${rb}" /><span class="faculty-name"> ${faculty.name}</span>. <br>
-		<span class="applic">	<fmt:message key="application.num_appl" bundle="${rb}" /></span> <br/>
-		<span class="applic-num">	${faculty_registered} / ${faculty.facultyPlan}</span> <br/>
+		      	<h2>Факультеты</h2>
+				
+			<c:forEach var="faculty" items="${facList}" begin="">
+			<div class="faculty">
+			<h3>${faculty.name}</h3>
+			<span class="">Подано заявлений / План приема - </span> <span class="applic-num">4/15</span>
+			<h4>Сдаваемые дисциплины:</h4>
+			<ul>
+			<li>дисциплина 1</li>
+			<li>дисциплина 2</li>
+			<li>дисциплина 3</li>
+			</ul>
+			</div>
+			</c:forEach>
 			
-			<a href="/Uni_project/controller?command=applic&act=del"><fmt:message key="application.delete" bundle="${rb}" /></a>
-			
+			<div class="pages">
+			<c:forEach var="i" begin="1" end="${numpage}">
+			<a href="/Uni_project/controller?command=showfac&p=${i}">$i</a>
+			</c:forEach>
+			</div>
 			</div>
 		</div>
 </body>

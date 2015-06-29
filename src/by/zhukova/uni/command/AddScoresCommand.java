@@ -1,6 +1,5 @@
 package by.zhukova.uni.command;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,11 +65,11 @@ public class AddScoresCommand implements ActionCommand {
 					abitur.setSchoolScore(school_score);
 					abitur.setOverallScore(overall);
 					abitur.setChosenFaculty(chosen_faculty);
-					System.out.println(abitur.toString());
 					
 					if (AbiturientLogic.createApplication(abitur)) {
 						page = ConfigurationManager
 								.getProperty("path.page.success_application");
+						session.setAttribute("application", "exists");
 	
 						
 					}

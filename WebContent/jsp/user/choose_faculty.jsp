@@ -14,10 +14,10 @@
 
 <%@include file="..\header.jsp"%>
 <div class="choosefaculty">
-		<form action="controller" method="POST"  accept-charset="UTF-8">
+		<form action="controller" method="POST">
 			<input type="hidden" name="command" value="chfac" /> 
 			<label><fmt:message key="chfaculty.first_name" bundle="${rb}" /></label><br> 
-			<input type="text" name="first_name" value=""   required /> <br/>
+			<input type="text" name="first_name" value=""  required /> <br/>
 			<label><fmt:message key="chfaculty.middle_name" bundle="${rb}" /></label> 
 			<br> <input type="text" name="middle_name" value="">  <br/>
 			<label><fmt:message key="chfaculty.last_name" bundle="${rb}" /></label> <br>
@@ -31,7 +31,6 @@
 			<br> 
 				<input type="submit" value="<fmt:message key="chfaculty.next" bundle="${rb}" />"> <br>
 				<span class="error">${errorMessage } </span>
-				${param.first_name} ${param.middle_name} ${param.last_name}
 		</form>
 	</div>
 

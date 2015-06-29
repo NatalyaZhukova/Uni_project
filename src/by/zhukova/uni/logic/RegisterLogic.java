@@ -39,7 +39,7 @@ public class RegisterLogic {
 		UserDAO userDao = new UserDAO(con);
 		User user = new User();
 		user.setUsername(login);
-		user.setPassword(MD5Digest.getMD5String(password));
+		user.setPassword(StringUtils.getMD5String(password));
 		result = userDao.create(user);
 		
 		return result;

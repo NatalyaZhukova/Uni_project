@@ -4,8 +4,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import org.apache.log4j.Logger;
 
-public class MD5Digest {
-	static Logger logger = Logger.getLogger(MD5Digest.class);
+public class StringUtils {
+	static Logger logger = Logger.getLogger(StringUtils.class);
 
 	public static String getMD5String(String password) {
 

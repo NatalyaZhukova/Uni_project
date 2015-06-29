@@ -39,12 +39,12 @@ public class Validation {
 		if (!fName.matches(FIRST_NAME)) {
 			result=false;
 		}
-		//if ((mName!=null) && (!mName.matches(MIDDLE_NAME))) {
-		//	result=false;
-		//}
-		//if (!lName.matches(LAST_NAME)) {
-		//	result=false;
-		//}
+		if ((mName!=null) && (!mName.matches(MIDDLE_NAME))) {
+			result=false;
+		}
+		if (!lName.matches(LAST_NAME)) {
+			result=false;
+		}
 		
 		
 		return result;

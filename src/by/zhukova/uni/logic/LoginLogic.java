@@ -15,13 +15,14 @@ public class LoginLogic {
 
 	public static boolean checkLogin(String enterLogin, String enterPass) {
 		boolean result = false;
+	
 		Connection con = ConnectionPool.getConnection();
 		UserDAO userDao = new UserDAO(con);
 		enterLogin = enterLogin.toLowerCase();
 		User user = userDao.findUserByUsername(enterLogin);
 		if ((user != null)
 				&& (user.getPassword()
-						.equals(MD5Digest.getMD5String(enterPass)))) {
+						.equals(StringUtils.getMD5String(enterPass)))) {
 			result = true;
 		} else {
 			result = false;
