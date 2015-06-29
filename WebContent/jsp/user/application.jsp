@@ -26,11 +26,11 @@
 			</ul>		
 			</div>
 			<div class="content">
-			${appl.firstName } ${appl.middlName } ${appl.lastName }<br>
-			<fmt:message key="application.overall" bundle="${rb}" /> ${appl.overallScore} <br>
-			<fmt:message key="application.faculty" bundle="${rb}" /> ${faculty.name}. <br>
-			<fmt:message key="application.num_appl" bundle="${rb}" />
-			${faculty_registered} / ${faculty.facultyPlan}
+		<span class="fio">	${appl.firstName } ${appl.middlName } ${appl.lastName } </span> <br>
+			<fmt:message key="application.overall" bundle="${rb}" /><span class="score"> ${appl.overallScore} </span><br>
+			<fmt:message key="application.faculty" bundle="${rb}" /><span class="faculty-name"> ${faculty.name}</span>. <br>
+		<span class="applic">	<fmt:message key="application.num_appl" bundle="${rb}" /></span> <br/>
+		<span class="applic-num">	${faculty_registered} / ${faculty.facultyPlan}</span> <br/>
 			
 			<a href="/Uni_project/controller?command=applic&act=del"><fmt:message key="application.delete" bundle="${rb}" /></a>
 			
