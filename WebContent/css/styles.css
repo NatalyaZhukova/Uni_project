@@ -179,6 +179,30 @@ min-height:400px;
 
 .content {
 width:80%;
+padding:20px;
+text-align:center;
+}
+.content .fio {
+font-weight:bold;
+}
+
+.content .faculty-name {
+font-weight:bold;
+}
+.content .score {
+font-weight:bold;
+}
+.content .applic {
+}
+
+.content .applic-num {
+font-weight:bold;
+font-style:italic;
+}
+
+.content a {
+color:#FF6F00;
+
 }
 .footer {
 width:100%;
