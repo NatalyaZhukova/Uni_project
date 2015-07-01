@@ -1,15 +1,14 @@
 package by.zhukova.uni.logic;
 
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
+
 
 import org.apache.log4j.Logger;
 
 import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.db.UserDAO;
-import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.User;
+import by.zhukova.uni.exception.DaoException;
 
 public class RegisterLogic {
 	
@@ -17,31 +16,41 @@ public class RegisterLogic {
 	
 	public static boolean checkLoginAvailable(String login) {
 		boolean result = false;
-		Connection con = ConnectionPool.getConnection();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		UserDAO userDao = new UserDAO(con);
 		login = login.toLowerCase();
-		User user = userDao.findUserByUsername(login);
+		User user=null;
+		try {
+			user = userDao.findUserByUsername(login);
+		} catch (DaoException e) {
+			logger.error(e);
+		}
 		
 		if (user==null) {
 			result = true;
 		}	
-		try {
-			con.close();
-		} catch (SQLException e) {
-			logger.error(e);
-		}
+		
+		pool.returnConnection(con);
 		return result;
 	}
 	
 	public static boolean addNewUser(String login, String password) {
 		boolean result = false;
-		Connection con = ConnectionPool.getConnection();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		UserDAO userDao = new UserDAO(con);
 		User user = new User();
 		user.setUsername(login);
 		user.setPassword(StringUtils.getMD5String(password));
-		result = userDao.create(user);
+		try {
+			result = userDao.create(user);
+		} catch (DaoException e) {
+			logger.error(e);
+		}
 		
+		
+		pool.returnConnection(con);
 		return result;
 		
 	}

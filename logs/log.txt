@@ -9,3 +9,12 @@
 23-06-2015 20:57:31 ERROR ConnectionPool:24 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
 23-06-2015 21:01:01 ERROR ConnectionPool:26 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
 23-06-2015 22:48:52 ERROR ConnectionPool:26 - javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+01-07-2015 21:07:42 FATAL ConnectionPool:64 - fatal exception in ConnectionPool class 
+java.io.FileNotFoundException: E:\My%20projects\java\Uni_project\build\classes\database.properties (Системе не удается найти указанный путь)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at by.zhukova.uni.db.ConnectionPool.<init>(ConnectionPool.java:45)
+	at by.zhukova.uni.db.ConnectionPool.getInstance(ConnectionPool.java:74)
+	at by.zhukova.uni.db.TestRun.main(TestRun.java:23)

@@ -7,14 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import by.zhukova.uni.entity.Faculty;
 import by.zhukova.uni.entity.Entity;
+import by.zhukova.uni.exception.DaoException;
 
 public class FacultyDAO extends AbstractDAO {
 
-	static Logger logger = Logger.getLogger(FacultyDAO.class);
+	
 	private final String SELECT_ALL = "SELECT * FROM faculties";
 	private final String SELECT_BY_ID = "SELECT * FROM faculties WHERE id_faculty=?";;
 	private final String DELETE = "DELETE FROM faculties WHERE id_faculty=?";
@@ -27,7 +26,7 @@ public class FacultyDAO extends AbstractDAO {
 	}
 
 	@Override
-	public List<Faculty> findAll() {
+	public List<Faculty> findAll() throws DaoException {
 		List<Faculty> list = new ArrayList<Faculty>();
 		PreparedStatement pst = null;
 		try {
@@ -46,7 +45,7 @@ public class FacultyDAO extends AbstractDAO {
 			
 
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -55,7 +54,7 @@ public class FacultyDAO extends AbstractDAO {
 	}
 
 	@Override
-	public Faculty findEntityById(int id) {
+	public Faculty findEntityById(int id) throws DaoException {
 		PreparedStatement pst = null;
 		Faculty fac = null;
 		try {
@@ -73,7 +72,7 @@ public class FacultyDAO extends AbstractDAO {
 			}
 			
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -82,21 +81,19 @@ public class FacultyDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
-		boolean result;
+		boolean result=false;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
-			}
-			result = true;
+			if (check != 0) {
+				result = true;
+			} 
 			
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -104,22 +101,21 @@ public class FacultyDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean delete(Entity entity) {
-		boolean result;
+	public boolean delete(Entity entity) throws DaoException {
+		boolean result=false;
 		int id = entity.getId();
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
+			if (check != 0) {
+				result = true;
 			}
-			result = true;
+			
 			
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);	
 		}
@@ -128,8 +124,8 @@ public class FacultyDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean create(Entity entity) {
-		boolean result;
+	public boolean create(Entity entity) throws DaoException {
+		boolean result=false;
 		PreparedStatement pst = null;
 		Faculty fac = (Faculty) entity;
 		try {
@@ -142,14 +138,13 @@ public class FacultyDAO extends AbstractDAO {
 			pst.setInt(6, fac.getThirdDiscipline());
 
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
+			if (check != 0) {
+				result = true;
 			}
-			result = true;
+			
 			
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -157,8 +152,8 @@ public class FacultyDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean update(Entity entity) {
-		boolean result;
+	public boolean update(Entity entity) throws DaoException {
+		boolean result=false;
 		Faculty fac = (Faculty) entity;
 		PreparedStatement pst = null;
 		try {
@@ -171,15 +166,13 @@ public class FacultyDAO extends AbstractDAO {
 			pst.setInt(5, fac.getThirdDiscipline());
 			pst.setInt(6, fac.getId());
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
+			if (check != 0) {
+				result = true;
 			}
-			result = true;
 			
 
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}

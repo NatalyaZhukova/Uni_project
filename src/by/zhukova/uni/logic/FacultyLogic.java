@@ -1,7 +1,6 @@
 package by.zhukova.uni.logic;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,38 +8,42 @@ import org.apache.log4j.Logger;
 
 import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.db.FacultyDAO;
-import by.zhukova.uni.entity.Entity;
 import by.zhukova.uni.entity.Faculty;
+import by.zhukova.uni.exception.DaoException;
 
 public class FacultyLogic {
 	
 	static Logger logger = Logger.getLogger(FacultyLogic.class);
 	
 	public static List<Faculty> getFacultiesList() {
-		Connection con = ConnectionPool.getConnection();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		FacultyDAO facDao = new FacultyDAO(con);
-		List<Faculty> list = facDao.findAll();
-		
+		List<Faculty> list=null;
 		try {
-			con.close();
-		} catch (SQLException e) {
-		 logger.error(e);
+			list = facDao.findAll();
+		} catch (DaoException e) {
+			logger.error(e);
 		}
+		
+		pool.returnConnection(con);
 		
 		return list;
 		
 	}
 	
 	public static Faculty getChosenFaculty(int id) {
-		Connection con = ConnectionPool.getConnection();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		FacultyDAO facDao = new FacultyDAO(con);
-		Faculty faculty = facDao.findEntityById(id);
-		
+		Faculty faculty=null;
 		try {
-			con.close();
-		} catch (SQLException e) {
-		 logger.error(e);
+			faculty = facDao.findEntityById(id);
+		} catch (DaoException e) {
+			logger.error(e);
 		}
+		
+	    pool.returnConnection(con);
 		
 		return faculty;
 	}

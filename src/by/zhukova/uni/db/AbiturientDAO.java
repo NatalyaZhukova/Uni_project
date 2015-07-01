@@ -7,14 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Entity;
+import by.zhukova.uni.exception.DaoException;
 
 public class AbiturientDAO extends AbstractDAO {
 
-	static Logger logger = Logger.getLogger(AbiturientDAO.class);
+	
 	private final String SELECT_ALL = "SELECT * FROM abiturients";
 	private final String SELECT_BY_ID = "SELECT * FROM abiturients WHERE id=?";
 	private final String SELECT_BY_USERNAME = "SELECT * FROM abiturients WHERE username=?"; // specific Abiturient method
@@ -31,7 +30,7 @@ public class AbiturientDAO extends AbstractDAO {
 	}
 
 	@Override
-	public List<Abiturient> findAll() {
+	public List<Abiturient> findAll() throws DaoException {
 		List<Abiturient> list = new ArrayList<Abiturient>();
 		PreparedStatement pst = null;
 		try {
@@ -55,7 +54,7 @@ public class AbiturientDAO extends AbstractDAO {
 			
 
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -63,7 +62,7 @@ public class AbiturientDAO extends AbstractDAO {
 
 	}
 	
-	public List<Abiturient> findAbitursByFaculty(int facultyId) {
+	public List<Abiturient> findAbitursByFaculty(int facultyId) throws DaoException {
 		List<Abiturient> list = new ArrayList<Abiturient>();
 		PreparedStatement pst = null;
 		try {
@@ -88,7 +87,7 @@ public class AbiturientDAO extends AbstractDAO {
 			
 
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -97,7 +96,7 @@ public class AbiturientDAO extends AbstractDAO {
 	}
 
 	@Override
-	public Abiturient findEntityById(int id) {
+	public Abiturient findEntityById(int id) throws DaoException {
 		PreparedStatement pst = null;
 		Abiturient ab = null;
 		try {
@@ -119,14 +118,14 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setChosenFaculty(res.getInt(11));
 			}
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
 
 		return ab;
 	}
-		public Abiturient findAbiturByUsername(String username) {
+	public Abiturient findAbiturByUsername(String username) throws DaoException {
 		PreparedStatement pst = null;
 		Abiturient ab = null;
 		try {
@@ -148,7 +147,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setChosenFaculty(res.getInt(11));
 			}
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -157,44 +156,41 @@ public class AbiturientDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
-		boolean result;
+		boolean result=false;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
-			}
-			result = true;
+			if (check != 0) {
+				result = true;
+			} 
 		
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
+			
 		}
 		return result;
+		
 	}
 
 	@Override
-	public boolean delete(Entity entity) {
-		boolean result;
+	public boolean delete(Entity entity) throws DaoException {
+		boolean result=false;
 		int id = entity.getId();
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
-			}
-			result = true;
-		
+			if (check != 0) {
+				result = true;
+			} 
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -202,8 +198,8 @@ public class AbiturientDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean create(Entity entity) {
-		boolean result;
+	public boolean create(Entity entity) throws DaoException {
+		boolean result = false;
 		PreparedStatement pst = null;
 		Abiturient ab = (Abiturient) entity;
 		try {
@@ -220,14 +216,13 @@ public class AbiturientDAO extends AbstractDAO {
 			pst.setInt(10, ab.getOverallScore());
 			pst.setInt(11, ab.getChosenFaculty());
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
-			}
-			result = true;
+			if (check != 0) {
+				result = true;
+			} 
 		
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
+			
 		} finally {
 			close(pst);
 		}
@@ -235,8 +230,8 @@ public class AbiturientDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean update(Entity entity) {
-		boolean result;
+	public boolean update(Entity entity) throws DaoException {
+		boolean result=false;
 		Abiturient ab = (Abiturient) entity;
 		PreparedStatement pst = null;
 		try {
@@ -253,15 +248,12 @@ public class AbiturientDAO extends AbstractDAO {
 			pst.setInt(9, ab.getOverallScore());
 			pst.setInt(10, ab.getChosenFaculty());
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
+			if (check != 0) {
+				result = true;
 			}
-			result = true;
-		
 
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}

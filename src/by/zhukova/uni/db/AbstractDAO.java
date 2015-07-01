@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import by.zhukova.uni.entity.Entity;
+import by.zhukova.uni.exception.DaoException;
 
 public abstract class AbstractDAO<T extends Entity> {
 	protected Connection connection;
@@ -17,17 +18,17 @@ public abstract class AbstractDAO<T extends Entity> {
 		this.connection = connection;
 	}
 
-	public abstract List<T> findAll();
+	public abstract List<T> findAll() throws DaoException;
 
-	public abstract T findEntityById(int id);
+	public abstract T findEntityById(int id) throws DaoException;
 
-	public abstract boolean delete(int id);
+	public abstract boolean delete(int id) throws DaoException;
 
-	public abstract boolean delete(T entity);
+	public abstract boolean delete(T entity) throws DaoException;
 
-	public abstract boolean create(T entity);
+	public abstract boolean create(T entity) throws DaoException;
 
-	public abstract boolean update(T entity);
+	public abstract boolean update(T entity) throws DaoException;
 
 	public void close(Statement st) {
 		try {

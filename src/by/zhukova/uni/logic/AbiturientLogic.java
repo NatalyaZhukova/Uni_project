@@ -1,7 +1,6 @@
 package by.zhukova.uni.logic;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,6 +8,7 @@ import org.apache.log4j.Logger;
 import by.zhukova.uni.db.AbiturientDAO;
 import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.entity.Abiturient;
+import by.zhukova.uni.exception.DaoException;
 
 public class AbiturientLogic {
 	
@@ -16,19 +16,21 @@ public class AbiturientLogic {
 	
 	public static boolean isApplicationExists(String username) {
 		boolean result = false;
-		Connection con = ConnectionPool.getConnection();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		AbiturientDAO abiturDao = new AbiturientDAO(con);
-		Abiturient abitur = abiturDao.findAbiturByUsername(username);
+		Abiturient abitur=null;
+		try {
+			abitur = abiturDao.findAbiturByUsername(username);
+		} catch (DaoException e1) {
+			logger.error(e1);
+		}
 		
 		if (abitur!=null) {
 			result=true;
 		}
 		
-		try {
-			con.close();
-		} catch (SQLException e) {
-			logger.error(e);
-		}
+		pool.returnConnection(con);
 		return result;
 	}
 	
@@ -42,10 +44,16 @@ public class AbiturientLogic {
 	}
 	
 	public static boolean createApplication(Abiturient abitur) {
-		boolean result;
-		Connection con = ConnectionPool.getConnection();
+		boolean result=false;
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		AbiturientDAO abiturDao = new AbiturientDAO(con);
-		List<Abiturient> list = abiturDao.findAll();
+		List<Abiturient> list = null;
+		try {
+			list = abiturDao.findAll();
+		} catch (DaoException e1) {
+			logger.error(e1);
+		}
 		int id;
 		if (list.size()==0) {
 			id=1;
@@ -54,43 +62,44 @@ public class AbiturientLogic {
 		}
 		abitur.setId(id);
 		System.out.println(abitur.toString());
-		result=abiturDao.create(abitur);
-		
-		
 		try {
-			con.close();
-		} catch (SQLException e) {
+			result=abiturDao.create(abitur);
+		} catch (DaoException e) {
 			logger.error(e);
 		}
+		
+		pool.returnConnection(con);
 		return result;
 	}
 	
 	public static Abiturient getAbiturApplication(String username) {
 		Abiturient abitur = null;
-		
-		Connection con = ConnectionPool.getConnection();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		AbiturientDAO abiturDao = new AbiturientDAO(con);
-		 abitur = abiturDao.findAbiturByUsername(username);
-		
-		try {
-			con.close();
-		} catch (SQLException e) {
+		 try {
+			abitur = abiturDao.findAbiturByUsername(username);
+		} catch (DaoException e) {
 			logger.error(e);
 		}
+		
+		pool.returnConnection(con);
 		
 		return abitur;
 	}
 	
 	public static List<Abiturient> getAbitursByFaculty(int id) {
-		Connection con = ConnectionPool.getConnection();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		AbiturientDAO abiturDao = new AbiturientDAO(con);
-		List<Abiturient> list = abiturDao.findAbitursByFaculty(id);
-		
+		List<Abiturient> list=null;
 		try {
-			con.close();
-		} catch (SQLException e) {
+			list = abiturDao.findAbitursByFaculty(id);
+		} catch (DaoException e) {
 			logger.error(e);
 		}
+		
+		pool.returnConnection(con);
 		
 		return list;
 		
@@ -98,15 +107,16 @@ public class AbiturientLogic {
 	
 	public static boolean deleteApplication(int id) {
 		boolean result = false;
-		Connection con = ConnectionPool.getConnection();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
 		AbiturientDAO abiturDao = new AbiturientDAO(con);
-		result = abiturDao.delete(id);
-		
 		try {
-			con.close();
-		} catch (SQLException e) {
-			logger.error(e);
+			result = abiturDao.delete(id);
+		} catch (DaoException e1) {
+			logger.error(e1);
 		}
+		
+		pool.returnConnection(con);
 		
 		return result;
 		

@@ -20,7 +20,8 @@ public class TestRun {
 		
 		 final String SQL_SELECT = "SELECT * FROM disciplines";
 		   Connection connect=null;
-				connect = ConnectionPool.getConnection();
+		   ConnectionPool pool = ConnectionPool.getInstance();
+				connect = pool.getConnection();
 			
 	
 		    PreparedStatement ps = null;

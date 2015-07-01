@@ -7,14 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import by.zhukova.uni.entity.Entity;
 import by.zhukova.uni.entity.User;
+import by.zhukova.uni.exception.DaoException;
 
 public class UserDAO extends AbstractDAO {
 
-	static Logger logger = Logger.getLogger(UserDAO.class);
+	
 	private final String SELECT_ALL = "SELECT * FROM users";
 	private final String SELECT_BY_ID = "SELECT * FROM users WHERE id=?";
 	private final String SELECT_BY_USERNAME = "SELECT * FROM users WHERE username=?"; // specific User method
@@ -28,7 +27,7 @@ public class UserDAO extends AbstractDAO {
 	}
 
 	@Override
-	public List<User> findAll() {
+	public List<User> findAll() throws DaoException {
 		List<User> list = new ArrayList<User>();
 		PreparedStatement pst = null;
 		try {
@@ -46,7 +45,7 @@ public class UserDAO extends AbstractDAO {
 			
 
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -54,7 +53,7 @@ public class UserDAO extends AbstractDAO {
 	}
 
 	@Override
-	public User findEntityById(int id) {
+	public User findEntityById(int id) throws DaoException {
 		
 		PreparedStatement pst = null;
 		User user = null;
@@ -71,7 +70,7 @@ public class UserDAO extends AbstractDAO {
 			}
 			
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -79,7 +78,7 @@ public class UserDAO extends AbstractDAO {
 		return user;
 	}
 	
-	public User findUserByUsername(String username) {
+	public User findUserByUsername(String username) throws DaoException {
 		
 		PreparedStatement pst = null;
 		User user = null;
@@ -96,7 +95,7 @@ public class UserDAO extends AbstractDAO {
 			}
 			
 		} catch (SQLException e) {
-			logger.error(e);
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -105,21 +104,20 @@ public class UserDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
-		boolean result;
+		boolean result=false;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
+			if (check != 0) {
+				result = true;
 			}
-			result = true;
+			
 			
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -127,22 +125,21 @@ public class UserDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean delete(Entity entity) {
-		boolean result;
+	public boolean delete(Entity entity) throws DaoException {
+		boolean result=false;
 		int id = entity.getId();
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
+			if (check != 0) {
+				result = true;
 			}
-			result = true;
+			
 			
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
@@ -150,8 +147,8 @@ public class UserDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean create(Entity entity) {
-		boolean result;
+	public boolean create(Entity entity) throws DaoException {
+		boolean result=false;
 		PreparedStatement pst = null;
 		User user = (User) entity;
 		try {
@@ -160,14 +157,12 @@ public class UserDAO extends AbstractDAO {
 			pst.setString(2, user.getPassword());
 			pst.setString(3, user.getUserType());
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
+			if (check != 0) {
+				result = true;
 			}
-			result = true;
 			
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);	
 		}
@@ -175,8 +170,8 @@ public class UserDAO extends AbstractDAO {
 	}
 
 	@Override
-	public boolean update(Entity entity) {
-		boolean result;
+	public boolean update(Entity entity) throws DaoException {
+		boolean result=false;
 		User user = (User) entity;
 		PreparedStatement pst = null;
 		try {
@@ -186,15 +181,13 @@ public class UserDAO extends AbstractDAO {
 			pst.setString(3, user.getUserType());
 			pst.setInt(4, user.getId());
 			int check = pst.executeUpdate();
-			if (check == 0) {
-				result = false;
+			if (check != 0) {
+				result = true;
 			}
-			result = true;
 			
 
 		} catch (SQLException e) {
-			logger.error(e);
-			result = false;
+			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
 		}
