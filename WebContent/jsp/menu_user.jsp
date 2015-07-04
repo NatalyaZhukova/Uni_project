@@ -1,15 +1,13 @@
-<%@include file="libs.jsp"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css\styles.css">
-<title><fmt:message key="header.title" bundle="${rb}" /></title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
-		<div class="content-wrapper">
-			<div class="menu">
+<div class="menu">
 			<h2><fmt:message key="usermain.menu" bundle="${rb}" /></h2>
 			<ul>
 			<li><a href="/Uni_project/controller?command=fac"><fmt:message key="usermain.fac_list" bundle="${rb}" /></a></li>
@@ -21,10 +19,5 @@
 			</c:if>
 			</ul>		
 			</div>
-			<div class="content">
-			</div>
-		</div>
-		
-		<%@include file="footer.jsp" %>
-	</body>
+</body>
 </html>

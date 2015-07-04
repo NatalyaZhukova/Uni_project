@@ -3,7 +3,7 @@ package by.zhukova.uni.entity;
 public class Abiturient extends User {
 
 	private String firstName;
-	private String middlName;
+	private String middleName;
 	private String lastName;
 
 	private int firstScore;
@@ -24,7 +24,7 @@ public class Abiturient extends User {
 		super(id, username, password, userType);
 		
 		this.firstName = firstName;
-		this.middlName = middlName;
+		this.middleName = middlName;
 		this.lastName = lastName;
 		this.firstScore = firstScore;
 		this.secondScore = secondScore;
@@ -44,11 +44,11 @@ public class Abiturient extends User {
 	}
 
 	public String getMiddlName() {
-		return middlName;
+		return middleName;
 	}
 
-	public void setMiddlName(String middlName) {
-		this.middlName = middlName;
+	public void setMiddleName(String middlName) {
+		this.middleName = middlName;
 	}
 
 	public String getLastName() {
@@ -110,7 +110,7 @@ public class Abiturient extends User {
 	@Override
 	public String toString() {
 		return "Abiturient [id "+ getId()+"username "+ getUsername() + " firstName=" + firstName + ", middlName="
-				+ middlName + ", lastName=" + lastName + ", firstScore="
+				+ middleName + ", lastName=" + lastName + ", firstScore="
 				+ firstScore + ", secondScore=" + secondScore + ", thirdScore="
 				+ thirdScore + ", schoolScore=" + schoolScore
 				+ ", overallScore=" + overallScore + ", chosenFaculty="

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+import javax.servlet.http.HttpSession;
+
 import by.zhukova.uni.command.ActionCommand;
 import by.zhukova.uni.command.ActionFactory;
 import by.zhukova.uni.db.ConnectionPool;
@@ -56,7 +58,14 @@ public class Controller extends HttpServlet {
 		
 			dispatcher.forward(request, response);
 		} else {
+			HttpSession session = request.getSession(true);
+			if (session.getAttribute("role")==null){
 			page = ConfigurationManager.getProperty("path.page.index");
+			}
+			else {
+				page = ConfigurationManager.getProperty("path.page.main");
+			}
+		 
 			request.getSession().setAttribute("nullPage",
 					MessageManager.getProperty("message.nullpage"));
 			response.sendRedirect(request.getContextPath() + page);

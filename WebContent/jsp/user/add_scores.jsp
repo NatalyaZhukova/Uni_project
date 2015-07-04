@@ -15,17 +15,12 @@
 	<%@include file="..\header.jsp"%>
 	<div class="choosefaculty">
 		<form action="controller" method="POST">
-			<input type="hidden" name="command" value="addscores" /> 
-			<input type="hidden" name="first_name" value="${fName}"> 
-			<input type="hidden" name="middle_name" value="${mName}"> 
-			<input type="hidden" name="last_name" value="${lName}"> 
-			<input type="hidden" name="faculty" value="${faculty}"> 
-			<input type="hidden" name="faculty_name" value="${faculty_name}"> 
+			<input type="hidden" name="command" value="addscores" />  
+			<input type="hidden" name="faculty_name" value="${faculty_name}">
 			<h2>
 				${faculty_name}
 			</h2>
-			<br>
-			<fmt:message key="scores.message" bundle="${rb}" />
+				<fmt:message key="scores.message" bundle="${rb}" />
 			<br /> <br /> <label>${disciplines[0].name}:</label> <input
 				type="text" name="disc1" pattern="([0-9]{1,2})|(100)"
 				title="<fmt:message key="validation.test_score" bundle="${rb}" />"
@@ -37,11 +32,11 @@
 				title="<fmt:message key="validation.test_score" bundle="${rb}" />"
 				required><br /> <label><fmt:message
 					key="scores.school" bundle="${rb}" />:</label><input type="text"
-				name="school" pattern="(\d.\d)|(10.0)"
+				name="school" pattern="(\d\.\d)|(10\.0)"
 				title="<fmt:message key="validation.school_score" bundle="${rb}" />"
 				required><br /> <br> <input type="submit"
 				value="<fmt:message key="scores.submit" bundle="${rb}" />"><br />
-				${errorMessage}
+				<span class="error">${errorMessage}</span>
 		</form>
 	</div>
      <div>

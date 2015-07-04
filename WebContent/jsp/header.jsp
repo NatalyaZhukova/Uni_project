@@ -2,7 +2,7 @@
 
 	<div class="header">
 		<h1>
-			<fmt:message key="header.title" bundle="${ rb }" />
+			<a class="title" href="/Uni_project/controller"><fmt:message key="header.title" bundle="${ rb }" /></a>
 		</h1>
 		<div class="locale">
 			<a href="/Uni_project/controller?command=lang&locale=ru_RU">RU</a> | <a

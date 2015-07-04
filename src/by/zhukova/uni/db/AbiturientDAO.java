@@ -41,7 +41,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setId(res.getInt(1));
 				ab.setUsername(res.getString(2));
 				ab.setFirstName(res.getString(3));
-				ab.setMiddlName(res.getString(4));
+				ab.setMiddleName(res.getString(4));
 				ab.setLastName(res.getString(5));
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));
@@ -74,7 +74,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setId(res.getInt(1));
 				ab.setUsername(res.getString(2));
 				ab.setFirstName(res.getString(3));
-				ab.setMiddlName(res.getString(4));
+				ab.setMiddleName(res.getString(4));
 				ab.setLastName(res.getString(5));
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));
@@ -108,7 +108,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setId(res.getInt(1));
 				ab.setUsername(res.getString(2));
 				ab.setFirstName(res.getString(3));
-				ab.setMiddlName(res.getString(4));
+				ab.setMiddleName(res.getString(4));
 				ab.setLastName(res.getString(5));
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));
@@ -137,7 +137,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setId(res.getInt(1));
 				ab.setUsername(res.getString(2));
 				ab.setFirstName(res.getString(3));
-				ab.setMiddlName(res.getString(4));
+				ab.setMiddleName(res.getString(4));
 				ab.setLastName(res.getString(5));
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));

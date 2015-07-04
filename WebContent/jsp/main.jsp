@@ -1,14 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@include file="libs.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" type="text/css" href="css\styles.css">
+<title><fmt:message key="header.title" bundle="${rb}" /></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
-<body class="admin">
-	<div class="header"></div>
-	<div class="menu">f</div>
-	<div class="content">f</div>
-	<div class="footer"></div>
-</body>
+<body>
+<%@include file="header.jsp"%>
+		<div class="content-wrapper">
+			<c:if test="${role=='admin'}">
+			<%@include file="menu_admin.jsp" %>
+			</c:if>
+			<c:if test="${role=='abiturient' }" >
+			<%@include file="menu_user.jsp" %>
+			</c:if>
+			<div class="content">
+			</div>
+		</div>
+		
+		<%@include file="footer.jsp" %>
+	</body>
 </html>

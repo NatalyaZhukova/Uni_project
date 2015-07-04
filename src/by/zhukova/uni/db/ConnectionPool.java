@@ -2,15 +2,10 @@ package by.zhukova.uni.db;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Iterator;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -20,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
-    private static final Logger LOGGER = Logger
+    private static  Logger logger = Logger
             .getLogger(ConnectionPool.class);
 
     public static final String PATH_LOG4J = "resources/log4j.properties";
@@ -59,7 +54,7 @@ public class ConnectionPool {
             }
 
         } catch (SQLException | ClassNotFoundException e) {
-            LOGGER.fatal("fatal exception in ConnectionPool class ", e);
+            logger.fatal("fatal exception in ConnectionPool class ", e);
             throw new RuntimeException("",e);
         }
     }
@@ -87,7 +82,7 @@ public class ConnectionPool {
             try {
                 connection = pool.take();
             } catch (InterruptedException e) {
-                LOGGER.error("InterruptedException ", e);
+                logger.error("InterruptedException ", e);
             } 
         }
         return connection;
@@ -100,7 +95,7 @@ public class ConnectionPool {
                 pool.add(connection);
             }
         } catch (SQLException e) {
-            LOGGER.error("SQLException in returnConnection method ", e);
+            logger.error("SQLException in returnConnection method ", e);
         }
     }
 
@@ -120,7 +115,7 @@ public class ConnectionPool {
                 iterator.remove();
             }
         } catch (SQLException e) {
-            LOGGER.error("SQLException in cleanUp method", e);
+            logger.error("SQLException in cleanUp method", e);
         }
     }
 }

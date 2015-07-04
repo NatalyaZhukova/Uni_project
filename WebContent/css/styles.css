@@ -157,8 +157,9 @@ padding:10px;
 margin-right:50px;
 
 min-width:190px;
-width:10%;
+width:20%;
 min-height:370px;
+height:100%;
 background-color:#FFECB3;
 border-right:1px solid #757575;
 float:left;
@@ -179,7 +180,7 @@ min-height:400px;
 }
 
 .content {
-width:90%;
+width:80%;
 padding:20px;
 text-align:left;
 }
@@ -231,4 +232,9 @@ background-color:#FFF8E1;
 width:100%;
 min-height:10px;
 text-align:center;
+}
+
+a.title {
+ text-decoration:none; 
+ color:#fff;
 }

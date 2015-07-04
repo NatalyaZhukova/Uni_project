@@ -12,10 +12,14 @@ import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
 
 public class ApplicationActionCommand implements ActionCommand {
+	
+	private static final String PAGE_APPLIC = "path.page.application";
+	private static final String PAGE_MAIN = "path.page.main";
+	private static final String PARAM_ACTION = "act";
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		String page = ConfigurationManager.getProperty("path.page.application");
+		String page = ConfigurationManager.getProperty(PAGE_APPLIC);
 		
 		HttpSession session = request.getSession(true);
 		String username = (String) session.getAttribute("user");
@@ -29,14 +33,14 @@ public class ApplicationActionCommand implements ActionCommand {
 		request.setAttribute("faculty", fac);
 		request.setAttribute("faculty_registered", applicationsNum);
 		
-		String action = request.getParameter("act");
+		String action = request.getParameter(PARAM_ACTION);
 		if (action!=null) {
 			if (action.equals("del")){
 		
 				int id = abitur.getId();
 				if (AbiturientLogic.deleteApplication(id)) {
 				session.removeAttribute("application");
-				page = ConfigurationManager.getProperty("path.page.main_user");
+				page = ConfigurationManager.getProperty(PAGE_MAIN);
 				}
 			}
 		}

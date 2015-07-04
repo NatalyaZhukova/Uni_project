@@ -52,7 +52,7 @@ public class Validation {
 	
 	public static boolean validScores(String first, String second, String third, String school) {
 		final String TEST_SCORE = "([0-9]{1,2})|(100)";
-		final String SCHOOL_SCORE = "(\\d.\\d)|(10.0)";
+		final String SCHOOL_SCORE = "(\\d\\.\\d)|(10\\.0)";
 		
 		boolean result = true;
 		

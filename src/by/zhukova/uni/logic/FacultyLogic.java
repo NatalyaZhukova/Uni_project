@@ -14,6 +14,7 @@ import by.zhukova.uni.exception.DaoException;
 public class FacultyLogic {
 	
 	static Logger logger = Logger.getLogger(FacultyLogic.class);
+	private final static int ONPAGE = 5;
 	
 	public static List<Faculty> getFacultiesList() {
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -48,7 +49,7 @@ public class FacultyLogic {
 		return faculty;
 	}
 	
-	private final static int ONPAGE = 5;
+	
 
 	public static List<Faculty> getFacultiesPage (int p, int numpage, List<Faculty> list) {
 	

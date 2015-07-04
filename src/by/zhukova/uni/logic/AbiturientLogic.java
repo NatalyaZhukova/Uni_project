@@ -61,7 +61,6 @@ public class AbiturientLogic {
 		 id = list.get(list.size()-1).getId()+1;
 		}
 		abitur.setId(id);
-		System.out.println(abitur.toString());
 		try {
 			result=abiturDao.create(abitur);
 		} catch (DaoException e) {

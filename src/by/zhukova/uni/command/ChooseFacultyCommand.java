@@ -1,11 +1,12 @@
 package by.zhukova.uni.command;
 
-import java.io.UnsupportedEncodingException;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Discipline;
 import by.zhukova.uni.entity.Faculty;
 import by.zhukova.uni.logic.DisciplineLogic;
@@ -15,18 +16,28 @@ import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
 
 public class ChooseFacultyCommand implements ActionCommand {
+	
+	private static final String PARAM_FIRST_NAME = "first_name";
+	private static final String PARAM_MIDDLE_NAME = "middle_name";
+	private static final String PARAM_LAST_NAME = "last_name";
+	private static final String PARAM_FACULTY = "faculty";
+	private static final String PAGE_CHOOSE_FACULTY = "path.page.choose_fac";
+	private static final String PAGE_ADD_SCORES = "path.page.add_scores";
+	
+	private static final String MESSAGE_VALIDATION_FORMAT = "validation.format";
+	private static final String MESSAGE_NOT_FILLED = "validation.notfilled";
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		String page = ConfigurationManager.getProperty("path.page.choose_fac");
-		HttpSession session = request.getSession(true);
+		String page = ConfigurationManager.getProperty(PAGE_CHOOSE_FACULTY);
+		HttpSession session = request.getSession(true); // Locale
 
 		List<Faculty> list = FacultyLogic.getFacultiesList();
 		request.setAttribute("facList", list);
 
-		String fName=request.getParameter("first_name");
-		String mName = request.getParameter("middle_name");
-		String lName = request.getParameter("last_name");
+		String fName=request.getParameter(PARAM_FIRST_NAME);
+		String mName = request.getParameter(PARAM_MIDDLE_NAME);
+		String lName = request.getParameter(PARAM_LAST_NAME);
 		
 	
 
@@ -34,28 +45,31 @@ public class ChooseFacultyCommand implements ActionCommand {
 			
 			if (Validation.isAllFieldFilled(fName, lName)) {
 				if (Validation.validFIO(fName, mName, lName)) {
-					request.setAttribute("fName", fName);
-					request.setAttribute("mName", mName);
-					request.setAttribute("lName", lName);
-					int facultyId = Integer.parseInt(request
-							.getParameter("faculty"));
+					Abiturient abitur = new Abiturient();
+					abitur.setFirstName(fName);
+					if (mName==null) {
+						mName="";
+					}
+					abitur.setMiddleName(mName);
+					abitur.setLastName(lName);
 					
-	             
+					int facultyId = Integer.parseInt(request.getParameter(PARAM_FACULTY));
+					abitur.setChosenFaculty(facultyId);
 					Faculty fac = FacultyLogic.getChosenFaculty(facultyId);
-					request.setAttribute("faculty", facultyId);
-					request.setAttribute("faculty_name", fac.getName());
 					List<Discipline> discList = DisciplineLogic.getFacultyDisciplines(fac);
+					session.setAttribute("abiturient", abitur);
+					request.setAttribute("faculty_name", fac.getName());
 					request.setAttribute("disciplines", discList);
 					page = ConfigurationManager
-							.getProperty("path.page.add_scores");
+							.getProperty(PAGE_ADD_SCORES);
 				} 
 			else {
 					request.setAttribute("errorMessage",
-							MessageManager.getProperty("validation.format"));
+							MessageManager.getProperty(MESSAGE_VALIDATION_FORMAT));
 				}
 			} else {
 				request.setAttribute("errorMessage",
-						MessageManager.getProperty("validation.notfilled"));
+						MessageManager.getProperty(MESSAGE_NOT_FILLED));
 			}
 		}
 

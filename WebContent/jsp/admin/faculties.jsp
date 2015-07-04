@@ -12,7 +12,7 @@
 
 <%@include file="..\header.jsp"%>
 <div class="content-wrapper">
-			<%@include file="..\menu_user.jsp" %>
+			<%@include file="..\menu_admin.jsp" %>
 			<div class="content">
 		      	<h2><fmt:message key="faculty.title" bundle="${rb}" /></h2>
 				

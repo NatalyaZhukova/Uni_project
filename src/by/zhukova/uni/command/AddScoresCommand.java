@@ -17,86 +17,89 @@ import by.zhukova.uni.resource.MessageManager;
 
 public class AddScoresCommand implements ActionCommand {
 
+	private final static String PAGE_ADD_SCORES = "path.page.add_scores";
+	private final static String PAGE_ERROR = "path.page.error";
+	private final static String PAGE_SUCCESS = "path.page.success_application";
+
+	private final static String PARAM_DISC1 = "disc1";
+	private final static String PARAM_DISC2 = "disc2";
+	private final static String PARAM_DISC3 = "disc3";
+	private final static String PARAM_SCHOOL = "school";
+	private final static String ATTR_FACULTY_NAME = "faculty_name";
+	private final static String ATTR_ABITUR = "abiturient";
+	private final static String ATTR_USER = "user";
+	private final static String ATTR_APPLIC = "exists";
+
+	private final static String MESSAGE_VALIDATION_FORMAT = "validation.format";
+	private final static String MESSAGE_NOT_FILLED = "validation.notfilled";
+
 	@Override
 	public String execute(HttpServletRequest request) {
-     String page = ConfigurationManager.getProperty("path.page.add_scores");
+		HttpSession session = request.getSession(true);
+		String page = ConfigurationManager.getProperty(PAGE_ADD_SCORES);
 
-		String first = request.getParameter("disc1");
-		String second = request.getParameter("disc2");
-		String third = request.getParameter("disc3");
-		String school = request.getParameter("school");
-		
-		
-		String first_name = request.getParameter("first_name");
-		
-		
-		String middle_name = request.getParameter("middle_name");
-		if (middle_name==null) {
-			middle_name="";
-		}
-		String last_name = request.getParameter("last_name");
-		
-		int chosen_faculty = Integer.parseInt(request.getParameter("faculty"));
+		Abiturient abitur = (Abiturient) session.getAttribute(ATTR_ABITUR);
+
+		String first = request.getParameter(PARAM_DISC1);
+		String second = request.getParameter(PARAM_DISC2);
+		String third = request.getParameter(PARAM_DISC3);
+		String school = request.getParameter(PARAM_SCHOOL);
+
+		int chosen_faculty = abitur.getChosenFaculty();
 		Faculty fac = FacultyLogic.getChosenFaculty(chosen_faculty);
 		List<Discipline> list = DisciplineLogic.getFacultyDisciplines(fac);
-		String faculty_name = request.getParameter("faculty_name");
-		
-		if ((first!=null) || (second!=null) || (third!=null) || (school!=null)) {
+		String faculty_name = (String) request.getAttribute(ATTR_FACULTY_NAME);
+
+		if ((first != null) || (second != null) || (third != null)
+				|| (school != null)) {
 			if (Validation.isAllFieldFilled(first, second, third, school)) {
 				if (Validation.validScores(first, second, third, school)) {
-				
+
 					int first_score = Integer.parseInt(first);
 					int second_score = Integer.parseInt(second);
 					int third_score = Integer.parseInt(third);
-					int school_score = AbiturientLogic.calculateSchoolScore(Double.parseDouble(school));
-					int overall = AbiturientLogic.calculateOverallScore(first_score, second_score, third_score, school_score);
+					int school_score = AbiturientLogic
+							.calculateSchoolScore(Double.parseDouble(school));
+					int overall = AbiturientLogic.calculateOverallScore(
+							first_score, second_score, third_score,
+							school_score);
+
 					
-					HttpSession session = request.getSession(true);
-					String username = (String) session.getAttribute("user");
-					
-					Abiturient abitur = new Abiturient();
+					String username = (String) session.getAttribute(ATTR_USER);
+
 					abitur.setUsername(username);
-					abitur.setFirstName(first_name);
-					abitur.setMiddlName(middle_name);
-					abitur.setLastName(last_name);
 					abitur.setFirstScore(first_score);
 					abitur.setSecondScore(second_score);
 					abitur.setThirdScore(third_score);
 					abitur.setSchoolScore(school_score);
 					abitur.setOverallScore(overall);
 					abitur.setChosenFaculty(chosen_faculty);
-					
+
 					if (AbiturientLogic.createApplication(abitur)) {
-						page = ConfigurationManager
-								.getProperty("path.page.success_application");
-						session.setAttribute("application", "exists");
-	
-						
+						page = ConfigurationManager.getProperty(PAGE_SUCCESS);
+						session.setAttribute("application", ATTR_APPLIC);
+						session.removeAttribute("abiturient");
+
+					} else {
+						page = ConfigurationManager.getProperty(PAGE_ERROR);
 					}
-					else {
-						page = ConfigurationManager.getProperty("path.page.error");
-					}
-					
+
+				} else {
+					request.setAttribute("errorMessage", MessageManager
+							.getProperty(MESSAGE_VALIDATION_FORMAT));
+
 				}
-				else {
-					request.setAttribute("errorMessage", MessageManager.getProperty("validation.format"));
-					
-				}
-				
-			}
-			else {
+
+			} else {
 				request.setAttribute("errorMessage",
-						MessageManager.getProperty("validation.notfilled"));
+						MessageManager.getProperty(MESSAGE_NOT_FILLED));
 			}
-			
+
 		}
-		request.setAttribute("fName", first_name);
-		request.setAttribute("mName", middle_name);
-		request.setAttribute("lName", last_name);
-		request.setAttribute("faculty", chosen_faculty);
-		request.setAttribute("faculty_name", faculty_name);
-		request.setAttribute("disciplines", list);
+
 		
+		request.setAttribute("disciplines", list);
+
 		return page;
 	}
 
