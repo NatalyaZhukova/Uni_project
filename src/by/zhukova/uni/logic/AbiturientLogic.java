@@ -51,20 +51,17 @@ public class AbiturientLogic {
 		List<Abiturient> list = null;
 		try {
 			list = abiturDao.findAll();
+			
+			int id;
+			if (list.size()==0) {
+				id=1;
+			} else {
+			 id = list.get(list.size()-1).getId()+1;
+			}
+			abitur.setId(id);
+			result=abiturDao.create(abitur);
 		} catch (DaoException e1) {
 			logger.error(e1);
-		}
-		int id;
-		if (list.size()==0) {
-			id=1;
-		} else {
-		 id = list.get(list.size()-1).getId()+1;
-		}
-		abitur.setId(id);
-		try {
-			result=abiturDao.create(abitur);
-		} catch (DaoException e) {
-			logger.error(e);
 		}
 		
 		pool.returnConnection(con);

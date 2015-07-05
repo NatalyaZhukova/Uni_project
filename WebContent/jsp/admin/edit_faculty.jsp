@@ -20,17 +20,74 @@
 			<%@include file="../menu_user.jsp" %>
 			</c:if>
 			<div class="content">
-			<h2>${faculty.name}</h2>
-			<h3><fmt:message key="faculty.disciplines" bundle="${rb}" />:</h3>
-			<ul>
-			<li>${discList[0].name }</li>
-			<li>${discList[1].name }</li>
-			<li>${discList[2].name }</li>
-			</ul>
-			<br/>
+			<div class="register">
+				<form action="controller" method="POST">
+					<input type="hidden" name="command" value="editfac" /> 
+					<input type="hidden" name="id" value="${faculty.id}">
+					<label><fmt:message key="faculty.name" bundle="${ rb }" />:</label> 
+					<input type="text" name="faculty_name" value="${faculty.name}" required> 
+					<label><fmt:message key="faculty.plan" bundle="${ rb }" /></label>: 
+					<input type="text" name="faculty_plan" pattern="\d{1,3}" value="${faculty.facultyPlan}" required> <label>
+					<fmt:message key="faculty.disciplines" bundle="${ rb }" /></label> 
+					
+					<select name="disc1">
+					<option value="${discList[faculty.firstDiscipline-1].id}" selected>${discList[faculty.firstDiscipline-1].name}</option>
+					<c:if test="${faculty.firstDiscipline==1}" > 
+					<c:forEach var="discipline" items="${discList}" begin="0" end="${faculty.firstDiscipline-1}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+					</c:if>
+					<c:if test="${faculty.firstDiscipline!=1}">
+					    <c:forEach var="discipline" items="${discList}" begin="0" end="${faculty.firstDiscipline-2}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+						</c:if>
+						<c:forEach var="discipline" items="${discList}" begin="${faculty.firstDiscipline}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+					</select> 
+					
+					
+					<select name="disc2">
+						<option value="${discList[faculty.secondDiscipline-1].id}" selected>${discList[faculty.secondDiscipline-1].name}</option>
+					<c:if test="${faculty.secondDiscipline==1}" > 
+					<c:forEach var="discipline" items="${discList}" begin="0" end="${faculty.secondtDiscipline-1}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+					</c:if>
+					<c:if test="${faculty.secondDiscipline!=1}">
+					    <c:forEach var="discipline" items="${discList}" begin="0" end="${faculty.secondDiscipline-2}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+						</c:if>
+						<c:forEach var="discipline" items="${discList}" begin="${faculty.secondDiscipline}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+					</select> 
+					 
+					
+					<select name="disc3">
+						<option value="${discList[faculty.thirdDiscipline-1].id}" selected>${discList[faculty.thirdDiscipline-1].name}</option>
+					<c:if test="${faculty.thirdDiscipline==1}" > 
+					<c:forEach var="discipline" items="${discList}" begin="0" end="${faculty.thirdDiscipline-1}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+					</c:if>
+					<c:if test="${faculty.thirdDiscipline!=1}">
+					    <c:forEach var="discipline" items="${discList}" begin="0" end="${faculty.thirdDiscipline-2}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+						</c:if>
+						<c:forEach var="discipline" items="${discList}" begin="${faculty.thirdDiscipline}">
+							<option value="${discipline.id}">${discipline.name}</option>
+						</c:forEach>
+					</select> 
+					
+					<input type="submit" value="<fmt:message key="faculty.save" bundle="${ rb }" />"
+						id="submit"> <br> <span class="error">${errorMessage}</span>
 			
-			<span class="applic">	<fmt:message key="application.num_appl" bundle="${rb}" /></span> <br/>
-		<span class="applic-num">	${applications} / ${faculty.facultyPlan}</span> <br/>
+			</form>
+			</div>
 		 
 			</div>
 		</div>

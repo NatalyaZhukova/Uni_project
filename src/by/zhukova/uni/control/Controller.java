@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.command.ActionCommand;
 import by.zhukova.uni.command.ActionFactory;
-import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
 

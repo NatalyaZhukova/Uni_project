@@ -21,6 +21,7 @@ public class RegisterCommand implements ActionCommand {
 	private static final String MESSAGE_INVALID_FORMAT = "validation.format";
 	private static final String MESSAGE_REPEAT = "validation.repeat";
 	private static final String MESSAGE_NOT_FILLED = "validation.notfilled";
+	private static final String MESSAGE_ERROR = "error.no_user";
 
 	@Override
 	public String execute(HttpServletRequest request) {
@@ -39,7 +40,9 @@ public class RegisterCommand implements ActionCommand {
 										.getProperty(PAGE_SUCCESS);
 							}
 							else {
-								page = ConfigurationManager.getProperty(PAGE_ERROR);
+								request.setAttribute("errorMessage",  MessageManager
+										.getProperty(MESSAGE_ERROR));
+									page = ConfigurationManager.getProperty(PAGE_ERROR);
 							}
 
 						} else {

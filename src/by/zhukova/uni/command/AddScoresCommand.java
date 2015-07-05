@@ -32,6 +32,7 @@ public class AddScoresCommand implements ActionCommand {
 
 	private final static String MESSAGE_VALIDATION_FORMAT = "validation.format";
 	private final static String MESSAGE_NOT_FILLED = "validation.notfilled";
+	private final static String MESSAGE_ERROR = "error.no_application";
 
 	@Override
 	public String execute(HttpServletRequest request) {
@@ -81,6 +82,8 @@ public class AddScoresCommand implements ActionCommand {
 						session.removeAttribute("abiturient");
 
 					} else {
+						request.setAttribute("errorMessage",  MessageManager
+							.getProperty(MESSAGE_ERROR));
 						page = ConfigurationManager.getProperty(PAGE_ERROR);
 					}
 

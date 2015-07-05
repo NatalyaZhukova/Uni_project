@@ -71,4 +71,30 @@ public class Validation {
 
     return result; 
 	}
+	
+	public static boolean validFaculty(String name, String plan) {
+		final String FACULTY_NAME = "[À-ß¨][à-ÿ¸\\-]+";
+		final String FACULTY_PLAN = "\\d{1,3}";
+		
+		boolean result = true;
+		
+		if (!name.matches(FACULTY_NAME)) {
+			result = false;
+		}
+		if (!plan.matches(FACULTY_PLAN)) {
+			result = false;
+		}
+		
+		
+		return result;
 	}
+	
+	public static boolean noRepeatDisciplines(String disc1, String disc2, String disc3) {
+		boolean result = true;
+		
+		if ((disc1.equals(disc2)) || (disc1.equals(disc3)) || (disc2.equals(disc3))) {
+			result = false;
+		}
+		return result;
+	}
+}

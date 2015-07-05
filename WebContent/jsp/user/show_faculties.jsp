@@ -35,9 +35,9 @@
 						<fmt:message key="faculty.plan" bundle="${rb}" /> - ${faculty.facultyPlan }<br />
 					</c:if>
 					<c:if test="${role=='admin'}">
-						<a href="/Uni_project/controller?command=editfac?id=${faculty.id}"
+						<a href="/Uni_project/controller?command=editfac&id=${faculty.id}"
 							class="act"><fmt:message key="faculty.edit" bundle="${rb}" /></a>
-						<a href="/Uni_project/controller?command=delfac?id=${faculty.id}"
+						<a href="/Uni_project/controller?command=delfac&id=${faculty.id}"
 							class="act"><fmt:message key="faculty.delete" bundle="${rb}" /></a>
 					</c:if>
 				</div>
