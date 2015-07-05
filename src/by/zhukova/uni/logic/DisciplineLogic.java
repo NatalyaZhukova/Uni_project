@@ -39,5 +39,25 @@ public class DisciplineLogic {
 		
 		
 	}
+	
+	public static List<Discipline> getAllDisciplines() {
+		List<Discipline> list = new ArrayList<Discipline>();
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
+		DisciplineDAO discDao = new DisciplineDAO(con);
+		
+		try {
+			list = discDao.findAll();
+		} catch (DaoException e) {
+			logger.error(e);
+		}
+		
+		
+		pool.returnConnection(con);
+		
+		return list;
+		
+		
+	}
 
 }

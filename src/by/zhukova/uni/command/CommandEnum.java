@@ -37,8 +37,20 @@ public enum CommandEnum {
 	FAC {{
 		this.command = new FacultiesCommand();
 	}},
+	CREATEFAC {{
+		this.command = new CreateFacultyCommand();
+	}},
 	SHOWFAC {{
 		this.command = new ShowFacultyCommand();
+	}},
+	EDITFAC {{
+		this.command = new EditFacultyCommand();
+	}},
+	DELFAC {{
+		this.command = new DeleteFacultyCommand();
+	}},
+	ABITUR {{
+		this.command = new AbiturientsCommand();
 	}};
 
 	ActionCommand command;

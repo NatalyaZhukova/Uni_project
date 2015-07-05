@@ -19,11 +19,11 @@ public class FacultiesCommand implements ActionCommand {
 		String page = null;
 		HttpSession session = request.getSession(true);
 
-		if (session.getAttribute("role").equals("admin")) {
-			page = ConfigurationManager.getProperty(PAGE_FACULTIES);
-		} else {
+		//if (session.getAttribute("role").equals("admin")) {
+		//	page = ConfigurationManager.getProperty(PAGE_FACULTIES);
+		//} else {
 			page = ConfigurationManager.getProperty(PAGE_SHOW_FACULTIES);
-		}
+		//}
 
 		List<Faculty> list = FacultyLogic.getFacultiesList();
 		// request.setAttribute("facList", list);

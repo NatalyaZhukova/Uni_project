@@ -13,18 +13,7 @@
 
 <%@include file="..\header.jsp"%>
 <div class="content-wrapper">
-			<div class="menu">
-			<h2><fmt:message key="usermain.menu" bundle="${rb}" /></h2>
-			<ul>
-			<li><a href="/Uni_project/controller?command=fac"><fmt:message key="usermain.fac_list" bundle="${rb}" /></a></li>
-			<c:if test="${application==null}">
-			<li><a href="/Uni_project/controller?command=chfac"><fmt:message key="usermain.register_fac" bundle="${rb}" /></a></li>
-			</c:if>
-			<c:if test="${application!=null}">
-			<li><a href="/Uni_project/controller?command=applic"><fmt:message key="usermain.application" bundle="${rb}" /></a></li>
-			</c:if>
-			</ul>		
-			</div>
+		 <%@include file="..\menu_user.jsp" %>
 			<div class="content">
 		<span class="fio">	${appl.firstName } ${appl.middlName } ${appl.lastName } </span> <br>
 			<fmt:message key="application.overall" bundle="${rb}" /><span class="score"> ${appl.overallScore} </span><br>

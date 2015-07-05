@@ -1,7 +1,1 @@
-/by/
-/config.properties
-/database.properties
-/log4j.properties
-/message_en_US.properties
-/message_ru_RU.properties
-/pattern.properties
+/custom_error.jsp
