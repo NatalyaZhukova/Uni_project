@@ -33,9 +33,9 @@ public class Validation {
 	
 	public static boolean validFIO(String fName, String mName, String lName){
 		boolean result = true;
-		final String FIRST_NAME = "[–ê-–Ø–∞-—è]+";
-		final String MIDDLE_NAME = "[–ê-–Ø–∞-—è]+";
-		final String LAST_NAME = "[–ê-–Ø–∞-—è]+";
+		final String FIRST_NAME = "[¿-ﬂ®‡-ˇ∏]+";
+		final String MIDDLE_NAME = "[¿-ﬂ®‡-ˇ∏]+";
+		final String LAST_NAME = "[¿-ﬂ®‡-ˇ∏]+";
 		if (!fName.matches(FIRST_NAME)) {
 			result=false;
 		}
