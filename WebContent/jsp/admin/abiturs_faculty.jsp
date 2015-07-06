@@ -28,7 +28,9 @@
 			${message}
 			<c:forEach var="abiturient" items="${abiturients}" begin="0" end="${stopLine-1}">
 			<div class="abiturient">
-			 <span class="fio">${abiturient.firstName } ${abiturient.middleName } ${abiturient.lastName } </span>  <span class="score"> ${abiturient.overallScore }</span>
+			 <span class="fio"><a href="/Uni_project/controller?command=showabitur&id=${abiturient.id}">
+			 ${abiturient.firstName } ${abiturient.middleName } ${abiturient.lastName } </a></span>
+			   <span class="score"> ${abiturient.overallScore }</span>
 			</div>
 			</c:forEach>
 			
@@ -36,7 +38,9 @@
 			<hr class="separator">
 			<c:forEach var="abiturient" items="${abiturients}" begin="${stopLine}" >
 			<div class="abiturient">
-			 <span class="fio"> ${abiturient.firstName } ${abiturient.middleName } ${abiturient.lastName } </span> <span class="score"> ${abiturient.overallScore }</span>
+			 <span class="fio"><a href="/Uni_project/controller?command=showabitur&id=${abiturient.id}"> 
+			 ${abiturient.firstName } ${abiturient.middleName } ${abiturient.lastName } </a> </span>
+			  <span class="score"> ${abiturient.overallScore }</span>
 			</div>
 			</c:forEach>
 			</c:if>

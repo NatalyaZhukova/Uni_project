@@ -26,16 +26,19 @@ else
 
 <div class="register">
 	<form action="controller" method="POST">
-		<input type="hidden" name="command" value="register" /> <label>
+		<input type="hidden" name="command" value="register" /> 
+		<label class="required">
 			<fmt:message key="register.login" bundle="${ rb }" />:
 		</label><br> <input type="text" name="reg_login"
 			pattern="[A-Za-z0-9_-]{5,50}"
 			title="<fmt:message key="validation.login" bundle="${ rb }" />"
-			required> <br> <label><fmt:message
+			required> <br> 
+			<label class="required"><fmt:message
 				key="register.password" bundle="${ rb }" />:</label><br> <input
 			type="password" id="password1" name="reg_password" pattern=".{5,20}"
 			title="<fmt:message key="validation.password" bundle="${ rb }" />"
-			required> <br> <label><fmt:message
+			required> <br> 
+			<label class="required"><fmt:message
 				key="register.repeat" bundle="${ rb }" />:</label><br> <input
 			type="password" id="password2" name="repeat_password"
 			pattern=".{5,20}"

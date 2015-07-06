@@ -12,42 +12,39 @@ import by.zhukova.uni.logic.DisciplineLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
 
-public class ShowFacultyCommand implements ActionCommand {
+public class ShowAbiturientCommand implements ActionCommand {
 	
-	private static final String PAGE_FACULTY = "path.page.showfaculty";
+	private static final String PAGE_INFO = "path.page.show_abiturient";
 	private static final String PARAM_ID = "id";
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		String page = null;
-		int faculty;
+		String page = ConfigurationManager.getProperty(PAGE_INFO);
+		
+		int abiturient;
 		String requestedId = request.getParameter(PARAM_ID);
 	
 		try {
-		 faculty=Integer.parseInt(requestedId);
+		 abiturient=Integer.parseInt(requestedId);
 		}
 		catch (NumberFormatException e) {
-			faculty=1;
+			abiturient=1;
 		}
 		
 		
-		Faculty fac = FacultyLogic.getChosenFaculty(faculty);
-		if (fac==null) {
-			faculty=1;
-			fac = FacultyLogic.getChosenFaculty(faculty);
+		Abiturient abitur = AbiturientLogic.getAbiturApplication(abiturient);
+		if (abitur==null) {
+			abiturient=1;
+			abitur = AbiturientLogic.getAbiturApplication(abiturient);
 		}
-		List<Abiturient> list = AbiturientLogic.getAbitursByFaculty(faculty);
-		int applicationsNum = list.size();
+		
+		Faculty fac = FacultyLogic.getChosenFaculty(abitur.getChosenFaculty());
 		List<Discipline> discList = DisciplineLogic.getFacultyDisciplines(fac);
-		
+		request.setAttribute("abiturient", abitur);
 		request.setAttribute("faculty", fac);
 		request.setAttribute("discList", discList);
-		request.setAttribute("applications", applicationsNum);
-		
-		page = ConfigurationManager.getProperty(PAGE_FACULTY);
-		
-		
-		
+		double schoolScore = (double)abitur.getSchoolScore()/10;
+		request.setAttribute("schoolScore", schoolScore);
 		
 		
 		return page;

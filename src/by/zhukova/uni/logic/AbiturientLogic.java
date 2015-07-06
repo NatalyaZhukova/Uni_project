@@ -84,6 +84,22 @@ public class AbiturientLogic {
 
 		return abitur;
 	}
+	
+	public static Abiturient getAbiturApplication(int id) {
+		Abiturient abitur = null;
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection con = pool.getConnection();
+		AbiturientDAO abiturDao = new AbiturientDAO(con);
+		try {
+			abitur = abiturDao.findEntityById(id);
+		} catch (DaoException e) {
+			logger.error(e);
+		}
+
+		pool.returnConnection(con);
+
+		return abitur;
+	}
 
 	public static List<Abiturient> getAbitursByFaculty(int id) {
 		ConnectionPool pool = ConnectionPool.getInstance();

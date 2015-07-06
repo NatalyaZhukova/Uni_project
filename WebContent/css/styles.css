@@ -285,6 +285,9 @@ float:right;
 	width:50%;
 	margin: 0 auto;
 }
+.abiturslist ul {
+	margin-left:20px;
+}
 .abiturient .fio {
 	display:inline-block;
 	width:70%;
@@ -295,4 +298,12 @@ float:right;
 	display:inline-block;
 	text-align:center;
 	font-weight:normal;
+}
+.abiturient a {
+	color:#800000;
+	text-decoration:none;
+}
+
+.required {
+	font-weight:bold;
 }

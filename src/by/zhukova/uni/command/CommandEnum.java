@@ -51,6 +51,9 @@ public enum CommandEnum {
 	}},
 	ABITUR {{
 		this.command = new AbiturientsCommand();
+	}},
+	SHOWABITUR {{
+		this.command = new ShowAbiturientCommand();
 	}};
 
 	ActionCommand command;

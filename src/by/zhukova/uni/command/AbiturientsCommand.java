@@ -13,7 +13,7 @@ import by.zhukova.uni.resource.MessageManager;
 
 public class AbiturientsCommand implements ActionCommand {
 	
-	private static final String PAGE_LIST = "page.path.abiturient_faculty";
+	private static final String PAGE_LIST = "path.page.abiturient_faculty";
 	private static final String PARAM_FACULTY_ID = "faculty";
 	private static final String MESSAGE_NO_APPLIC = "message.no_application";
 

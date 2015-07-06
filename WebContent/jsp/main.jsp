@@ -16,6 +16,15 @@
 			<%@include file="menu_user.jsp" %>
 			</c:if>
 			<div class="content">
+			
+		
+			<c:if test="${role=='admin'}">
+			<fmt:message key="message.admin" bundle="${rb}" />
+			</c:if>
+			<c:if test="${role=='abiturient' }" >
+		    <fmt:message key="message.abiturient" bundle="${rb}" />
+			</c:if>
+			
 			</div>
 		</div>
 		

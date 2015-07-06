@@ -15,7 +15,7 @@
 <div class="content-wrapper">
 		 <%@include file="..\menu_user.jsp" %>
 			<div class="content">
-		<span class="fio">	${appl.firstName } ${appl.middlName } ${appl.lastName } </span> <br>
+		<span class="fio">	${appl.firstName } ${appl.middleName } ${appl.lastName } </span> <br>
 			<fmt:message key="application.overall" bundle="${rb}" /><span class="score"> ${appl.overallScore} </span><br>
 			<fmt:message key="application.faculty" bundle="${rb}" /><span class="faculty-name"> ${faculty.name}</span>. <br>
 		<span class="applic">	<fmt:message key="application.num_appl" bundle="${rb}" /></span> <br/>

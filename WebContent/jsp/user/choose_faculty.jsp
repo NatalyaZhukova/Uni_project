@@ -16,13 +16,13 @@
 <div class="choosefaculty">
 		<form action="controller" method="POST">
 			<input type="hidden" name="command" value="chfac" /> 
-			<label><fmt:message key="chfaculty.first_name" bundle="${rb}" /></label><br> 
+			<label class="required"><fmt:message key="chfaculty.first_name" bundle="${rb}" />:</label><br> 
 			<input type="text" name="first_name" value=""  required /> <br/>
 			<label><fmt:message key="chfaculty.middle_name" bundle="${rb}" /></label> 
 			<br> <input type="text" name="middle_name" value="">  <br/>
-			<label><fmt:message key="chfaculty.last_name" bundle="${rb}" /></label> <br>
+			<label class="required"><fmt:message key="chfaculty.last_name" bundle="${rb}" />:</label> <br>
 			<input type="text" name="last_name" value=""   required /> <br/> <br/>
-			<label><fmt:message key="chfaculty.choose_faculty" bundle="${rb}" /></label>
+			<label class="required"><fmt:message key="chfaculty.choose_faculty" bundle="${rb}" />:</label>
 			<select name="faculty">
 			<c:forEach var="faculty" items="${facList}">
 			<option value="${faculty.id}">${faculty.name}</option>
