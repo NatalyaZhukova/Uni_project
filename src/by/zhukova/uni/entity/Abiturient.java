@@ -18,13 +18,13 @@ public class Abiturient extends User {
 	}
 
 	public Abiturient(int id, String username, String password, String userType,
-			String firstName, String middlName, String lastName,
+			String firstName, String middleName, String lastName,
 			int firstScore, int secondScore, int thirdScore, int schoolScore,
 			int overallScore, int chosenFaculty) {
 		super(id, username, password, userType);
 		
 		this.firstName = firstName;
-		this.middleName = middlName;
+		this.middleName = middleName;
 		this.lastName = lastName;
 		this.firstScore = firstScore;
 		this.secondScore = secondScore;
@@ -43,7 +43,7 @@ public class Abiturient extends User {
 		this.firstName = firstName;
 	}
 
-	public String getMiddlName() {
+	public String getMiddleName() {
 		return middleName;
 	}
 
@@ -109,7 +109,7 @@ public class Abiturient extends User {
 
 	@Override
 	public String toString() {
-		return "Abiturient [id "+ getId()+"username "+ getUsername() + " firstName=" + firstName + ", middlName="
+		return "Abiturient [id "+ getId()+" username "+ getUsername() + " firstName=" + firstName + ", middlName="
 				+ middleName + ", lastName=" + lastName + ", firstScore="
 				+ firstScore + ", secondScore=" + secondScore + ", thirdScore="
 				+ thirdScore + ", schoolScore=" + schoolScore

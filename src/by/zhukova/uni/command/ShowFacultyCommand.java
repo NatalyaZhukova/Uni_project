@@ -15,12 +15,13 @@ import by.zhukova.uni.resource.ConfigurationManager;
 public class ShowFacultyCommand implements ActionCommand {
 	
 	private static final String PAGE_FACULTY = "path.page.showfaculty";
+	private static final String PARAM_ID = "id";
 
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;
 		int faculty=1;
-		String requestedId = request.getParameter("id");
+		String requestedId = request.getParameter(PARAM_ID);
 	
 		try {
 		 faculty=Integer.parseInt(requestedId);

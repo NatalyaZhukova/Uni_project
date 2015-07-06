@@ -20,7 +20,10 @@ import by.zhukova.uni.resource.MessageManager;
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
 	
-	
+	private static final String PAGE_INDEX = "path.page.index";
+	private static final String PAGE_MAIN = "path.page.index";
+	private static final String MESSAGE_NULL = "message.nullpage";
+	private static final String ATTR_ROLE = "role";
 	public Controller() {
 		
 	}
@@ -56,15 +59,15 @@ public class Controller extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			HttpSession session = request.getSession(true);
-			if (session.getAttribute("role")==null){
-			page = ConfigurationManager.getProperty("path.page.index");
+			if (session.getAttribute(ATTR_ROLE)==null){
+			page = ConfigurationManager.getProperty(PAGE_INDEX);
 			}
 			else {
-				page = ConfigurationManager.getProperty("path.page.main");
+				page = ConfigurationManager.getProperty(PAGE_MAIN);
 			}
 		 
 			request.getSession().setAttribute("nullPage",
-					MessageManager.getProperty("message.nullpage"));
+					MessageManager.getProperty(MESSAGE_NULL));
 			response.sendRedirect(request.getContextPath() + page);
 		}
 	}

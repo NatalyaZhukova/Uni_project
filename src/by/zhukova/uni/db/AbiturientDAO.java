@@ -17,7 +17,7 @@ public class AbiturientDAO extends AbstractDAO {
 	private final String SELECT_ALL = "SELECT * FROM abiturients";
 	private final String SELECT_BY_ID = "SELECT * FROM abiturients WHERE id=?";
 	private final String SELECT_BY_USERNAME = "SELECT * FROM abiturients WHERE username=?"; // specific Abiturient method
-	private final String SELECT_BY_FACULTY = "SELECT * FROM abiturients WHERE chosen_faculty=?"; //specific Abiturient method
+	private final String SELECT_BY_FACULTY = "SELECT * FROM abiturients WHERE chosen_faculty=? ORDER BY score_sum DESC"; //specific Abiturient method
 	private final String DELETE = "DELETE FROM abiturients WHERE id=?";
 	private final String CREATE = "INSERT INTO abiturients (id, username, first_name, middle_name, last_name, discipline1_score, discipline2_score, "
 				+ "discipline3_score, school_score, score_sum, chosen_faculty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -207,7 +207,7 @@ public class AbiturientDAO extends AbstractDAO {
 			pst.setInt(1, ab.getId());
 			pst.setString(2, ab.getUsername());
 			pst.setString(3, ab.getFirstName());
-			pst.setString(4, ab.getMiddlName());
+			pst.setString(4, ab.getMiddleName());
 			pst.setString(5, ab.getLastName());
 			pst.setInt(6, ab.getFirstScore());
 			pst.setInt(7, ab.getSecondScore());
@@ -239,7 +239,7 @@ public class AbiturientDAO extends AbstractDAO {
 			pst.setInt(11, ab.getId());
 			pst.setString(1, ab.getUsername());
 			pst.setString(2, ab.getFirstName());
-			pst.setString(3, ab.getMiddlName());
+			pst.setString(3, ab.getMiddleName());
 			pst.setString(4, ab.getLastName());
 			pst.setInt(5, ab.getFirstScore());
 			pst.setInt(6, ab.getSecondScore());

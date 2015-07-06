@@ -19,6 +19,9 @@ public class ConnectionPool {
             .getLogger(ConnectionPool.class);
 
     public static final String PATH_LOG4J = "resources/log4j.properties";
+    private static final String PARAM_URL = "db.url";
+    private static final String PARAM_USER = "db.user";
+    private static final String PARAM_PASSWORD = "db.password";
 
     static {
         PropertyConfigurator.configure(PATH_LOG4J);
@@ -39,9 +42,9 @@ public class ConnectionPool {
 
             ResourceBundle resource = ResourceBundle.getBundle("database");
 
-            String url = resource.getString("db.url");
-            String login = resource.getString("db.user");
-            String password = resource.getString("db.password");
+            String url = resource.getString(PARAM_URL);
+            String login = resource.getString(PARAM_USER);
+            String password = resource.getString(PARAM_PASSWORD);
 
             pool = new ArrayBlockingQueue<>(POOL_SIZE);
 

@@ -33,9 +33,9 @@ public class Validation {
 	
 	public static boolean validFIO(String fName, String mName, String lName){
 		boolean result = true;
-		final String FIRST_NAME = "[À-ß¨à-ÿ¸]+";
-		final String MIDDLE_NAME = "[À-ß¨à-ÿ¸]+";
-		final String LAST_NAME = "[À-ß¨à-ÿ¸]+";
+		final String FIRST_NAME = "[À-ß¨à-ÿ¸]{2,30}";
+		final String MIDDLE_NAME = "[À-ß¨à-ÿ¸]{2,30}";
+		final String LAST_NAME = "[À-ß¨à-ÿ¸]{2,30}";
 		if (!fName.matches(FIRST_NAME)) {
 			result=false;
 		}
@@ -73,7 +73,7 @@ public class Validation {
 	}
 	
 	public static boolean validFaculty(String name, String plan) {
-		final String FACULTY_NAME = "[À-ß¨][à-ÿ¸\\-]+";
+		final String FACULTY_NAME = "[À-ß¨][à-ÿ¸\\-]{2,30}";
 		final String FACULTY_PLAN = "\\d{1,3}";
 		
 		boolean result = true;

@@ -38,7 +38,7 @@ public class EditFacultyCommand implements ActionCommand {
 	public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty(PAGE_FORM);
 		
-		String facultyId = request.getParameter("id");
+		String facultyId = request.getParameter(PARAM_ID);
 		try {
 		int id = Integer.parseInt(facultyId);
 		if (FacultyLogic.isIdExists(id)) {

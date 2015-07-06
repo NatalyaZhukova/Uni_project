@@ -18,7 +18,7 @@ public class FacultyDAO extends AbstractDAO {
 	private final String SELECT_BY_ID = "SELECT * FROM faculties WHERE id_faculty=?";;
 	private final String DELETE = "DELETE FROM faculties WHERE id_faculty=?";
 	private final String CREATE = "INSERT INTO faculties (id_faculty, faculty_name, faculty_plan, discipline_1, discipline_2, discipline_3) VALUES (?, ?, ?, ?, ?, ?)";
-	private final String UPDATE = "UPDATE disciplines SET  faculty_name=?, faculty_plan=?, discipline_1=?, discipline_2=?, discipline_3=? WHERE id_faculty=?";
+	private final String UPDATE = "UPDATE faculties SET  faculty_name=?, faculty_plan=?, discipline_1=?, discipline_2=?, discipline_3=? WHERE id_faculty=?";
 	
 	public FacultyDAO(Connection connection) {
 		super(connection);

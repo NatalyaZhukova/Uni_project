@@ -9,6 +9,8 @@ public class LangCommand implements ActionCommand {
 	private static final String LOCALE = "locale";
 	private static final String ROLE_ADMIN = "admin";
 	private static final String PAGE_REGISTER = "register";
+	private static final String PAGE_MAIN = "path.page.main";
+	private static final String PAGE_INDEX = "path.page.index";
 
 	@Override
 	public String execute(HttpServletRequest request) {
@@ -16,15 +18,11 @@ public class LangCommand implements ActionCommand {
 		HttpSession session = request.getSession(true);
 		String lang = request.getParameter(LOCALE);
 		if (session.getAttribute("user")!=null) {
-			if (session.getAttribute("role").equals(ROLE_ADMIN)) {
-			page=ConfigurationManager.getProperty("path.page.main_admin");
-			}
-			else {
-			page=ConfigurationManager.getProperty("path.page.main_user");
-			}
+			page=ConfigurationManager.getProperty(PAGE_MAIN);
+			
 		} 
 		else {
-			page=ConfigurationManager.getProperty("path.page.index");
+			page=ConfigurationManager.getProperty(PAGE_INDEX);
 		}
 		session.setAttribute("locale", lang);
 		
