@@ -4,14 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
-<c:if test="${session.locale==null }">
+<c:choose>
+<c:when test="${session.locale==null && param.locale==null}">
 <fmt:setLocale value="ru_RU" scope="session" />
-</c:if>
-<c:if test="${param.locale!=null}">
+</c:when>
+<c:when test="${session.locale==null && param.locale!=null}">
 <fmt:setLocale value="${param.locale}" scope="session" />
-</c:if>
-<c:if test="${session.locale!=null }">
+</c:when>
+<c:when test="${session.locale!=null}">
 <fmt:setLocale value="${session.locale}" scope="session" />
-</c:if>
+</c:choose>
 
 <fmt:setBundle basename="message" var="rb" />
