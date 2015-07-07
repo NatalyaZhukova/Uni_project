@@ -9,14 +9,16 @@
 <body>
 <%@include file="../header.jsp"%>
 		<div class="content-wrapper">
-			<c:if test="${role=='admin'}">
-			<%@include file="../menu_admin.jsp" %>
-			</c:if>
-			<c:if test="${role=='abiturient' }" >
-			<%@include file="../menu_user.jsp" %>
-			</c:if>
+			<c:choose>
+			<c:when  test="${role=='admin'}">
+			<%@include file="menu_admin.jsp" %>
+			</c:when>
+			<c:when test="${role=='abiturient' }">
+			<%@include file="menu_user.jsp" %>
+			</c:when>
+			</c:choose>
 			<div class="content">
-			${errorMessage}
+			<c:out value="${errorMessage}">
 			</div>
 		</div>
 		
