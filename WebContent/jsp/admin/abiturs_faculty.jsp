@@ -17,7 +17,7 @@
 			<form action="controller" method="POST">
 			<input type="hidden" name="command" value="abitur">
 			<select name="faculty">
-			<c:forEach var="faculty" items="${facList}">
+			<c:forEach var="faculty" items="${facList}" >
 			<option value="${faculty.id}">${faculty.name}</option>
 			</c:forEach>
 			</select>
@@ -26,9 +26,10 @@
 			<hr>
 			<h2>${facultyName }</h2>
 			${message}
-			<c:forEach var="abiturient" items="${abiturients}" begin="0" end="${stopLine-1}">
+			<c:forEach var="abiturient" items="${abiturients}" begin="0" end="${stopLine-1}" varStatus="status">
 			<div class="abiturient">
-			 <span class="fio"><a href="/Uni_project/controller?command=showabitur&id=${abiturient.id}">
+			<c:out value="${status.count}.">
+			<span class="fio"><a href="/Uni_project/controller?command=showabitur&id=${abiturient.id}">
 			 ${abiturient.firstName } ${abiturient.middleName } ${abiturient.lastName } </a></span>
 			   <span class="score"> ${abiturient.overallScore }</span>
 			</div>
