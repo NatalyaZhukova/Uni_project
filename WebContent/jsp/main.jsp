@@ -9,21 +9,26 @@
 <body>
 <%@include file="header.jsp"%>
 		<div class="content-wrapper">
-			<c:if test="${role=='admin'}">
+			<c:choose>
+			<c:when  test="${role=='admin'}">
 			<%@include file="menu_admin.jsp" %>
-			</c:if>
-			<c:if test="${role=='abiturient' }" >
+			</c:when>
+			<c:when test="${role=='abiturient' }">
 			<%@include file="menu_user.jsp" %>
-			</c:if>
+			</c:when>
+			</c:choose>
 			<div class="content">
-			
 		
-			<c:if test="${role=='admin'}">
-			<fmt:message key="message.admin" bundle="${rb}" />
-			</c:if>
-			<c:if test="${role=='abiturient' }" >
-		    <fmt:message key="message.abiturient" bundle="${rb}" />
-			</c:if>
+				<c:choose>
+			<c:when  test="${role=='admin'}">
+		<fmt:message key="message.admin" bundle="${rb}" />
+			</c:when>
+			<c:when test="${role=='abiturient' }">
+		<fmt:message key="message.abiturient" bundle="${rb}" />
+			</c:when>
+			</c:choose>
+		
+			
 			
 			</div>
 		</div>
