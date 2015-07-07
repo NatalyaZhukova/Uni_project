@@ -54,8 +54,10 @@ public enum CommandEnum {
 	}},
 	SHOWABITUR {{
 		this.command = new ShowAbiturientCommand();
+	}},
+	CHANGESTAT {{
+		this.command = new ChangeStatusCommand();
 	}};
-
 	ActionCommand command;
 
 	public ActionCommand getCurrentCommand() {

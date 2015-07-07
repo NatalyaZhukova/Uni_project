@@ -15,10 +15,10 @@
 	<div class="content-wrapper">
 		<c:choose>
 			<c:when  test="${role=='admin'}">
-			<%@include file="menu_admin.jsp" %>
+			<%@include file="../menu_admin.jsp" %>
 			</c:when>
 			<c:when test="${role=='abiturient' }">
-			<%@include file="menu_user.jsp" %>
+			<%@include file="../menu_user.jsp" %>
 			</c:when>
 			</c:choose>
 		<div class="content">
@@ -26,18 +26,18 @@
 				<fmt:message key="faculty.title" bundle="${rb}" />
 			</h2>
 			<c:if test="${role=='admin'}">
-			<a class="addbutton" href="/Uni_project/controller?command=createfac"><fmt:message key="faculty.create" bundle="${rb}" /></a>
+			<a class="addbutton" href="controller?command=createfac"><fmt:message key="faculty.create" bundle="${rb}" /></a>
 			</c:if>
 			<c:forEach var="faculty" items="${facList}" begin="">
 				<div class="faculty">
 					<h3>
-						<a href="/Uni_project/controller?command=showfac&id=${faculty.id}">${faculty.name}</a>
+						<a href="controller?command=showfac&id=${faculty.id}">${faculty.name}</a>
 					</h3>
 					<c:choose>
 			<c:when  test="${role=='admin'}">
-			<a href="/Uni_project/controller?command=editfac&id=${faculty.id}"
+			<a href="controller?command=editfac&id=${faculty.id}"
 							class="act"><fmt:message key="faculty.edit" bundle="${rb}" /></a>
-						<a href="/Uni_project/controller?command=delfac&id=${faculty.id}"
+						<a href="controller?command=delfac&id=${faculty.id}"
 							class="act"><fmt:message key="faculty.delete" bundle="${rb}" /></a>
 			</c:when>
 			<c:when test="${role=='abiturient' }">
@@ -49,7 +49,7 @@
 
 			<div class="pages">
 				<c:forEach var="i" begin="1" end="${numpage}">
-					<a href="/Uni_project/controller?command=fac&p=${i}">${i}</a>
+					<a href="controller?command=fac&p=${i}">${i}</a>
 				</c:forEach>
 			</div>
 		</div>

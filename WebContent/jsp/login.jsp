@@ -14,8 +14,7 @@
 		<input type="hidden" name="command" value="login" /> <label class="required">
 			<fmt:message key="login.user" bundle="${ rb }" />:
 		</label><br> <input type="text" name="login"
-			pattern="[A-Za-z0-9_-]{5,50}"
-			title="<fmt:message key="validation.login" bundle="${ rb }" />"
+			pattern="[A-Za-z0-9_-]{5,50}" title="<fmt:message key="validation.login" bundle="${ rb }" />"
 			required> <br> <label class="required"><fmt:message
 				key="login.password" bundle="${ rb }" />:</label><br> <input
 			type="password" name="password" pattern=".{5,20}"

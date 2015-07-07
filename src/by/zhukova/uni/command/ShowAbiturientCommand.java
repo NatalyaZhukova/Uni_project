@@ -1,5 +1,6 @@
 package by.zhukova.uni.command;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,9 @@ public class ShowAbiturientCommand implements ActionCommand {
 	
 	private static final String PAGE_INFO = "path.page.show_abiturient";
 	private static final String PARAM_ID = "id";
+	private final static String STATUS_APPROVED = "approved";
+	private final static String STATUS_WAITING = "waiting";
+	private final static String STATUS_DENIED = "denied";
 
 	@Override
 	public String execute(HttpServletRequest request) {
@@ -45,6 +49,16 @@ public class ShowAbiturientCommand implements ActionCommand {
 		request.setAttribute("discList", discList);
 		double schoolScore = (double)abitur.getSchoolScore()/10;
 		request.setAttribute("schoolScore", schoolScore);
+		String status = abitur.getStatus();
+		String statusText = AbiturientLogic.getApplicationStatus(status);
+		request.setAttribute("status", status);
+		request.setAttribute("statusText", statusText);
+		List<String> statusList = new ArrayList<String>();
+		statusList.add(AbiturientLogic.getApplicationStatus(STATUS_APPROVED));
+		statusList.add(AbiturientLogic.getApplicationStatus(STATUS_WAITING));
+		statusList.add(AbiturientLogic.getApplicationStatus(STATUS_DENIED));
+		request.setAttribute("statusList", statusList);
+		
 		
 		
 		return page;

@@ -143,38 +143,38 @@ public class FacultyLogic {
 		return result;
 	}
 
-	public static List<Faculty> getFacultiesPage (int p, int numpage, List<Faculty> list) {
-	
-	int onPage;
-	int rows = list.size();
+public static List<Faculty> getFacultiesPage (int p, int numpage, List<Faculty> list) {
+		
+		int onPage;
+		int rows = list.size();
 
-	if ((p>numpage) ||(p<1)) {
-	p=1;
-	}
-	if (rows<ONPAGE) {onPage=rows; } else { onPage=p*ONPAGE; }
-	if ((p==numpage) && (rows%ONPAGE>0)) {onPage=(p-1)*ONPAGE+rows%ONPAGE; }
+		if ((p>numpage) ||(p<1)) {
+		p=1;
+		}
+		if (rows<ONPAGE) {onPage=rows; } else { onPage=p*ONPAGE; }
+		if ((p==numpage) && (rows%ONPAGE>0)) {onPage=(p-1)*ONPAGE+rows%ONPAGE; }
 
-	List<Faculty> listPage = new ArrayList<Faculty>();
-	for ( int i=(p-1)*ONPAGE;i<onPage;i++) {
-	   listPage.add(list.get(i));
-	}
+		List<Faculty> listPage = new ArrayList<Faculty>();
+		for ( int i=(p-1)*ONPAGE;i<onPage;i++) {
+		   listPage.add(list.get(i));
+		}
 
-	return listPage;
+		return listPage;
 
-	}
+		}
 
-	public static int getLastPageNum( List<Faculty> list) {
-	int numpage;
-	int rows = list.size();
+		public static int getLastPageNum( List<Faculty> list) {
+		int numpage;
+		int rows = list.size();
 
-	if (rows%ONPAGE!=0) {
-	numpage = (int)(rows/ONPAGE)+1;
-	}
-	else {
-	 numpage = (int)(rows/ONPAGE);
-	}
-	return numpage;
-	}
+		if (rows%ONPAGE!=0) {
+		numpage = (int)(rows/ONPAGE)+1;
+		}
+		else {
+		 numpage = (int)(rows/ONPAGE);
+		}
+		return numpage;
+		}
 
 	
 

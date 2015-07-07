@@ -154,7 +154,7 @@ color:#FFF8E1;
 margin-top:5px;
 margin-left:5px;
 padding:10px;
-margin-bottom:20px;
+margin-bottom:50px;
 
 
 width:95%;
@@ -306,4 +306,21 @@ float:right;
 
 .required {
 	font-weight:bold;
+}
+
+.status {
+	width:200px;
+	
+	padding:10px;
+	margin-top:20px;
+	margin-bottom:20px;
+	border: 1px dashed #800000;
+}
+.status span {
+	color:#800000;
+	font-weight:bold;
+}
+
+.application {
+	margin:30px 20px;
 }

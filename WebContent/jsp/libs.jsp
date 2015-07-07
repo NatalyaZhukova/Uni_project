@@ -13,6 +13,7 @@
 </c:when>
 <c:when test="${session.locale!=null}">
 <fmt:setLocale value="${session.locale}" scope="session" />
+</c:when>
 </c:choose>
 
 <fmt:setBundle basename="message" var="rb" />

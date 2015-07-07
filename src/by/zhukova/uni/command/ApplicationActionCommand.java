@@ -28,10 +28,12 @@ public class ApplicationActionCommand implements ActionCommand {
 		Faculty fac = FacultyLogic.getChosenFaculty(faculty);
 		List<Abiturient> list = AbiturientLogic.getAbitursByFaculty(faculty);
 		int applicationsNum = list.size();
+		String status = AbiturientLogic.getApplicationStatus(abitur.getStatus());
 		
 		request.setAttribute("appl", abitur);
 		request.setAttribute("faculty", fac);
 		request.setAttribute("faculty_registered", applicationsNum);
+		request.setAttribute("status", status);
 		
 		String action = request.getParameter(PARAM_ACTION);
 		if (action!=null) {

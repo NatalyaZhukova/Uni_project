@@ -14,12 +14,52 @@ import by.zhukova.uni.resource.MessageManager;
 public class AbiturientsCommand implements ActionCommand {
 	
 	private static final String PAGE_LIST = "path.page.abiturient_faculty";
+	private static final String PAGE_OTHER_LIST = "path.page.applicat_list";
 	private static final String PARAM_FACULTY_ID = "faculty";
+	private static final String PARAM_STATUS = "stat";
 	private static final String MESSAGE_NO_APPLIC = "message.no_application";
+	private static final String MESSAGE_NO_APPLICS = "message.no_applications";
+	private static final String STATUS_WAITING = "waiting";
+	private static final String STATUS_DENIED = "denied";
+	private static final String PARAM_PAGE = "p";
 
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;
+		String status = request.getParameter(PARAM_STATUS);
+		if ((status!=null) && ((status.equals(STATUS_WAITING)) || (status.equals(STATUS_DENIED)))) {
+			
+			
+			List<Abiturient> list = AbiturientLogic.getAbitursByStatus(status);
+			int quantApplic = list.size();
+			
+			if (quantApplic==0) {
+				request.setAttribute("message", MessageManager.getProperty(MESSAGE_NO_APPLICS));
+				}
+			int pageNum;
+			if (request.getParameter(PARAM_PAGE) == null) {
+				pageNum = 1;
+			} else {
+				try {
+					pageNum = Integer.parseInt(request.getParameter(PARAM_PAGE));
+				} catch (NumberFormatException e) {
+					pageNum = 1;
+				}
+			}
+
+			int lastPage = AbiturientLogic.getLastPageNum(list);
+
+			request.setAttribute("numpage", lastPage);
+			List<Abiturient> listPart = AbiturientLogic.getFacultiesPage(pageNum, lastPage, list);
+			
+			    request.setAttribute("status", status);
+				request.setAttribute("abiturients", listPart);
+			
+			
+			page = ConfigurationManager.getProperty(PAGE_OTHER_LIST);
+		
+		}
+		else {
 		page = ConfigurationManager.getProperty(PAGE_LIST);
 		
 		List<Faculty> facList = FacultyLogic.getFacultiesList();
@@ -51,7 +91,7 @@ public class AbiturientsCommand implements ActionCommand {
 		request.setAttribute("stopLine", stopLine);
 		request.setAttribute("applicNums", quantApplic);
 		request.setAttribute("abiturients", abiturients);
-		
+		}
 		
 		return page;
 	}

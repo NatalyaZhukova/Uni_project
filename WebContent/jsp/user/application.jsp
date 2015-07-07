@@ -15,14 +15,16 @@
 <div class="content-wrapper">
 		 <%@include file="..\menu_user.jsp" %>
 			<div class="content">
+			<div class="application">
+			
 		<span class="fio">	${appl.firstName } ${appl.middleName } ${appl.lastName } </span> <br>
 			<fmt:message key="application.overall" bundle="${rb}" /><span class="score"> ${appl.overallScore} </span><br>
 			<fmt:message key="application.faculty" bundle="${rb}" /><span class="faculty-name"> ${faculty.name}</span>. <br>
 		<span class="applic">	<fmt:message key="application.num_appl" bundle="${rb}" /></span> <br/>
 		<span class="applic-num">	${faculty_registered} / ${faculty.facultyPlan}</span> <br/>
-			
+			<div class="status"><fmt:message key="status.status" bundle="${rb}" />: <span>${status}</span></div>
 			<a href="/Uni_project/controller?command=applic&act=del"><fmt:message key="application.delete" bundle="${rb}" /></a>
-			
+			</div>
 			</div>
 		</div>
 </body>
