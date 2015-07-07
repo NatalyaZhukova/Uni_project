@@ -13,12 +13,14 @@
 
 	<%@include file="..\header.jsp"%>
 	<div class="content-wrapper">
-		<c:if test="${role=='admin'}">
-			<%@include file="../menu_admin.jsp"%>
-		</c:if>
-		<c:if test="${role=='abiturient' }">
-			<%@include file="../menu_user.jsp"%>
-		</c:if>
+		<c:choose>
+			<c:when  test="${role=='admin'}">
+			<%@include file="menu_admin.jsp" %>
+			</c:when>
+			<c:when test="${role=='abiturient' }">
+			<%@include file="menu_user.jsp" %>
+			</c:when>
+			</c:choose>
 		<div class="content">
 			<h2>
 				<fmt:message key="faculty.title" bundle="${rb}" />
@@ -31,15 +33,17 @@
 					<h3>
 						<a href="/Uni_project/controller?command=showfac&id=${faculty.id}">${faculty.name}</a>
 					</h3>
-					<c:if test="${role=='abiturient' }">
-						<fmt:message key="faculty.plan" bundle="${rb}" /> - ${faculty.facultyPlan }<br />
-					</c:if>
-					<c:if test="${role=='admin'}">
-						<a href="/Uni_project/controller?command=editfac&id=${faculty.id}"
+					<c:choose>
+			<c:when  test="${role=='admin'}">
+			<a href="/Uni_project/controller?command=editfac&id=${faculty.id}"
 							class="act"><fmt:message key="faculty.edit" bundle="${rb}" /></a>
 						<a href="/Uni_project/controller?command=delfac&id=${faculty.id}"
 							class="act"><fmt:message key="faculty.delete" bundle="${rb}" /></a>
-					</c:if>
+			</c:when>
+			<c:when test="${role=='abiturient' }">
+				<fmt:message key="faculty.plan" bundle="${rb}" /> - ${faculty.facultyPlan }<br />
+			</c:when>
+			</c:choose>
 				</div>
 			</c:forEach>
 
