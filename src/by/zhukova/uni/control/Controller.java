@@ -17,7 +17,7 @@ import by.zhukova.uni.command.ActionFactory;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
 
-@WebServlet("/controller")
+
 public class Controller extends HttpServlet {
 	
 	private static final String PAGE_INDEX = "path.page.index";
