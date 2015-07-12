@@ -6,6 +6,7 @@ import by.zhukova.uni.resource.MessageManager;
 
 public class ActionFactory {
 	private static final String PARAM_COMMAND = "command";
+	private static final String MESSAGE_WRONGACTION = "message.wrongaction";
 	
 
 	public ActionCommand defineCommand(HttpServletRequest request) {
@@ -23,7 +24,7 @@ public class ActionFactory {
 			current = currentEnum.getCurrentCommand();
 		} catch (IllegalArgumentException e) {
 			request.setAttribute("wrongAction",
-					action + MessageManager.getProperty("message.wrongaction"));
+					action + MessageManager.getProperty(MESSAGE_WRONGACTION));
 		}
 		return current;
 	}

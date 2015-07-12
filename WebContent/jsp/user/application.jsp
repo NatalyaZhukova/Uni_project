@@ -22,10 +22,11 @@
 			<fmt:message key="application.faculty" bundle="${rb}" /><span class="faculty-name"> ${faculty.name}</span>. <br>
 		<span class="applic">	<fmt:message key="application.num_appl" bundle="${rb}" /></span> <br/>
 		<span class="applic-num">	${faculty_registered} / ${faculty.facultyPlan}</span> <br/>
-			<div class="status"><fmt:message key="status.status" bundle="${rb}" />: <span>${status}</span></div>
+			<div class="status"><fmt:message key="status.status" bundle="${rb}" />: <fmt:message key="${status }" bundle="${rb}" /></div>
 			<a href="/Uni_project/controller?command=applic&act=del"><fmt:message key="application.delete" bundle="${rb}" /></a>
 			</div>
 			</div>
 		</div>
+		<ctg:footer />
 </body>
 </html>

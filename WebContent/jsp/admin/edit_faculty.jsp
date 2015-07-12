@@ -25,7 +25,9 @@
 					<input type="hidden" name="command" value="editfac" /> 
 					<input type="hidden" name="id" value="${faculty.id}">
 					<label><fmt:message key="faculty.name" bundle="${ rb }" />:</label> 
-					<input type="text" name="faculty_name" value="${faculty.name}" required> 
+					<input type="text" name="faculty_name" value="${faculty.name}" 
+					title="<fmt:message key="validation.rus" bundle="${rb}" />"
+					pattern="[\u0410-\u042F\u0401\][\u0430-\u044F\u0451]{1,20}" required> 
 					<label><fmt:message key="faculty.plan" bundle="${ rb }" /></label>: 
 					<input type="text" name="faculty_plan" pattern="\d{1,3}" value="${faculty.facultyPlan}" required> <label>
 					<fmt:message key="faculty.disciplines" bundle="${ rb }" /></label> 
@@ -84,12 +86,16 @@
 					</select> 
 					
 					<input type="submit" value="<fmt:message key="faculty.save" bundle="${ rb }" />"
-						id="submit"> <br> <span class="error">${errorMessage}</span>
+						id="submit"> <br> 
+						<c:if test="${not empty errorMessage }">
+						<span class="error"><fmt:message key="${errorMessage}" bundle="${rb }" /></span>
+						</c:if>
 			
 			</form>
 			</div>
 		 
 			</div>
 		</div>
+		<ctg:footer />
 </body>
 </html>

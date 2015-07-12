@@ -25,7 +25,9 @@
 			</form>
 			<hr>
 			<h2>${facultyName }</h2>
-			${message}
+			<c:if test="${not empty message }">
+			<fmt:message key="${message }" bundle="${rb }" />
+			</c:if>
 			<c:forEach var="abiturient" items="${abiturients}" begin="0" end="${stopLine-1}" varStatus="status">
 			<div class="abiturient">
 			<span class="fio">
@@ -54,6 +56,6 @@
 			</div>
 		</div>
 		
-		<%@include file="../footer.jsp" %>
+		<ctg:footer />
 	</body>
 </html>

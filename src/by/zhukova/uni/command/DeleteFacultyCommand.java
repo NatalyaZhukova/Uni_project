@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
 
 public class DeleteFacultyCommand implements ActionCommand {
 	
@@ -24,7 +23,7 @@ public class DeleteFacultyCommand implements ActionCommand {
 		int id = Integer.parseInt(facultyId);
 		if (FacultyLogic.isIdExists(id)) {
 			if (FacultyLogic.isApplicationsExist(id)) {
-				request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_ABITURS_EXIST));
+				request.setAttribute("errorMessage", MESSAGE_ABITURS_EXIST);
 				page = ConfigurationManager.getProperty(PAGE_ERROR);
 			}
 			else {
@@ -32,18 +31,18 @@ public class DeleteFacultyCommand implements ActionCommand {
 				page = ConfigurationManager.getProperty(PAGE_SUCCESS); 
 				}
 				else {
-					request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_NO_DELETE));
+					request.setAttribute("errorMessage", MESSAGE_NO_DELETE);
 					page = ConfigurationManager.getProperty(PAGE_ERROR);
 				}
 			}
 		}
 		else {
-			request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_INVALID_ID));
+			request.setAttribute("errorMessage", MESSAGE_INVALID_ID);
 			page = ConfigurationManager.getProperty(PAGE_ERROR);
 		}
 		}
 		catch (NumberFormatException e) {
-			request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_INVALID_ID));
+			request.setAttribute("errorMessage", MESSAGE_INVALID_ID);
 			page = ConfigurationManager.getProperty(PAGE_ERROR);
 		}
 		

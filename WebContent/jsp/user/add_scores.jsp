@@ -41,10 +41,11 @@
 				required><br /> <br> 
 				<input type="submit"
 				value="<fmt:message key="scores.submit" bundle="${rb}" />"><br />
-				<span class="error">${errorMessage}</span>
+				<c:if test="${not empty errorMessage }">
+				<span class="error"><fmt:message key="${errorMessage }" bundle="${rb}" /></span>
+				</c:if>
 		</form>
 	</div>
-     <div>
-    </div>
+     <ctg:footer />
 </body>
 </html>

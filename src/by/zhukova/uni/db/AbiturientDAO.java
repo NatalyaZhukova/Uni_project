@@ -1,3 +1,6 @@
+/*
+ * The package contains the classes which work with database
+ */
 package by.zhukova.uni.db;
 
 import java.sql.Connection;
@@ -11,13 +14,21 @@ import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Entity;
 import by.zhukova.uni.exception.DaoException;
 
+
+/**
+ *  Class {@code AbiturientDAO} (data access object) is designed to work with database table {@code abiturients} 
+ *  and {@code Abiturient} objects.
+ *  
+ *  @author Natallya Zhukova
+ *  @since 1.0
+ */
 public class AbiturientDAO extends AbstractDAO {
 
 	
 	private final String SELECT_ALL = "SELECT * FROM abiturients";
 	private final String SELECT_BY_ID = "SELECT * FROM abiturients WHERE id=?";
-	private final String SELECT_BY_USERNAME = "SELECT * FROM abiturients WHERE username=?"; // specific Abiturient method
-	private final String SELECT_BY_FACULTY = "SELECT * FROM abiturients WHERE chosen_faculty=? and status='approved' ORDER BY score_sum DESC"; //specific Abiturient method
+	private final String SELECT_BY_USERNAME = "SELECT * FROM abiturients WHERE username=?"; 
+	private final String SELECT_BY_FACULTY = "SELECT * FROM abiturients WHERE chosen_faculty=? and status='approved' ORDER BY score_sum DESC"; 
 	private final String SELECT_BY_STATUS = "SELECT * FROM abiturients WHERE status=?";
 	private final String DELETE = "DELETE FROM abiturients WHERE id=?";
 	private final String CREATE = "INSERT INTO abiturients (id, username, first_name, middle_name, last_name, discipline1_score, discipline2_score, "
@@ -25,11 +36,22 @@ public class AbiturientDAO extends AbstractDAO {
 	private final String UPDATE = "UPDATE abiturients SET username=?, first_name=?, middle_name=?, last_name=?, discipline1_score=?, discipline2_score=?, "
 				+ "discipline3_score=?, school_score=?, score_sum=?, chosen_faculty=?, status=? WHERE id=?";
 
+	/**
+	 * Instantiates a new Abiturient data access object.
+	 *
+	 * @param connection the connection
+	 */
 	public AbiturientDAO(Connection connection) {
 		super(connection);
 
 	}
 
+	/** 
+	 * Gets list of all registered applications.
+	 * 
+	 * @return  list of {@code Abiturient} objects - the list of applications
+	 * @throws {@code DaoException} if there is SQLException
+	 */
 	@Override
 	public List<Abiturient> findAll() throws DaoException {
 		List<Abiturient> list = new ArrayList<Abiturient>();
@@ -63,6 +85,13 @@ public class AbiturientDAO extends AbstractDAO {
 
 	}
 	
+	/**
+	 * Find registered applications with status "approved"  by chosen faculty.
+	 *
+	 * @param facultyId the faculty identifier
+	 * @return list of {@code Abiturient} objects) - the list of applications
+	 * @throws DaoException if there is SQLException
+	 */
 	public List<Abiturient> findAbitursByFaculty(int facultyId) throws DaoException {
 		List<Abiturient> list = new ArrayList<Abiturient>();
 		PreparedStatement pst = null;
@@ -97,6 +126,13 @@ public class AbiturientDAO extends AbstractDAO {
 
 	}
 	
+	/**
+	 * Find registered applications by given status.
+	 *
+	 * @param status the status
+	 * @return {@code List<Abiturient> list} - the list of applications
+	 * @throws DaoException if there is SQLException
+	 */
 	public List<Abiturient> findAbitursByStatus(String status) throws DaoException {
 		List<Abiturient> list = new ArrayList<Abiturient>();
 		PreparedStatement pst = null;
@@ -131,6 +167,13 @@ public class AbiturientDAO extends AbstractDAO {
 
 	}
 
+	/**
+	 * Finds the application by given identifier
+	 * 
+	 * @param id id of application
+	 * @return {@code Abiturient} object - the application
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public Abiturient findEntityById(int id) throws DaoException {
 		PreparedStatement pst = null;
@@ -162,6 +205,14 @@ public class AbiturientDAO extends AbstractDAO {
 
 		return ab;
 	}
+	
+	/**
+	 * Find the application by given username.
+	 *
+	 * @param username the username
+	 * @return {@code Abiturient} object - the application
+	 * @throws DaoException if there is SQLException
+	 */
 	public Abiturient findAbiturByUsername(String username) throws DaoException {
 		PreparedStatement pst = null;
 		Abiturient ab = null;
@@ -193,6 +244,13 @@ public class AbiturientDAO extends AbstractDAO {
 		return ab;
 	}
 
+	/**
+	 * Delete the application chosen by given identifier
+	 * 
+	 * @param id identifier
+	 * @return result - true if deleting was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
@@ -215,6 +273,14 @@ public class AbiturientDAO extends AbstractDAO {
 		
 	}
 
+	/**
+	 * Delete the application which was given as a parameter
+	 * The method overrides the class {@code Entity} method
+	 * 
+	 * @param {@Entity} entity - {@code Abiturient} object inherited from {@code Entity} class
+	 * @return result - true if deleting was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public boolean delete(Entity entity) throws DaoException {
 		boolean result=false;
@@ -235,6 +301,14 @@ public class AbiturientDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Create the new application 
+	 * The method overrides the class {@code Entity} method
+	 * 
+	 * @param {@Entity} entity - {@code Abiturient} object inherited from {@code Entity} class
+	 * @return result - true if creating was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public boolean create(Entity entity) throws DaoException {
 		boolean result = false;
@@ -268,6 +342,14 @@ public class AbiturientDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Update the application which was given as a parameter
+	 * The method overrides the class {@code Entity} method
+	 * 
+	 * @param {@Entity} entity - {@code Abiturient} object inherited from {@code Entity} class
+	 * @return result - true if update was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public boolean update(Entity entity) throws DaoException {
 		boolean result=false;

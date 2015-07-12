@@ -34,7 +34,7 @@ public class AbiturientsCommand implements ActionCommand {
 			int quantApplic = list.size();
 			
 			if (quantApplic==0) {
-				request.setAttribute("message", MessageManager.getProperty(MESSAGE_NO_APPLICS));
+				request.setAttribute("message", MESSAGE_NO_APPLICS);
 				}
 			int pageNum;
 			if (request.getParameter(PARAM_PAGE) == null) {
@@ -81,7 +81,7 @@ public class AbiturientsCommand implements ActionCommand {
 		int quantApplic = abiturients.size();
 		int stopLine=1;
 		if (quantApplic==0) {
-			request.setAttribute("message", MessageManager.getProperty(MESSAGE_NO_APPLIC));
+			request.setAttribute("message", MESSAGE_NO_APPLIC);
 		} else if (quantApplic<=plan) {
 			stopLine = quantApplic;
 		} else if (quantApplic>plan) {

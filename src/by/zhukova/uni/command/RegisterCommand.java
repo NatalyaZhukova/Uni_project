@@ -40,8 +40,8 @@ public class RegisterCommand implements ActionCommand {
 										.getProperty(PAGE_SUCCESS);
 							}
 							else {
-								request.setAttribute("errorMessage",  MessageManager
-										.getProperty(MESSAGE_ERROR));
+								request.setAttribute("errorMessage",  
+										MESSAGE_ERROR);
 									page = ConfigurationManager.getProperty(PAGE_ERROR);
 							}
 
@@ -51,14 +51,14 @@ public class RegisterCommand implements ActionCommand {
 						}
 					}
 					else {
-						request.setAttribute("errorUserMessage", MessageManager.getProperty(MESSAGE_INVALID_FORMAT));
+						request.setAttribute("errorUserMessage", MESSAGE_INVALID_FORMAT);
 					}
 				}
 				else {
-					request.setAttribute("errorUserMessage", MessageManager.getProperty(MESSAGE_REPEAT));
+					request.setAttribute("errorUserMessage", MESSAGE_REPEAT);
 				}
 			} else {
-				request.setAttribute("errorUserMessage", MessageManager.getProperty(MESSAGE_NOT_FILLED));
+				request.setAttribute("errorUserMessage", MESSAGE_NOT_FILLED);
 			}
 
 			

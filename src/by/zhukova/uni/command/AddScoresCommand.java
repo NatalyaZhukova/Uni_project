@@ -82,20 +82,17 @@ public class AddScoresCommand implements ActionCommand {
 						session.removeAttribute("abiturient");
 
 					} else {
-						request.setAttribute("errorMessage",  MessageManager
-							.getProperty(MESSAGE_ERROR));
+						request.setAttribute("errorMessage",  MESSAGE_ERROR);
 						page = ConfigurationManager.getProperty(PAGE_ERROR);
 					}
 
 				} else {
-					request.setAttribute("errorMessage", MessageManager
-							.getProperty(MESSAGE_VALIDATION_FORMAT));
+					request.setAttribute("errorMessage", MESSAGE_VALIDATION_FORMAT);
 
 				}
 
 			} else {
-				request.setAttribute("errorMessage",
-						MessageManager.getProperty(MESSAGE_NOT_FILLED));
+				request.setAttribute("errorMessage", MESSAGE_NOT_FILLED);
 			}
 
 		}

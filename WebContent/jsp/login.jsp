@@ -23,10 +23,12 @@
 			required> <br> <input type="submit"
 			value="<fmt:message key="login.submit" bundle="${ rb }" />">
 		<a href="/Uni_project/controller?command=register"><fmt:message
-				key="login.register" bundle="${ rb }" /></a> <br> <span
-			class="error">${errorLoginPassMessage}</span>
+				key="login.register" bundle="${ rb }" /></a> <br> 
+				<c:if test="${not empty errorLoginPassMessage }">
+			<span class="error"><fmt:message key="${errorLoginPassMessage}" bundle="${rb }" /></span>
+			</c:if>
 	</form>
 </div>
-<%@include file="footer.jsp"%>
+<ctg:footer />
 </body>
 </html>

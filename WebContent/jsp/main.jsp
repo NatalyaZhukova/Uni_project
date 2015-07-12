@@ -33,6 +33,6 @@
 			</div>
 		</div>
 		
-		<%@include file="footer.jsp" %>
+		<ctg:footer />
 	</body>
 </html>

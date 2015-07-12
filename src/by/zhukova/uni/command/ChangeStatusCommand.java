@@ -44,7 +44,7 @@ public class ChangeStatusCommand implements ActionCommand {
 			page = ConfigurationManager.getProperty(PAGE_SUCCESS);
 		}
 		else {
-			request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_ERROR));
+			request.setAttribute("errorMessage", MESSAGE_ERROR);
 			page = ConfigurationManager.getProperty(PAGE_ERROR);
 		}
 		return page;

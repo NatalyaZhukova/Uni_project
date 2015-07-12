@@ -11,17 +11,17 @@
 		<div class="content-wrapper">
 			<c:choose>
 			<c:when  test="${role=='admin'}">
-			<%@include file="menu_admin.jsp" %>
+			<%@include file="../menu_admin.jsp" %>
 			</c:when>
 			<c:when test="${role=='abiturient' }">
-			<%@include file="menu_user.jsp" %>
+			<%@include file="../menu_user.jsp" %>
 			</c:when>
 			</c:choose>
 			<div class="content">
-			<c:out value="${errorMessage}">
+			<span class="error"><fmt:message key="${errorMessage }" bundle="${rb}" /></span>
 			</div>
 		</div>
 		
-		<%@include file="../footer.jsp" %>
+<ctg:footer />
 	</body>
 </html>

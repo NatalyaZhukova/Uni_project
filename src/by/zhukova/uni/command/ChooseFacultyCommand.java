@@ -65,11 +65,11 @@ public class ChooseFacultyCommand implements ActionCommand {
 				} 
 			else {
 					request.setAttribute("errorMessage",
-							MessageManager.getProperty(MESSAGE_VALIDATION_FORMAT));
+							MESSAGE_VALIDATION_FORMAT);
 				}
 			} else {
 				request.setAttribute("errorMessage",
-						MessageManager.getProperty(MESSAGE_NOT_FILLED));
+						MESSAGE_NOT_FILLED);
 			}
 		}
 

@@ -11,6 +11,6 @@
 <div class = "content">
 <fmt:message key="faculty.success_del" bundle="${ rb }" /> 
 </div>
-<%@include file="..\footer.jsp" %>
+<ctg:footer />
 </body>
 </html>

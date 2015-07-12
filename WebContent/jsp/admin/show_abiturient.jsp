@@ -28,23 +28,23 @@
 			</ul>
             <fmt:message key="abiturient.school_score" bundle="${rb}" /> - ${schoolScore }
 		
-			<div class="status"><fmt:message key="status.status" bundle="${rb}" />: <span>${statusText}</span></div>
+			<div class="status"><fmt:message key="status.status" bundle="${rb}" />: <span><fmt:message key="${statusText}" bundle="${rb}" /></span></div>
 			<form action="controller">
 			<input type="hidden" name="command" value="changestat">
 			<input type="hidden" value="${abiturient.id }" name="application_id">
 			<select name="status">
 			<c:choose>
 			<c:when test="${status=='approved'}">
-			<option value="2">${statusList[1]}</option>
-			<option value="3">${statusList[2]} </option>
+			<option value="2"><fmt:message key="${statusList[1]}" bundle="${rb}" /></option>
+			<option value="3"><fmt:message key="${statusList[2]}" bundle="${rb}" /> </option>
 			</c:when>
 			<c:when test="${status=='waiting'}">
-				<option value="1">${statusList[0]}</option>
-			<option value="3">${statusList[2]} </option>
+				<option value="1"><fmt:message key="${statusList[0]}" bundle="${rb}" /></option>
+			<option value="3"><fmt:message key="${statusList[2]}" bundle="${rb}" /> </option>
 			</c:when>
 			<c:when test="${status=='denied'}">
-				<option value="2">${statusList[1]}</option>
-			<option value="1">${statusList[0]} </option>
+				<option value="2"><fmt:message key="${statusList[1]}" bundle="${rb}" /></option>
+			<option value="1"><fmt:message key="${statusList[0]}" bundle="${rb}" /> </option>
 			</c:when>
 			</c:choose>
 			</select>
@@ -54,5 +54,6 @@
 			
 			</div>
 		</div>
+		<ctg:footer />
 </body>
 </html>

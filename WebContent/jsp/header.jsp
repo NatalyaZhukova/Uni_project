@@ -2,12 +2,9 @@
 
 	<div class="header">
 		<h1>
-			<a class="title" href="controller"><fmt:message key="header.title" bundle="${ rb }" /></a>
+			<fmt:message key="header.title" bundle="${ rb }" />
 		</h1>
-		<div class="locale">
-			<a href="controller?command=lang&locale=ru_RU">RU</a> | <a
-				href="controller?command=lang&locale=en_US">EN</a>
-		</div>
+		<ctg:locale-switcher />
 		<div class="lg">
 			<c:if test="${user!=null}">
 				<br>${user} <a href="controller?command=logout"><fmt:message

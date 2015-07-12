@@ -59,24 +59,23 @@ public class CreateFacultyCommand implements ActionCommand {
 							page = ConfigurationManager.getProperty(PAGE_SUCCESS);
 						}
 						else {
-							request.setAttribute("errorMessage",  MessageManager
-									.getProperty(MESSAGE_ERROR));
+							request.setAttribute("errorMessage",  MESSAGE_ERROR);
 								page = ConfigurationManager.getProperty(PAGE_ERROR);
 						}
 						
 						
 					} else {
-						request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_REPEAT));
+						request.setAttribute("errorMessage", MESSAGE_REPEAT);
 					}
 					
 				} else {
 					request.setAttribute("errorMessage",
-							MessageManager.getProperty(MESSAGE_VALIDATION_FORMAT));
+							MESSAGE_VALIDATION_FORMAT);
 				}
 			}
 			else {
 				request.setAttribute("errorMessage",
-						MessageManager.getProperty(MESSAGE_NOT_FILLED));
+						MESSAGE_NOT_FILLED);
 			}
 			
 		}

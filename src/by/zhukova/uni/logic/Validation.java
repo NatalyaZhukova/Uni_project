@@ -5,7 +5,7 @@ public class Validation {
 	public static boolean isAllFieldFilled(String ...args ) {
 		boolean result = true;
 		for (int i=0; i<args.length; i++) {
-			if (args[i]==null){
+			if ((args[i]==null) || (args[i]=="")){
 				result=false;
 				break;
 			}
@@ -33,9 +33,9 @@ public class Validation {
 	
 	public static boolean validFIO(String fName, String mName, String lName){
 		boolean result = true;
-		final String FIRST_NAME = "[À-ß¨à-ÿ¸]{2,30}";
-		final String MIDDLE_NAME = "[À-ß¨à-ÿ¸]{2,30}";
-		final String LAST_NAME = "[À-ß¨à-ÿ¸]{2,30}";
+		final String FIRST_NAME ="[Ð-Ð¯ÐÐ°-ÑÑ‘]{2,30}";
+		final String MIDDLE_NAME = "[Ð-Ð¯ÐÐ°-ÑÑ‘]{2,30}";
+		final String LAST_NAME = "[Ð-Ð¯ÐÐ°-ÑÑ‘]{2,30}";
 		if (!fName.matches(FIRST_NAME)) {
 			result=false;
 		}
@@ -73,7 +73,7 @@ public class Validation {
 	}
 	
 	public static boolean validFaculty(String name, String plan) {
-		final String FACULTY_NAME = "[À-ß¨][à-ÿ¸\\-]{2,30}";
+		final String FACULTY_NAME = "[Ð-Ð¯Ð][Ð°-ÑÑ‘\\-]{2,30}";
 		final String FACULTY_PLAN = "\\d{1,3}";
 		
 		boolean result = true;

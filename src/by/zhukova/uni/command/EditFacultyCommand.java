@@ -48,7 +48,7 @@ public class EditFacultyCommand implements ActionCommand {
 			List<Discipline> discList = DisciplineLogic.getAllDisciplines();
 			request.setAttribute("discList", discList);
 			if (FacultyLogic.isApplicationsExist(id)) {
-				request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_ABITURS_EXIST));
+				request.setAttribute("errorMessage", MESSAGE_ERROR);
 				page = ConfigurationManager.getProperty(PAGE_ERROR);
 			}
 			else {

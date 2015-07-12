@@ -12,6 +12,6 @@
 <fmt:message key="faculty.success" bundle="${ rb }" /> 
 <a href="/Uni_project/controller?command=fac"><fmt:message key="faculty.success_link" bundle="${ rb }" /></a>
 </div>
-<%@include file="..\footer.jsp" %>
+<ctg:footer />
 </body>
 </html>

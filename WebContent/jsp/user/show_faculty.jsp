@@ -36,5 +36,6 @@
 		 
 			</div>
 		</div>
+		<ctg:footer />
 </body>
 </html>

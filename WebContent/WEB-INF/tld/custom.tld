@@ -6,8 +6,15 @@
 	<short-name>ctg</short-name>
 	<uri>customtags</uri>
 	<tag>
-		<name>custom-footer</name>
-		<tag-class>by.zhukova.uni.FooterTag</tag-class>
+		<name>footer</name>
+		<tag-class>by.zhukova.uni.tag.FooterTag</tag-class>
+		<info>footer of page</info>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
+		<name>locale-switcher</name>
+		<tag-class>by.zhukova.uni.tag.LocaleSwitcherTag</tag-class>
+		<info>switcher of page language</info>
 		<body-content>empty</body-content>
 	</tag>
 </taglib>

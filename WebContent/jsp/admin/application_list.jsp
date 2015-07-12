@@ -15,8 +15,9 @@
 			<div class="abiturslist">
 			
 			<hr>
-			
-			<c:out value="${message}" />
+			<c:if test="${not empty message }">
+			<fmt:message key="${message }" bundle="${rb }" />
+			</c:if>
 			<c:forEach var="abiturient" items="${abiturients}"  varStatus="status">
 			<div class="abiturient">
 			<span class="fio">
@@ -37,6 +38,6 @@
 			</div>
 		</div>
 		
-		<%@include file="../footer.jsp" %>
+		<ctg:footer />
 	</body>
 </html>

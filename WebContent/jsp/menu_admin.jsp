@@ -1,6 +1,8 @@
 
 <div class="menu">
 	<ul>
+	<li><a href="index.jsp"><fmt:message
+					key="usermain.main" bundle="${rb}" /></a> </li>
 		<li><a href="controller?command=fac"><fmt:message
 					key="adminmain.faculties" bundle="${rb}" /></a></li>
 					

@@ -13,6 +13,6 @@
 <fmt:message key="register.successfull" bundle="${ rb }" /> 
 <a href="/Uni_project/"><fmt:message key="register.log_in" bundle="${ rb }" /></a>
 </div>
-<%@include file="..\footer.jsp" %>
+<ctg:footer />
 </body>
 </html>

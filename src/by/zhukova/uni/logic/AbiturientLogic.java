@@ -3,14 +3,11 @@ package by.zhukova.uni.logic;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-
 import org.apache.log4j.Logger;
 
 import by.zhukova.uni.db.AbiturientDAO;
 import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.entity.Abiturient;
-import by.zhukova.uni.entity.Faculty;
 import by.zhukova.uni.exception.DaoException;
 import by.zhukova.uni.resource.MessageManager;
 
@@ -20,6 +17,7 @@ public class AbiturientLogic {
 	private final static String MESSAGE_WAITING = "status.waiting";
 	private final static String MESSAGE_DENIED = "status.denied";
 	private final static int ONPAGE = 15;
+	public final static int TO_DOUBLE_DIGIT = 10;
 
 	static Logger logger = Logger.getLogger(AbiturientLogic.class);
 
@@ -45,7 +43,7 @@ public class AbiturientLogic {
 
 	public static int calculateSchoolScore(double score) {
 
-		return (int) (score * 10);
+		return (int) (score * TO_DOUBLE_DIGIT);
 	}
 
 	public static int calculateOverallScore(int first, int second, int third,
@@ -213,14 +211,14 @@ public static List<Abiturient> getFacultiesPage (int p, int numpage, List<Abitur
 		String state = "";
 		switch (status) {
 		case "approved":
-			state = MessageManager.getProperty(MESSAGE_APPROVED);
+			state = MESSAGE_APPROVED;
 			break;
 		case "waiting":
-			state = MessageManager.getProperty(MESSAGE_WAITING);
+			state = MESSAGE_WAITING;
 
 			break;
 		case "denied":
-			state = MessageManager.getProperty(MESSAGE_DENIED);
+			state = MESSAGE_DENIED;
 		}
 		return state;
 	}

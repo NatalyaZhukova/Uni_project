@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(
-		  urlPatterns = { "/jsp/*" }, initParams = { @WebInitParam(name = "INDEX_PATH", value = "/index.jsp") })
+		  urlPatterns = { "/jsp/*", "/jsp/admin/*", "/jsp/user/*", "/jsp/error/*" }, initParams = { @WebInitParam(name = "INDEX_PATH", value = "/index.jsp") })
 public class PageRedirectJSPSecurityFilter implements Filter {
 	private String indexPath;
 

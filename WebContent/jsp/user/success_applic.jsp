@@ -13,6 +13,6 @@
 <fmt:message key="scores.success" bundle="${ rb }" /> 
 <a href="/Uni_project/controller?command=applic"><fmt:message key="scores.success_link" bundle="${ rb }" /></a>
 </div>
-<%@include file="..\footer.jsp" %>
+<ctg:footer />
 </body>
 </html>
