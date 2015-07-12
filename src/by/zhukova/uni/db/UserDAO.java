@@ -1,3 +1,6 @@
+/*
+ * The package contains the classes which work with database
+ */
 package by.zhukova.uni.db;
 
 import java.sql.Connection;
@@ -6,12 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import by.zhukova.uni.entity.Entity;
 import by.zhukova.uni.entity.User;
 import by.zhukova.uni.exception.DaoException;
 
-public class UserDAO extends AbstractDAO {
+
+/**
+ *  Class {@code UserDAO}  (data access object) is designed to work with database table {@code users} 
+ *  and {@code User} objects.
+ */
+public class UserDAO extends AbstractDAO<User> {
 
 	
 	private final String SELECT_ALL = "SELECT * FROM users";
@@ -21,11 +27,22 @@ public class UserDAO extends AbstractDAO {
 	private final String CREATE = "INSERT INTO users (username, password, user_type) VALUES (?, ?, ?)";
 	private final String UPDATE = "UPDATE users SET  username=?, password=?, user_type=? WHERE id=?";
 
+	/**
+	 * Instantiates a new user DAO.
+	 *
+	 * @param connection the connection
+	 */
 	public UserDAO(Connection connection) {
 		super(connection);
 
 	}
 
+	/** 
+	 * Gets list of all users.
+	 * 
+	 * @return  list of {@code User} objects - the list of users
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public List<User> findAll() throws DaoException {
 		List<User> list = new ArrayList<User>();
@@ -52,6 +69,13 @@ public class UserDAO extends AbstractDAO {
 		return list;
 	}
 
+	/**
+	 * Finds the user by given identifier
+	 * 
+	 * @param id id of user
+	 * @return {@code User} object - the faculty
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public User findEntityById(int id) throws DaoException {
 		
@@ -78,6 +102,13 @@ public class UserDAO extends AbstractDAO {
 		return user;
 	}
 	
+	/**
+	 * Find user by username.
+	 *
+	 * @param username the username
+	 * @return {@code User}object - the user
+	 * @throws DaoException if there is SQLException
+	 */
 	public User findUserByUsername(String username) throws DaoException {
 		
 		PreparedStatement pst = null;
@@ -103,6 +134,13 @@ public class UserDAO extends AbstractDAO {
 		return user;
 	}
 
+	/**
+	 * Delete the user chosen by given identifier
+	 * 
+	 * @param id identifier
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
@@ -124,10 +162,17 @@ public class UserDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Delete the user which was given as a parameter
+	 * 
+	 * @param {@code User} user - the user
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean delete(Entity entity) throws DaoException {
+	public boolean delete(User user) throws DaoException {
 		boolean result=false;
-		int id = entity.getId();
+		int id = user.getId();
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
@@ -146,11 +191,17 @@ public class UserDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Create the new user 
+	 * 
+	 * @param {@code User} user - the user
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean create(Entity entity) throws DaoException {
+	public boolean create(User user) throws DaoException {
 		boolean result=false;
 		PreparedStatement pst = null;
-		User user = (User) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
 			pst.setString(1, user.getUsername());
@@ -169,10 +220,16 @@ public class UserDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Update the user which was given as a parameter
+	 * 
+	 * @param {@code User} user - the user
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean update(Entity entity) throws DaoException {
+	public boolean update(User user) throws DaoException {
 		boolean result=false;
-		User user = (User) entity;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);

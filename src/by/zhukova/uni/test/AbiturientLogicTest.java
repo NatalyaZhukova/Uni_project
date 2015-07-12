@@ -1,11 +1,23 @@
+
 package by.zhukova.uni.test;
 import org.junit.Assert;
 import org.junit.Test;
 
 import by.zhukova.uni.logic.AbiturientLogic;
 
+
+/**
+ * The Class {@code AbiturientLogicTest} is designed to test the class
+ *  {@code by.zhukova.uni.logic.AbiturientLogic}.
+ * 
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class AbiturientLogicTest {
 	
+    /**
+     * Test the method which calculate school score.
+     */
     @Test
 	public void calculateSchoolScoreTest() {
 		

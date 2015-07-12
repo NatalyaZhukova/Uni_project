@@ -4,11 +4,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import by.zhukova.uni.resource.MessageManager;
 
+/**
+ * A factory for creating ActionCommand objects.
+ */
 public class ActionFactory {
 	private static final String PARAM_COMMAND = "command";
 	private static final String MESSAGE_WRONGACTION = "message.wrongaction";
 	
 
+	/**
+	 * Define command.
+	 *
+	 * @param request the request
+	 * @return the action command
+	 */
 	public ActionCommand defineCommand(HttpServletRequest request) {
 		ActionCommand current = new EmptyCommand();
 		

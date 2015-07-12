@@ -1,3 +1,6 @@
+/*
+ * The package contains the classes which work with database
+ */
 package by.zhukova.uni.db;
 
 import java.sql.Connection;
@@ -8,10 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.zhukova.uni.entity.Faculty;
-import by.zhukova.uni.entity.Entity;
 import by.zhukova.uni.exception.DaoException;
 
-public class FacultyDAO extends AbstractDAO {
+
+/**
+ *  Class {@code FacultyDAO}  (data access object) is designed to work with database table {@code faculties} 
+ *  and {@code Faculty} objects.
+ */
+public class FacultyDAO extends AbstractDAO<Faculty> {
 
 	
 	private final String SELECT_ALL = "SELECT * FROM faculties";
@@ -20,11 +27,22 @@ public class FacultyDAO extends AbstractDAO {
 	private final String CREATE = "INSERT INTO faculties (id_faculty, faculty_name, faculty_plan, discipline_1, discipline_2, discipline_3) VALUES (?, ?, ?, ?, ?, ?)";
 	private final String UPDATE = "UPDATE faculties SET  faculty_name=?, faculty_plan=?, discipline_1=?, discipline_2=?, discipline_3=? WHERE id_faculty=?";
 	
+	/**
+	 * Instantiates a new faculty DAO.
+	 *
+	 * @param connection the connection
+	 */
 	public FacultyDAO(Connection connection) {
 		super(connection);
 
 	}
 
+	/** 
+	 * Gets list of all faculties.
+	 * 
+	 * @return  list of {@code Faculty} objects - the list of faculties
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public List<Faculty> findAll() throws DaoException {
 		List<Faculty> list = new ArrayList<Faculty>();
@@ -53,6 +71,13 @@ public class FacultyDAO extends AbstractDAO {
 
 	}
 
+	/**
+	 * Finds the faculty by given identifier
+	 * 
+	 * @param id id of faculty
+	 * @return {@code Faculty} object - the faculty
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public Faculty findEntityById(int id) throws DaoException {
 		PreparedStatement pst = null;
@@ -80,6 +105,13 @@ public class FacultyDAO extends AbstractDAO {
 		return fac;
 	}
 
+	/**
+	 * Delete the faculty chosen by given identifier
+	 * 
+	 * @param id identifier
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
@@ -100,10 +132,17 @@ public class FacultyDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Delete the faculty which was given as a parameter
+	 * 
+	 * @param {@code Faculty} fac - the faculty
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean delete(Entity entity) throws DaoException {
+	public boolean delete(Faculty fac) throws DaoException {
 		boolean result=false;
-		int id = entity.getId();
+		int id = fac.getId();
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
@@ -123,11 +162,17 @@ public class FacultyDAO extends AbstractDAO {
 
 	}
 
+	/**
+	 * Create the new faculty 
+	 * 
+	 * @param {@code Faculty} fac - the faculty
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean create(Entity entity) throws DaoException {
+	public boolean create(Faculty fac) throws DaoException {
 		boolean result=false;
 		PreparedStatement pst = null;
-		Faculty fac = (Faculty) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
 			pst.setInt(1, fac.getId());
@@ -151,10 +196,16 @@ public class FacultyDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Update the faculty which was given as a parameter
+	 * 
+	 * @param {@code Faculty} fac - the faculty
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean update(Entity entity) throws DaoException {
+	public boolean update(Faculty fac) throws DaoException {
 		boolean result=false;
-		Faculty fac = (Faculty) entity;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);

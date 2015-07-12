@@ -11,7 +11,7 @@ import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
 
-public class AbiturientsCommand implements ActionCommand {
+public class ShowAbiturientsListCommand implements ActionCommand {
 	
 	private static final String PAGE_LIST = "path.page.abiturient_faculty";
 	private static final String PAGE_OTHER_LIST = "path.page.applicat_list";

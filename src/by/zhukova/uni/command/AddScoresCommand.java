@@ -13,8 +13,11 @@ import by.zhukova.uni.logic.DisciplineLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
 
+
+/**
+ * The Class AddScoresCommand is command which adds application to database.
+ */
 public class AddScoresCommand implements ActionCommand {
 
 	private final static String PAGE_ADD_SCORES = "path.page.add_scores";
@@ -34,6 +37,12 @@ public class AddScoresCommand implements ActionCommand {
 	private final static String MESSAGE_NOT_FILLED = "validation.notfilled";
 	private final static String MESSAGE_ERROR = "error.no_application";
 
+	/**
+	 * The method gets data from form, validate it, creates application and adds it to database
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
@@ -49,7 +58,7 @@ public class AddScoresCommand implements ActionCommand {
 		int chosen_faculty = abitur.getChosenFaculty();
 		Faculty fac = FacultyLogic.getChosenFaculty(chosen_faculty);
 		List<Discipline> list = DisciplineLogic.getFacultyDisciplines(fac);
-		String faculty_name = (String) request.getAttribute(ATTR_FACULTY_NAME);
+		String facultyName = (String) request.getAttribute(ATTR_FACULTY_NAME);
 
 		if ((first != null) || (second != null) || (third != null)
 				|| (school != null)) {
@@ -59,11 +68,12 @@ public class AddScoresCommand implements ActionCommand {
 					int first_score = Integer.parseInt(first);
 					int second_score = Integer.parseInt(second);
 					int third_score = Integer.parseInt(third);
-					int school_score = AbiturientLogic
-							.calculateSchoolScore(Double.parseDouble(school));
+					double school_score = Double.parseDouble(school);
+					int doubleDigit = AbiturientLogic
+							.calculateSchoolScore(school_score);
 					int overall = AbiturientLogic.calculateOverallScore(
 							first_score, second_score, third_score,
-							school_score);
+							doubleDigit);
 
 					
 					String username = (String) session.getAttribute(ATTR_USER);
@@ -99,6 +109,7 @@ public class AddScoresCommand implements ActionCommand {
 
 		
 		request.setAttribute("disciplines", list);
+		request.setAttribute(ATTR_FACULTY_NAME, facultyName);
 
 		return page;
 	}

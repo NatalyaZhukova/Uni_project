@@ -5,6 +5,7 @@
 package by.zhukova.uni.entity;
 
 
+// TODO: Auto-generated Javadoc
 /** 
  * Class {@code Abiturient} stores information from database table {@code abiturients}
  *  
@@ -33,8 +34,8 @@ public class Abiturient extends User {
 	/**  The  score of third discipline. */
 	private int thirdScore;
 	
-	/** The average school mark transformed to double-digit number. */
-	private int schoolScore;
+	/**  The average school mark. */
+	private double schoolScore;
 	
 	/** The sum of all scores. */
 	private int overallScore;
@@ -73,7 +74,7 @@ public class Abiturient extends User {
 	 */
 	public Abiturient(int id, String username, String password, String userType,
 			String firstName, String middleName, String lastName,
-			int firstScore, int secondScore, int thirdScore, int schoolScore,
+			int firstScore, int secondScore, int thirdScore, double schoolScore,
 			int overallScore, int chosenFaculty, String status) {
 		super(id, username, password, userType);
 		
@@ -199,20 +200,20 @@ public class Abiturient extends User {
 	}
 
 	/**
-	 * Gets the average school mark transformed to double-digit number.
+	 * Gets the average school mark.
 	 *
-	 * @return the average school mark transformed to double-digit number
+	 * @return the average school mark
 	 */
-	public int getSchoolScore() {
+	public double getSchoolScore() {
 		return schoolScore;
 	}
 
 	/**
-	 * Sets the average school mark transformed to double-digit number.
+	 * Sets the average school mark .
 	 *
-	 * @param schoolScore the new average school mark transformed to double-digit number
+	 * @param schoolScore the new average school mark
 	 */
-	public void setSchoolScore(int schoolScore) {
+	public void setSchoolScore(double schoolScore) {
 		this.schoolScore = schoolScore;
 	}
 
@@ -276,7 +277,7 @@ public class Abiturient extends User {
 	 */
 	@Override
 	public String toString() {
-		return super.toString()+ "Abiturient [firstName=" + firstName + ", middleName="
+		return "Abiturient [firstName=" + firstName + ", middleName="
 				+ middleName + ", lastName=" + lastName + ", firstScore="
 				+ firstScore + ", secondScore=" + secondScore + ", thirdScore="
 				+ thirdScore + ", schoolScore=" + schoolScore
@@ -293,22 +294,20 @@ public class Abiturient extends User {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + chosenFaculty;
-		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + firstScore;
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result
-				+ ((middleName == null) ? 0 : middleName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((middleName == null) ? 0 : middleName.hashCode());
 		result = prime * result + overallScore;
-		result = prime * result + schoolScore;
+		long temp;
+		temp = Double.doubleToLongBits(schoolScore);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + secondScore;
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + thirdScore;
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see by.zhukova.uni.entity.User#equals(java.lang.Object)
 	 */
@@ -354,7 +353,7 @@ public class Abiturient extends User {
 		if (overallScore != other.overallScore) {
 			return false;
 		}
-		if (schoolScore != other.schoolScore) {
+		if (Double.doubleToLongBits(schoolScore) != Double.doubleToLongBits(other.schoolScore)) {
 			return false;
 		}
 		if (secondScore != other.secondScore) {

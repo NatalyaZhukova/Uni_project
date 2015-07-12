@@ -1,3 +1,6 @@
+/*
+ * The package contains the classes which work with database
+ */
 package by.zhukova.uni.db;
 
 import java.sql.Connection;
@@ -8,10 +11,17 @@ import java.util.List;
 import java.sql.PreparedStatement;
 
 import by.zhukova.uni.entity.Discipline;
-import by.zhukova.uni.entity.Entity;
 import by.zhukova.uni.exception.DaoException;
 
-public class DisciplineDAO extends AbstractDAO {
+
+/**
+ *  Class {@code DisciplineDAO}  (data access object) is designed to work with database table {@code disciplines} 
+ *  and {@code Discipline} objects.
+ *  
+ *  @author Natallya Zhukova
+ *  @since 1.0
+ */
+public class DisciplineDAO extends AbstractDAO<Discipline> {
 
 	
 	private final String SELECT_ALL = "SELECT * FROM disciplines";
@@ -20,10 +30,21 @@ public class DisciplineDAO extends AbstractDAO {
 	private final String CREATE = "INSERT INTO disciplines (id_discipline, discipline_name) VALUES (?, ?)";
 	private final String UPDATE = "UPDATE disciplines SET  discipline_name=? WHERE id_discipline=?";
 
+	/**
+	 * Instantiates a new discipline DAO.
+	 *
+	 * @param connection the connection
+	 */
 	public DisciplineDAO(Connection connection) {
 		super(connection);
 	}
 
+	/** 
+	 * Gets list of all disciplines.
+	 * 
+	 * @return  list of {@code Discipline} objects - the list of disciplines
+	 * @throws  DaoException if there is SQLException
+	 */
 	@Override
 	public List<Discipline> findAll() throws DaoException {
 		List<Discipline> list = new ArrayList<Discipline>();
@@ -48,6 +69,13 @@ public class DisciplineDAO extends AbstractDAO {
 
 	}
 
+	/**
+	 * Finds the discipline by given identifier
+	 * 
+	 * @param id id of discipline
+	 * @return {@code Discipline} object - the discipline
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public Discipline findEntityById(int id) throws DaoException {
 		PreparedStatement pst = null;
@@ -70,6 +98,13 @@ public class DisciplineDAO extends AbstractDAO {
 		return dis;
 	}
 
+	/**
+	 * Delete the discipline chosen by given identifier
+	 * 
+	 * @param id identifier
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
@@ -91,10 +126,17 @@ public class DisciplineDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Delete the discipline which was given as a parameter
+	 * 
+	 * @param {@code Discipline} dis - the discipline
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean delete(Entity entity) throws DaoException {
+	public boolean delete(Discipline dis) throws DaoException {
 		boolean result=false;
-		int id = entity.getId();
+		int id = dis.getId();
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
@@ -113,11 +155,17 @@ public class DisciplineDAO extends AbstractDAO {
 
 	}
 
+	/**
+	 * Create the new discipline 
+	 * 
+	 * @param {@code Discipline} dis - the discipline
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean create(Entity entity) throws DaoException {
+	public boolean create(Discipline dis) throws DaoException {
 		boolean result=false;
 		PreparedStatement pst = null;
-		Discipline dis = (Discipline) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
 			pst.setInt(1, dis.getId());
@@ -135,10 +183,16 @@ public class DisciplineDAO extends AbstractDAO {
 		return result;
 	}
 
+	/**
+	 * Update the discipline which was given as a parameter
+	 * 
+	 * @param {@code Discipline} dis - the discipline
+	 * @return result - true if it was successful
+	 * @throws DaoException if there is SQLException
+	 */
 	@Override
-	public boolean update(Entity entity) throws DaoException {
+	public boolean update(Discipline dis) throws DaoException {
 		boolean result=false;
-		Discipline dis = (Discipline) entity;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);

@@ -6,8 +6,17 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
+
+/**
+ * The Class FooterTag is custom tag for footer of page.
+ */
 public class FooterTag extends TagSupport {
 	
+	/**
+	 *  Writes the html code of page footer on jsp page 
+	 *  
+	 * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
+	 */
 	@Override
 	public int doStartTag() throws JspException {
 
@@ -23,6 +32,9 @@ public class FooterTag extends TagSupport {
 	return SKIP_BODY;
 	}
 	
+	/**
+	 * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
+	 */
 	@Override
 	public int doEndTag() throws JspException {
 		return EVAL_PAGE;

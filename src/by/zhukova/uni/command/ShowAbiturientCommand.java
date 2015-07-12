@@ -47,8 +47,6 @@ public class ShowAbiturientCommand implements ActionCommand {
 		request.setAttribute("abiturient", abitur);
 		request.setAttribute("faculty", fac);
 		request.setAttribute("discList", discList);
-		double schoolScore = (double)abitur.getSchoolScore()/10;
-		request.setAttribute("schoolScore", schoolScore);
 		String status = abitur.getStatus();
 		String statusText = AbiturientLogic.getApplicationStatus(status);
 		request.setAttribute("status", status);

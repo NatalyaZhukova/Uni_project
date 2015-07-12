@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.zhukova.uni.entity.Abiturient;
-import by.zhukova.uni.entity.Entity;
 import by.zhukova.uni.exception.DaoException;
 
 
@@ -22,7 +21,7 @@ import by.zhukova.uni.exception.DaoException;
  *  @author Natallya Zhukova
  *  @since 1.0
  */
-public class AbiturientDAO extends AbstractDAO {
+public class AbiturientDAO extends AbstractDAO<Abiturient> {
 
 	
 	private final String SELECT_ALL = "SELECT * FROM abiturients";
@@ -50,7 +49,7 @@ public class AbiturientDAO extends AbstractDAO {
 	 * Gets list of all registered applications.
 	 * 
 	 * @return  list of {@code Abiturient} objects - the list of applications
-	 * @throws {@code DaoException} if there is SQLException
+	 * @throws DaoException if there is SQLException
 	 */
 	@Override
 	public List<Abiturient> findAll() throws DaoException {
@@ -69,7 +68,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));
 				ab.setThirdScore(res.getInt(8));
-				ab.setSchoolScore(res.getInt(9));
+				ab.setSchoolScore(res.getDouble(9));
 				ab.setOverallScore(res.getInt(10));
 				ab.setChosenFaculty(res.getInt(11));
 				list.add(ab);
@@ -109,7 +108,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));
 				ab.setThirdScore(res.getInt(8));
-				ab.setSchoolScore(res.getInt(9));
+				ab.setSchoolScore(res.getDouble(9));
 				ab.setOverallScore(res.getInt(10));
 				ab.setChosenFaculty(res.getInt(11));
 				ab.setStatus(res.getString(12));
@@ -150,7 +149,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));
 				ab.setThirdScore(res.getInt(8));
-				ab.setSchoolScore(res.getInt(9));
+				ab.setSchoolScore(res.getDouble(9));
 				ab.setOverallScore(res.getInt(10));
 				ab.setChosenFaculty(res.getInt(11));
 				ab.setStatus(res.getString(12));
@@ -192,7 +191,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));
 				ab.setThirdScore(res.getInt(8));
-				ab.setSchoolScore(res.getInt(9));
+				ab.setSchoolScore(res.getDouble(9));
 				ab.setOverallScore(res.getInt(10));
 				ab.setChosenFaculty(res.getInt(11));
 				ab.setStatus(res.getString(12));
@@ -230,7 +229,7 @@ public class AbiturientDAO extends AbstractDAO {
 				ab.setFirstScore(res.getInt(6));
 				ab.setSecondScore(res.getInt(7));
 				ab.setThirdScore(res.getInt(8));
-				ab.setSchoolScore(res.getInt(9));
+				ab.setSchoolScore(res.getDouble(9));
 				ab.setOverallScore(res.getInt(10));
 				ab.setChosenFaculty(res.getInt(11));
 				ab.setStatus(res.getString(12));
@@ -275,16 +274,15 @@ public class AbiturientDAO extends AbstractDAO {
 
 	/**
 	 * Delete the application which was given as a parameter
-	 * The method overrides the class {@code Entity} method
 	 * 
-	 * @param {@Entity} entity - {@code Abiturient} object inherited from {@code Entity} class
+	 * @param {@code Abiturient} abitur - application
 	 * @return result - true if deleting was successful
 	 * @throws DaoException if there is SQLException
 	 */
 	@Override
-	public boolean delete(Entity entity) throws DaoException {
+	public boolean delete(Abiturient abitur) throws DaoException {
 		boolean result=false;
-		int id = entity.getId();
+		int id = abitur.getId();
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(DELETE);
@@ -303,31 +301,29 @@ public class AbiturientDAO extends AbstractDAO {
 
 	/**
 	 * Create the new application 
-	 * The method overrides the class {@code Entity} method
 	 * 
-	 * @param {@Entity} entity - {@code Abiturient} object inherited from {@code Entity} class
-	 * @return result - true if creating was successful
+	 * @param {@code Abiturient} abitur - new application
+	 * @return result - true if it was successful
 	 * @throws DaoException if there is SQLException
 	 */
 	@Override
-	public boolean create(Entity entity) throws DaoException {
+	public boolean create(Abiturient abitur) throws DaoException {
 		boolean result = false;
 		PreparedStatement pst = null;
-		Abiturient ab = (Abiturient) entity;
 		try {
 			pst = connection.prepareStatement(CREATE);
-			pst.setInt(1, ab.getId());
-			pst.setString(2, ab.getUsername());
-			pst.setString(3, ab.getFirstName());
-			pst.setString(4, ab.getMiddleName());
-			pst.setString(5, ab.getLastName());
-			pst.setInt(6, ab.getFirstScore());
-			pst.setInt(7, ab.getSecondScore());
-			pst.setInt(8, ab.getThirdScore());
-			pst.setInt(9, ab.getSchoolScore());
-			pst.setInt(10, ab.getOverallScore());
-			pst.setInt(11, ab.getChosenFaculty());
-			pst.setString(12, ab.getStatus());
+			pst.setInt(1, abitur.getId());
+			pst.setString(2, abitur.getUsername());
+			pst.setString(3, abitur.getFirstName());
+			pst.setString(4, abitur.getMiddleName());
+			pst.setString(5, abitur.getLastName());
+			pst.setInt(6, abitur.getFirstScore());
+			pst.setInt(7, abitur.getSecondScore());
+			pst.setInt(8, abitur.getThirdScore());
+			pst.setDouble(9, abitur.getSchoolScore());
+			pst.setInt(10, abitur.getOverallScore());
+			pst.setInt(11, abitur.getChosenFaculty());
+			pst.setString(12, abitur.getStatus());
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;
@@ -344,31 +340,29 @@ public class AbiturientDAO extends AbstractDAO {
 
 	/**
 	 * Update the application which was given as a parameter
-	 * The method overrides the class {@code Entity} method
 	 * 
-	 * @param {@Entity} entity - {@code Abiturient} object inherited from {@code Entity} class
+	 * @param {@code Abiturient} abitur - application
 	 * @return result - true if update was successful
 	 * @throws DaoException if there is SQLException
 	 */
 	@Override
-	public boolean update(Entity entity) throws DaoException {
+	public boolean update(Abiturient abitur) throws DaoException {
 		boolean result=false;
-		Abiturient ab = (Abiturient) entity;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);
-			pst.setInt(12, ab.getId());
-			pst.setString(1, ab.getUsername());
-			pst.setString(2, ab.getFirstName());
-			pst.setString(3, ab.getMiddleName());
-			pst.setString(4, ab.getLastName());
-			pst.setInt(5, ab.getFirstScore());
-			pst.setInt(6, ab.getSecondScore());
-			pst.setInt(7, ab.getThirdScore());
-			pst.setInt(8, ab.getSchoolScore());
-			pst.setInt(9, ab.getOverallScore());
-			pst.setInt(10, ab.getChosenFaculty());
-			pst.setString(11, ab.getStatus());
+			pst.setInt(12, abitur.getId());
+			pst.setString(1, abitur.getUsername());
+			pst.setString(2, abitur.getFirstName());
+			pst.setString(3, abitur.getMiddleName());
+			pst.setString(4, abitur.getLastName());
+			pst.setInt(5, abitur.getFirstScore());
+			pst.setInt(6, abitur.getSecondScore());
+			pst.setInt(7, abitur.getThirdScore());
+			pst.setDouble(8, abitur.getSchoolScore());
+			pst.setInt(9, abitur.getOverallScore());
+			pst.setInt(10, abitur.getChosenFaculty());
+			pst.setString(11, abitur.getStatus());
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;

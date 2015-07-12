@@ -1,3 +1,4 @@
+
 package by.zhukova.uni.tag;
 
 import java.io.IOException;
@@ -6,8 +7,17 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
+
+/**
+ * The Class LocaleSwitcherTag is custom tag for locale switcher 
+ */
 public class LocaleSwitcherTag extends TagSupport {
 	
+	/** 
+	 * Writes the html code of locale switcher on jsp page 
+	 * 
+	 * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
+	 */
 	@Override
 	public int doStartTag() throws JspException {
 		String textTag = "<div class='locale'>" +
@@ -26,6 +36,9 @@ public class LocaleSwitcherTag extends TagSupport {
 		
 	}
 	
+	/**
+	 * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
+	 */
 	@Override
 	public int doEndTag() throws JspException {
 		return EVAL_PAGE;

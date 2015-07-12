@@ -26,7 +26,7 @@
 			<li>${discList[1].name} - ${abiturient.secondScore }</li>
 			<li>${discList[2].name} - ${abiturient.secondScore }</li>
 			</ul>
-            <fmt:message key="abiturient.school_score" bundle="${rb}" /> - ${schoolScore }
+            <fmt:message key="abiturient.school_score" bundle="${rb}" /> - ${abiturient.schoolScore }
 		
 			<div class="status"><fmt:message key="status.status" bundle="${rb}" />: <span><fmt:message key="${statusText}" bundle="${rb}" /></span></div>
 			<form action="controller">
