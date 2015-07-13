@@ -9,11 +9,20 @@ import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.db.UserDAO;
 import by.zhukova.uni.entity.User;
 import by.zhukova.uni.exception.DaoException;
-
+/** 
+* The Class RegisterLogic contains the methods which are used in register process.
+*
+* @author Natallya Zhukova
+* @since 1.0
+*/
 public class RegisterLogic {
 	
 	static Logger logger = Logger.getLogger(RegisterLogic.class);
-	
+	/** 
+	* The method checks if login is available
+	* @param login
+	* @return true, if it's available
+	*/
 	public static boolean checkLoginAvailable(String login) {
 		boolean result = false;
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -34,7 +43,11 @@ public class RegisterLogic {
 		pool.returnConnection(con);
 		return result;
 	}
-	
+	/** 
+	* The method adds new user to database
+	* @param login, password
+	* @return true, if successful
+	*/
 	public static boolean addNewUser(String login, String password) {
 		boolean result = false;
 		ConnectionPool pool = ConnectionPool.getInstance();

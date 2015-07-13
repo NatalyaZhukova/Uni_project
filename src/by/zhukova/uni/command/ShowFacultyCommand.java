@@ -11,12 +11,23 @@ import by.zhukova.uni.logic.AbiturientLogic;
 import by.zhukova.uni.logic.DisciplineLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
-
+/**
+ * The Class ShowFacultyCommand is command which shows list of faculties.
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class ShowFacultyCommand implements ActionCommand {
 	
 	private static final String PAGE_FACULTY = "path.page.showfaculty";
 	private static final String PARAM_ID = "id";
-
+/**
+	 * The method gets data of faculty from database by given identifier and shows it on the defined page.
+	 * 
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;
@@ -45,10 +56,6 @@ public class ShowFacultyCommand implements ActionCommand {
 		request.setAttribute("applications", applicationsNum);
 		
 		page = ConfigurationManager.getProperty(PAGE_FACULTY);
-		
-		
-		
-		
 		
 		return page;
 	}

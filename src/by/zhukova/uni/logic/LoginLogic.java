@@ -8,11 +8,20 @@ import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.db.UserDAO;
 import by.zhukova.uni.entity.User;
 import by.zhukova.uni.exception.DaoException;
-
+/** 
+* The Class LoginLogic contains the methods which are used in login process.
+*
+* @author Natallya Zhukova
+* @since 1.0
+*/
 public class LoginLogic {
 
 	static Logger logger = Logger.getLogger(LoginLogic.class);
-
+/** 
+* The method checks if the user with given username and password exists
+* @param enterLogin, enterPassword
+* @return true, if it exists
+*/
 	public static boolean checkLogin(String enterLogin, String enterPass) {
 		boolean result = false;
 	    ConnectionPool pool = ConnectionPool.getInstance();
@@ -39,7 +48,11 @@ public class LoginLogic {
 		return result;
 
 	}
-
+ /** 
+ * The method checks if the user with given username is administrator.
+ * @param username
+ * @return true if type of user is administrator
+ */
 	public static boolean isAdmin(String username) {
 		boolean result=false;
 		ConnectionPool pool = ConnectionPool.getInstance();

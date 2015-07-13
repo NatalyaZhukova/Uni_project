@@ -11,12 +11,26 @@ import by.zhukova.uni.logic.AbiturientLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
 
+/**
+ * The Class ApplicationActionCommand is command which shows registered application to user
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class ApplicationActionCommand implements ActionCommand {
 	
 	private static final String PAGE_APPLIC = "path.page.application";
 	private static final String PAGE_MAIN = "path.page.main";
 	private static final String PARAM_ACTION = "act";
-
+	private static final String ACTION_DELETE = "del";
+	private static final String ATTR_APPLICATION = "application";
+/**
+	 * The method gets data of user's own application from database, shows it on the defined page
+	 * and allows user to delete it from database.
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_APPLIC);
@@ -37,11 +51,11 @@ public class ApplicationActionCommand implements ActionCommand {
 		
 		String action = request.getParameter(PARAM_ACTION);
 		if (action!=null) {
-			if (action.equals("del")){
+			if (action.equals(ACTION_DELETE)){
 		
 				int id = abitur.getId();
 				if (AbiturientLogic.deleteApplication(id)) {
-				session.removeAttribute("application");
+				session.removeAttribute(ATTR_APPLICATION);
 				page = ConfigurationManager.getProperty(PAGE_MAIN);
 				}
 			}

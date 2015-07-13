@@ -8,7 +8,12 @@ import by.zhukova.uni.logic.LoginLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
 
-
+/**
+ * The Class LoginCommand is command which allows to log in the system
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class LoginCommand implements ActionCommand {
 	private static final String PARAM_NAME_LOGIN = "login";
 	private static final String PARAM_NAME_PASSWORD = "password";
@@ -22,7 +27,13 @@ public class LoginCommand implements ActionCommand {
 
 	private static final String MESSAGE_LOGINERROR = "message.loginerror";
 	private static final String MESSAGE_FORMATERROR = "validation.format";
-
+/**
+	 * The method gets user data from form, validates and checks it.
+	 * If such user and password exist, then method defines the main page as the page to redirect.
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	public String execute(HttpServletRequest request) {
 		String page = null;
 		

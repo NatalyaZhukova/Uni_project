@@ -14,7 +14,12 @@ import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
-
+/**
+ * The Class ChooseFacultyCommand is command which shows form with part of user's data and choice of faculty.
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class ChooseFacultyCommand implements ActionCommand {
 	
 	private static final String PARAM_FIRST_NAME = "first_name";
@@ -26,7 +31,13 @@ public class ChooseFacultyCommand implements ActionCommand {
 	
 	private static final String MESSAGE_VALIDATION_FORMAT = "validation.format";
 	private static final String MESSAGE_NOT_FILLED = "validation.notfilled";
-
+/**
+	 * The method shows form, gets part of user's application data from it, validates   
+	 * and send it to defined page
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_CHOOSE_FACULTY);

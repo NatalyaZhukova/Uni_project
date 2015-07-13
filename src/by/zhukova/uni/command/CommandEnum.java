@@ -4,6 +4,9 @@ package by.zhukova.uni.command;
 
 /**
  * The Enum CommandEnum contains command names.
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
  */
 public enum CommandEnum {
 	
@@ -55,7 +58,7 @@ public enum CommandEnum {
 	
 	
 	FAC {{
-		this.command = new FacultiesCommand();
+		this.command = new ShowFacultiesCommand();
 	}},
 	
 	

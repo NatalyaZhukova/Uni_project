@@ -6,6 +6,9 @@ import by.zhukova.uni.resource.MessageManager;
 
 /**
  * A factory for creating ActionCommand objects.
+ * 
+ * @author Natallya Zhukova
+ * @since 1.0
  */
 public class ActionFactory {
 	private static final String PARAM_COMMAND = "command";

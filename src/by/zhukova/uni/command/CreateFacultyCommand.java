@@ -11,7 +11,12 @@ import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
-
+/**
+ * The Class CreateFacultyCommand is command which creates the new faculty and writes it to database
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class CreateFacultyCommand implements ActionCommand {
 	private static final String PARAM_NAME = "faculty_name";
 	private static final String PARAM_PLAN = "faculty_plan";
@@ -27,6 +32,13 @@ public class CreateFacultyCommand implements ActionCommand {
 	private final static String PAGE_ERROR = "path.page.error";
 	private final static String PAGE_SUCCESS = "path.page.success_faculty";
 
+	/**
+	 * The method shows form, gets user's data from it, validate and write to database
+	 * 
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_FORM);

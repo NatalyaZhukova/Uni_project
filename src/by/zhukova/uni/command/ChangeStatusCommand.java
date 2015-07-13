@@ -5,8 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.logic.AbiturientLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
 
+/**
+ * The Class ChangeStatusCommand is command which changes status of user's application
+ * 
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class ChangeStatusCommand implements ActionCommand {
 
 	private static final String PARAM_STATUS = "status";
@@ -21,6 +26,13 @@ public class ChangeStatusCommand implements ActionCommand {
 	
 	private final static String MESSAGE_ERROR = "error.no_change_status";
 
+	/**
+	 * The method gets user's application status as a parameter and writes the new status to database
+	 * 
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;

@@ -13,7 +13,12 @@ import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
-
+/**
+ * The Class EditFacultyCommand is command which allows to edit faculty data
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class EditFacultyCommand implements ActionCommand {
 
 	private static final String PAGE_ERROR = "path.page.error";
@@ -33,7 +38,13 @@ public class EditFacultyCommand implements ActionCommand {
 	private static final String PARAM_DISC1 = "disc1";
 	private static final String PARAM_DISC2 = "disc2";
 	private static final String PARAM_DISC3 = "disc3";
-	
+	/**
+	 * The method gets the faculty data from the database, shows it on the form, gets data from it, 
+	 * validate and update it in the database
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty(PAGE_FORM);

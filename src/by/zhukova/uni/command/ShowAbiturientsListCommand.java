@@ -10,7 +10,12 @@ import by.zhukova.uni.logic.AbiturientLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
-
+/**
+ * The Class ShowAbiturientsListCommand is command which shows list of user's applications
+ * and defines who is allowed to enter the University.
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class ShowAbiturientsListCommand implements ActionCommand {
 	
 	private static final String PAGE_LIST = "path.page.abiturient_faculty";
@@ -22,7 +27,19 @@ public class ShowAbiturientsListCommand implements ActionCommand {
 	private static final String STATUS_WAITING = "waiting";
 	private static final String STATUS_DENIED = "denied";
 	private static final String PARAM_PAGE = "p";
-
+ /**
+	 * The method gets list of user's application chosen by status given as a parameter.
+	 * If the status is "waiting" or "denied", the method shows application list with links to application pages.
+	 * In this case, list is divided by pages.
+	 * @see by.zhukova.uni.logic.AbiturientLogic#getFacultiesPage(int, int, List<Abiturients>)
+	 *
+	 * If the status is "approved"(which is defined by default), the method shows application list 
+	 * divided by faculty and sorted by sum of scores.
+	 * In this case the method also defines who is allowed to enter the faculty.
+	 *
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;

@@ -11,11 +11,21 @@ import by.zhukova.uni.db.DisciplineDAO;
 import by.zhukova.uni.entity.Discipline;
 import by.zhukova.uni.entity.Faculty;
 import by.zhukova.uni.exception.DaoException;
-
+/** 
+* The Class DisciplineLogic contains the methods which work with {@code Discipline} objects
+*
+* @author Natallya Zhukova
+* @since 1.0
+*/
 public class DisciplineLogic {
 	
 	static Logger logger = Logger.getLogger(DisciplineLogic.class);
 	
+	/** 
+	* The method gets list of disciplines for given faculty
+	* @param faculty
+	* @return {@code List<Discipline>} list - list of disciplines
+	*/
 	public static List<Discipline> getFacultyDisciplines(Faculty fac) {
 		List<Discipline> list = new ArrayList<Discipline>();
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -39,7 +49,11 @@ public class DisciplineLogic {
 		
 		
 	}
-	
+	/** 
+	* The method gets list of all disciplines in database
+	*
+	* @return {@code List<Discipline>} list - the list of disciplines
+	*/
 	public static List<Discipline> getAllDisciplines() {
 		List<Discipline> list = new ArrayList<Discipline>();
 		ConnectionPool pool = ConnectionPool.getInstance();

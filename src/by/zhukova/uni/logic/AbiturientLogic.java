@@ -10,7 +10,12 @@ import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.exception.DaoException;
 import by.zhukova.uni.resource.MessageManager;
-
+/** 
+* The Class AbiturientLogic contains the methods which work with {@code Abiturient} objects
+*
+* @author Natallya Zhukova
+* @since 1.0
+*/
 public class AbiturientLogic {
 
 	private final static String MESSAGE_APPROVED = "status.approved";
@@ -20,7 +25,11 @@ public class AbiturientLogic {
 	public final static int TO_DOUBLE_DIGIT = 10;
 
 	static Logger logger = Logger.getLogger(AbiturientLogic.class);
-
+/** 
+* The method checks if the application of given user is exists.
+* @param username
+* @return true, if there is the application with given username in the database.
+*/
 	public static boolean isApplicationExists(String username) {
 		boolean result = false;
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -40,17 +49,29 @@ public class AbiturientLogic {
 		pool.returnConnection(con);
 		return result;
 	}
-
+/** 
+* The method transforms  average school mark to double-digit integer number.
+* @param average school mark
+* @return integer double-digit number.
+*/
 	public static int calculateSchoolScore(double score) {
 
 		return (int) (score * TO_DOUBLE_DIGIT);
 	}
-
+/** 
+* The method calculates sum of all required scores.
+* @param scores of first, second, third disciplines and transformed average school mark
+* @return sum of scores
+*/
 	public static int calculateOverallScore(int first, int second, int third,
 			int school) {
 		return first + second + third + school;
 	}
-
+/** 
+* The method creates the given application in database
+* @param {@code Abiturient} object
+* @return true, if successful
+*/
 	public static boolean createApplication(Abiturient abitur) {
 		boolean result = false;
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -75,7 +96,11 @@ public class AbiturientLogic {
 		pool.returnConnection(con);
 		return result;
 	}
-
+/** 
+* The method updates abiturient's data in database
+* @param {@code Abiturient} object
+* @return true, if successful
+*/
 	public static boolean updateAbiturient(Abiturient abitur) {
 		boolean result = false;
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -91,6 +116,11 @@ public class AbiturientLogic {
 		return result;
 	}
 
+	/** 
+	* The method gets application from database by given username
+	* @param username
+	* @return {@code Abiturient} object - the application
+	*/
 	public static Abiturient getAbiturApplication(String username) {
 		Abiturient abitur = null;
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -106,7 +136,11 @@ public class AbiturientLogic {
 
 		return abitur;
 	}
-
+   /** 
+   * The method gets application from database by given identifier
+   * @param id
+   * @return {@code Abiturient} object - the application
+   */
 	public static Abiturient getAbiturApplication(int id) {
 		Abiturient abitur = null;
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -122,7 +156,11 @@ public class AbiturientLogic {
 
 		return abitur;
 	}
-
+ /** 
+ * The method gets the list of the application with status "approved" by given faculty
+ * @param id
+ * @return {@code List<Abiturient>} list - the list of applications
+ */
 	public static List<Abiturient> getAbitursByFaculty(int id) {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection con = pool.getConnection();
@@ -139,6 +177,12 @@ public class AbiturientLogic {
 		return list;
 
 	}
+	
+/** 
+ * The method gets the list of the application  by given status
+ * @param status
+ * @return {@code List<Abiturient>} list - the list of applications
+ */
 	public static List<Abiturient> getAbitursByStatus(String status) {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection con = pool.getConnection();
@@ -155,7 +199,11 @@ public class AbiturientLogic {
 		return list;
 
 	}
-	
+/** 
+* The method gets the list of the applications which should be shown on current page
+* @param page number, quantity of pages, list of application
+* @return {@code List<Abiturient>} list - the list of applications
+*/
 public static List<Abiturient> getFacultiesPage (int p, int numpage, List<Abiturient> list) {
 		
 		int onPage;
@@ -175,7 +223,11 @@ public static List<Abiturient> getFacultiesPage (int p, int numpage, List<Abitur
 		return listPage;
 
 		}
-
+/** 
+* The method calculates the number of pages that list can be divided
+* @param list of applications
+* @return number of last page
+*/
 		public static int getLastPageNum( List<Abiturient> list) {
 		int numpage;
 		int rows = list.size();
@@ -189,7 +241,11 @@ public static List<Abiturient> getFacultiesPage (int p, int numpage, List<Abitur
 		return numpage;
 		}
 
-
+/** 
+* The method deletes the application by given identifier
+* @param id
+* @return true, if successful
+*/
 	public static boolean deleteApplication(int id) {
 		boolean result = false;
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -206,7 +262,11 @@ public static List<Abiturient> getFacultiesPage (int p, int numpage, List<Abitur
 		return result;
 
 	}
-
+ /** 
+ * The method gets status name from locale properties file.
+ * @param status
+ * @return string
+ */
 	public static String getApplicationStatus(String status) {
 		String state = "";
 		switch (status) {

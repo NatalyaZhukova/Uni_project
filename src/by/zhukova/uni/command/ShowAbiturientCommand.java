@@ -12,7 +12,12 @@ import by.zhukova.uni.logic.AbiturientLogic;
 import by.zhukova.uni.logic.DisciplineLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
-
+/**
+ * The Class ShowAbiturientCommand is command which shows full user's application to administrator
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class ShowAbiturientCommand implements ActionCommand {
 	
 	private static final String PAGE_INFO = "path.page.show_abiturient";
@@ -20,7 +25,12 @@ public class ShowAbiturientCommand implements ActionCommand {
 	private final static String STATUS_APPROVED = "approved";
 	private final static String STATUS_WAITING = "waiting";
 	private final static String STATUS_DENIED = "denied";
-
+/**
+	 * The method gets user's application from database by given identifier and shows it on page
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_INFO);

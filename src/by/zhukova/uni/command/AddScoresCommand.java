@@ -17,6 +17,9 @@ import by.zhukova.uni.resource.ConfigurationManager;
 
 /**
  * The Class AddScoresCommand is command which adds application to database.
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
  */
 public class AddScoresCommand implements ActionCommand {
 
@@ -89,7 +92,7 @@ public class AddScoresCommand implements ActionCommand {
 					if (AbiturientLogic.createApplication(abitur)) {
 						page = ConfigurationManager.getProperty(PAGE_SUCCESS);
 						session.setAttribute("application", ATTR_APPLIC);
-						session.removeAttribute("abiturient");
+						session.removeAttribute(ATTR_ABITUR);
 
 					} else {
 						request.setAttribute("errorMessage",  MESSAGE_ERROR);

@@ -6,7 +6,12 @@ import by.zhukova.uni.logic.RegisterLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
-
+/**
+ * The Class ApplicationActionCommand is command which allows to register new user.
+ *
+ * @author Natallya Zhukova
+ * @since 1.0
+ */
 public class RegisterCommand implements ActionCommand {
 
 	private static final String PARAM_NAME_LOGIN = "reg_login";
@@ -22,7 +27,12 @@ public class RegisterCommand implements ActionCommand {
 	private static final String MESSAGE_REPEAT = "validation.repeat";
 	private static final String MESSAGE_NOT_FILLED = "validation.notfilled";
 	private static final String MESSAGE_ERROR = "error.no_user";
-
+/**
+	 * The method gets user's data from form, validates and checks it, then writes it to database.
+	 * 
+	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
+	 * @return page defined page
+	 */
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_REGISTER);
