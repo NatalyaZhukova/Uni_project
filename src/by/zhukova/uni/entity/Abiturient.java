@@ -4,45 +4,45 @@
 
 package by.zhukova.uni.entity;
 
-
 // TODO: Auto-generated Javadoc
-/** 
- * Class {@code Abiturient} stores information from database table {@code abiturients}
- *  
+/**
+ * Class {@code Abiturient} stores information from database table
+ * {@code abiturients}
+ * 
  * @author Natallya Zhukova
  * @since 1.0
  * 
- * */
+ */
 
 public class Abiturient extends User {
 
 	/** The first name. */
 	private String firstName;
-	
+
 	/** The middle name. */
 	private String middleName;
-	
+
 	/** The last name. */
 	private String lastName;
 
-	/** The  score of first discipline. */
+	/** The score of first discipline. */
 	private int firstScore;
-	
-	/**  The  score of second discipline. */
+
+	/** The score of second discipline. */
 	private int secondScore;
-	
-	/**  The  score of third discipline. */
+
+	/** The score of third discipline. */
 	private int thirdScore;
-	
-	/**  The average school mark. */
+
+	/** The average school mark. */
 	private double schoolScore;
-	
+
 	/** The sum of all scores. */
 	private int overallScore;
-	
+
 	/** Identifier of chosen faculty. */
 	private int chosenFaculty;
-	
+
 	/** The status of registered application. */
 	private String status;
 
@@ -57,27 +57,40 @@ public class Abiturient extends User {
 	/**
 	 * Instantiates a new application.
 	 *
-	 * @param id the id
-	 * @param username the username
-	 * @param password the password
-	 * @param userType the user type
-	 * @param firstName the first name
-	 * @param middleName the middle name
-	 * @param lastName the last name
-	 * @param firstScore the  score of the first discipline
-	 * @param secondScore the  score of the second discipline
-	 * @param thirdScore the  score of the third discipline
-	 * @param schoolScore the average school mark
-	 * @param overallScore the sum of all scores
-	 * @param chosenFaculty the chosen faculty
-	 * @param status the status of registered application
+	 * @param id
+	 *            the id
+	 * @param username
+	 *            the username
+	 * @param password
+	 *            the password
+	 * @param userType
+	 *            the user type
+	 * @param firstName
+	 *            the first name
+	 * @param middleName
+	 *            the middle name
+	 * @param lastName
+	 *            the last name
+	 * @param firstScore
+	 *            the score of the first discipline
+	 * @param secondScore
+	 *            the score of the second discipline
+	 * @param thirdScore
+	 *            the score of the third discipline
+	 * @param schoolScore
+	 *            the average school mark
+	 * @param overallScore
+	 *            the sum of all scores
+	 * @param chosenFaculty
+	 *            the chosen faculty
+	 * @param status
+	 *            the status of registered application
 	 */
-	public Abiturient(int id, String username, String password, String userType,
-			String firstName, String middleName, String lastName,
-			int firstScore, int secondScore, int thirdScore, double schoolScore,
-			int overallScore, int chosenFaculty, String status) {
+	public Abiturient(int id, String username, String password, String userType, String firstName, String middleName,
+			String lastName, int firstScore, int secondScore, int thirdScore, double schoolScore, int overallScore,
+			int chosenFaculty, String status) {
 		super(id, username, password, userType);
-		
+
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -88,7 +101,7 @@ public class Abiturient extends User {
 		this.overallScore = overallScore;
 		this.chosenFaculty = chosenFaculty;
 		this.status = status;
-		
+
 	}
 
 	/**
@@ -103,7 +116,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the first name.
 	 *
-	 * @param firstName the new first name
+	 * @param firstName
+	 *            the new first name
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -121,7 +135,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the middle name.
 	 *
-	 * @param middlName the new middle name
+	 * @param middlName
+	 *            the new middle name
 	 */
 	public void setMiddleName(String middlName) {
 		this.middleName = middlName;
@@ -139,7 +154,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the last name.
 	 *
-	 * @param lastName the new last name
+	 * @param lastName
+	 *            the new last name
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -157,7 +173,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the score of the first discipline.
 	 *
-	 * @param firstScore the new  score of the first discipline
+	 * @param firstScore
+	 *            the new score of the first discipline
 	 */
 	public void setFirstScore(int firstScore) {
 		this.firstScore = firstScore;
@@ -175,7 +192,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the score of the second discipline.
 	 *
-	 * @param secondScore the new score of the second discipline
+	 * @param secondScore
+	 *            the new score of the second discipline
 	 */
 	public void setSecondScore(int secondScore) {
 		this.secondScore = secondScore;
@@ -193,7 +211,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the score of the third discipline.
 	 *
-	 * @param thirdScore the new score of the third discipline
+	 * @param thirdScore
+	 *            the new score of the third discipline
 	 */
 	public void setThirdScore(int thirdScore) {
 		this.thirdScore = thirdScore;
@@ -211,7 +230,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the average school mark .
 	 *
-	 * @param schoolScore the new average school mark
+	 * @param schoolScore
+	 *            the new average school mark
 	 */
 	public void setSchoolScore(double schoolScore) {
 		this.schoolScore = schoolScore;
@@ -229,7 +249,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the sum of all scores.
 	 *
-	 * @param score the new sum of all scores
+	 * @param score
+	 *            the new sum of all scores
 	 */
 	public void setOverallScore(int score) {
 		this.overallScore = score;
@@ -247,7 +268,8 @@ public class Abiturient extends User {
 	/**
 	 * Sets the identifier of chosen faculty.
 	 *
-	 * @param chosenFaculty the new identifier of chosen faculty
+	 * @param chosenFaculty
+	 *            the new identifier of chosen faculty
 	 */
 	public void setChosenFaculty(int chosenFaculty) {
 		this.chosenFaculty = chosenFaculty;
@@ -265,28 +287,29 @@ public class Abiturient extends User {
 	/**
 	 * Sets the status of registered application.
 	 *
-	 * @param status the new status of registered application
+	 * @param status
+	 *            the new status of registered application
 	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.User#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Abiturient [firstName=" + firstName + ", middleName="
-				+ middleName + ", lastName=" + lastName + ", firstScore="
-				+ firstScore + ", secondScore=" + secondScore + ", thirdScore="
-				+ thirdScore + ", schoolScore=" + schoolScore
-				+ ", overallScore=" + overallScore + ", chosenFaculty="
-				+ chosenFaculty + ", status=" + status + "]";
+		return "Abiturient [firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName
+				+ ", firstScore=" + firstScore + ", secondScore=" + secondScore + ", thirdScore=" + thirdScore
+				+ ", schoolScore=" + schoolScore + ", overallScore=" + overallScore + ", chosenFaculty=" + chosenFaculty
+				+ ", status=" + status + "]";
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.User#hashCode()
 	 */
 	@Override
@@ -308,7 +331,9 @@ public class Abiturient extends User {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.User#equals(java.lang.Object)
 	 */
 	@Override
@@ -371,9 +396,5 @@ public class Abiturient extends User {
 		}
 		return true;
 	}
-
-	
-	
-	
 
 }

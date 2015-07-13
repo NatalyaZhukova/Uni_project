@@ -16,12 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * The Class PageRedirectJSPSecurityFilter is designed to disallow opening jsp pages directly
+ * The Class PageRedirectJSPSecurityFilter is designed to disallow opening jsp
+ * pages directly
  */
-@WebFilter(
-		  urlPatterns = { "/jsp/*", "/jsp/admin/*", "/jsp/user/*", "/jsp/error/*" }, initParams = { @WebInitParam(name = "INDEX_PATH", value = "/index.jsp") })
+@WebFilter(urlPatterns = { "/jsp/*", "/jsp/admin/*", "/jsp/user/*", "/jsp/error/*" }, initParams = {
+		@WebInitParam(name = "INDEX_PATH", value = "/index.jsp") })
 public class PageRedirectJSPSecurityFilter implements Filter {
-	
+
 	private String indexPath;
 
 	/**
@@ -36,10 +37,11 @@ public class PageRedirectJSPSecurityFilter implements Filter {
 	/**
 	 * Redirect to index page
 	 * 
-	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
+	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
+	 *      javax.servlet.ServletResponse, javax.servlet.FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);

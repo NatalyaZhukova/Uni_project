@@ -14,7 +14,6 @@ import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
 
-
 /**
  * The Class AddScoresCommand is command which adds application to database.
  *
@@ -41,7 +40,8 @@ public class AddScoresCommand implements ActionCommand {
 	private final static String MESSAGE_ERROR = "error.no_application";
 
 	/**
-	 * The method gets data from form, validate it, creates application and adds it to database
+	 * The method gets data from form, validate it, creates application and adds
+	 * it to database
 	 * 
 	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
 	 * @return page defined page
@@ -63,8 +63,7 @@ public class AddScoresCommand implements ActionCommand {
 		List<Discipline> list = DisciplineLogic.getFacultyDisciplines(fac);
 		String facultyName = (String) request.getAttribute(ATTR_FACULTY_NAME);
 
-		if ((first != null) || (second != null) || (third != null)
-				|| (school != null)) {
+		if ((first != null) || (second != null) || (third != null) || (school != null)) {
 			if (Validation.isAllFieldFilled(first, second, third, school)) {
 				if (Validation.validScores(first, second, third, school)) {
 
@@ -72,13 +71,10 @@ public class AddScoresCommand implements ActionCommand {
 					int second_score = Integer.parseInt(second);
 					int third_score = Integer.parseInt(third);
 					double school_score = Double.parseDouble(school);
-					int doubleDigit = AbiturientLogic
-							.calculateSchoolScore(school_score);
-					int overall = AbiturientLogic.calculateOverallScore(
-							first_score, second_score, third_score,
+					int doubleDigit = AbiturientLogic.calculateSchoolScore(school_score);
+					int overall = AbiturientLogic.calculateOverallScore(first_score, second_score, third_score,
 							doubleDigit);
 
-					
 					String username = (String) session.getAttribute(ATTR_USER);
 
 					abitur.setUsername(username);
@@ -95,7 +91,7 @@ public class AddScoresCommand implements ActionCommand {
 						session.removeAttribute(ATTR_ABITUR);
 
 					} else {
-						request.setAttribute("errorMessage",  MESSAGE_ERROR);
+						request.setAttribute("errorMessage", MESSAGE_ERROR);
 						page = ConfigurationManager.getProperty(PAGE_ERROR);
 					}
 
@@ -110,7 +106,6 @@ public class AddScoresCommand implements ActionCommand {
 
 		}
 
-		
 		request.setAttribute("disciplines", list);
 		request.setAttribute(ATTR_FACULTY_NAME, facultyName);
 

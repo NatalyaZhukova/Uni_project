@@ -3,12 +3,12 @@
  */
 package by.zhukova.uni.entity;
 
-
 /**
- *  Class {@code Discipline} stores the information from database table {@code disciplines}
- *  
- *  @author Natallya Zhukova
- *  @since 1.0
+ * Class {@code Discipline} stores the information from database table
+ * {@code disciplines}
+ * 
+ * @author Natallya Zhukova
+ * @since 1.0
  */
 public class Discipline extends Entity {
 
@@ -24,8 +24,10 @@ public class Discipline extends Entity {
 	/**
 	 * Instantiates a new discipline.
 	 *
-	 * @param id the identifier
-	 * @param name the name
+	 * @param id
+	 *            the identifier
+	 * @param name
+	 *            the name
 	 */
 	public Discipline(int id, String name) {
 		super(id);
@@ -44,13 +46,16 @@ public class Discipline extends Entity {
 	/**
 	 * Sets the name of discipline.
 	 *
-	 * @param name the new name
+	 * @param name
+	 *            the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#toString()
 	 */
 	@Override
@@ -58,7 +63,9 @@ public class Discipline extends Entity {
 		return super.toString() + "Discipline [name=" + name + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#hashCode()
 	 */
 	@Override
@@ -69,7 +76,9 @@ public class Discipline extends Entity {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#equals(java.lang.Object)
 	 */
 	@Override
@@ -94,8 +103,4 @@ public class Discipline extends Entity {
 		return true;
 	}
 
-	
-	
-	
-	
 }

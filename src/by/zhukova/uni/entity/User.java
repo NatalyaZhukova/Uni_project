@@ -3,39 +3,42 @@
  */
 package by.zhukova.uni.entity;
 
-
 /**
  * Class {@code User} stores the information from database table {@code users}.
  * 
  * @author Natallya Zhukova
  * @since 1.0
  */
-public  class User extends Entity {
+public class User extends Entity {
 
 	/** The username. */
 	private String username;
-	
+
 	/** The password. */
 	private String password;
-	
+
 	/** The user type. */
 	private String userType;
-	
+
 	/**
 	 * Instantiates a new user.
 	 */
 	public User() {
-		
+
 		this.userType = "abiturient";
 	}
-	
+
 	/**
 	 * Instantiates a new user.
 	 *
-	 * @param id the id
-	 * @param username the username
-	 * @param password the password
-	 * @param userType the user type
+	 * @param id
+	 *            the id
+	 * @param username
+	 *            the username
+	 * @param password
+	 *            the password
+	 * @param userType
+	 *            the user type
 	 */
 	public User(int id, String username, String password, String userType) {
 		super(id);
@@ -56,7 +59,8 @@ public  class User extends Entity {
 	/**
 	 * Sets the username.
 	 *
-	 * @param username the new username
+	 * @param username
+	 *            the new username
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -74,7 +78,8 @@ public  class User extends Entity {
 	/**
 	 * Sets the password.
 	 *
-	 * @param password the new password
+	 * @param password
+	 *            the new password
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -92,38 +97,41 @@ public  class User extends Entity {
 	/**
 	 * Sets the user type.
 	 *
-	 * @param userType the new user type
+	 * @param userType
+	 *            the new user type
 	 */
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#toString()
 	 */
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password
-				+ ", userType=" + userType + "]";
+		return "User [username=" + username + ", password=" + password + ", userType=" + userType + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result
-				+ ((userType == null) ? 0 : userType.hashCode());
-		result = prime * result
-				+ ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((userType == null) ? 0 : userType.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#equals(java.lang.Object)
 	 */
 	@Override
@@ -161,7 +169,5 @@ public  class User extends Entity {
 		}
 		return true;
 	}
-	
-	
 
 }

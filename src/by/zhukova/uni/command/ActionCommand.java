@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface ActionCommand {
 
-/**
- * Execute.
- *
- * @param request the request
- * @return the string - the page path
- * @see by.zhukova.uni.control.Controller
- */
-String execute(HttpServletRequest request);
+	/**
+	 * Execute.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the string - the page path
+	 * @see by.zhukova.uni.control.Controller
+	 */
+	String execute(HttpServletRequest request);
 }

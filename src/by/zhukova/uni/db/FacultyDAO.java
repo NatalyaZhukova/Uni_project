@@ -13,42 +13,42 @@ import java.util.List;
 import by.zhukova.uni.entity.Faculty;
 import by.zhukova.uni.exception.DaoException;
 
-
 /**
- *  Class {@code FacultyDAO}  (data access object) is designed to work with database table {@code faculties} 
- *  and {@code Faculty} objects.
+ * Class {@code FacultyDAO} (data access object) is designed to work with
+ * database table {@code faculties} and {@code Faculty} objects.
  */
 public class FacultyDAO extends AbstractDAO<Faculty> {
 
-	
 	private final String SELECT_ALL = "SELECT * FROM faculties";
 	private final String SELECT_BY_ID = "SELECT * FROM faculties WHERE id_faculty=?";;
 	private final String DELETE = "DELETE FROM faculties WHERE id_faculty=?";
 	private final String CREATE = "INSERT INTO faculties (id_faculty, faculty_name, faculty_plan, discipline_1, discipline_2, discipline_3) VALUES (?, ?, ?, ?, ?, ?)";
 	private final String UPDATE = "UPDATE faculties SET  faculty_name=?, faculty_plan=?, discipline_1=?, discipline_2=?, discipline_3=? WHERE id_faculty=?";
-	
+
 	/**
 	 * Instantiates a new faculty DAO.
 	 *
-	 * @param connection the connection
+	 * @param connection
+	 *            the connection
 	 */
 	public FacultyDAO(Connection connection) {
 		super(connection);
 
 	}
 
-	/** 
+	/**
 	 * Gets list of all faculties.
 	 * 
-	 * @return  list of {@code Faculty} objects - the list of faculties
-	 * @throws DaoException if there is SQLException
+	 * @return list of {@code Faculty} objects - the list of faculties
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public List<Faculty> findAll() throws DaoException {
 		List<Faculty> list = new ArrayList<Faculty>();
 		PreparedStatement pst = null;
 		try {
-			 pst = connection.prepareStatement(SELECT_ALL);
+			pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Faculty fac = new Faculty();
@@ -60,7 +60,6 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 				fac.setThirdDiscipline(res.getInt(6));
 				list.add(fac);
 			}
-			
 
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
@@ -74,9 +73,11 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 	/**
 	 * Finds the faculty by given identifier
 	 * 
-	 * @param id id of faculty
+	 * @param id
+	 *            id of faculty
 	 * @return {@code Faculty} object - the faculty
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public Faculty findEntityById(int id) throws DaoException {
@@ -95,7 +96,7 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 				fac.setSecondDiscipline(res.getInt(5));
 				fac.setThirdDiscipline(res.getInt(6));
 			}
-			
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
@@ -108,22 +109,24 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 	/**
 	 * Delete the faculty chosen by given identifier
 	 * 
-	 * @param id identifier
+	 * @param id
+	 *            identifier
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
-		boolean result=false;
+		boolean result = false;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;
-			} 
-			
+			}
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
@@ -135,13 +138,15 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 	/**
 	 * Delete the faculty which was given as a parameter
 	 * 
-	 * @param {@code Faculty} fac - the faculty
+	 * @param fac
+	 *            - the faculty
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean delete(Faculty fac) throws DaoException {
-		boolean result=false;
+		boolean result = false;
 		int id = fac.getId();
 		PreparedStatement pst = null;
 		try {
@@ -151,27 +156,28 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 			if (check != 0) {
 				result = true;
 			}
-			
-			
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
-			close(pst);	
+			close(pst);
 		}
 		return result;
 
 	}
 
 	/**
-	 * Create the new faculty 
+	 * Create the new faculty
 	 * 
-	 * @param {@code Faculty} fac - the faculty
+	 * @param fac
+	 *            - the faculty
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean create(Faculty fac) throws DaoException {
-		boolean result=false;
+		boolean result = false;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(CREATE);
@@ -186,8 +192,7 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 			if (check != 0) {
 				result = true;
 			}
-			
-			
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
@@ -199,13 +204,15 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 	/**
 	 * Update the faculty which was given as a parameter
 	 * 
-	 * @param {@code Faculty} fac - the faculty
+	 * @param fac
+	 *            - the faculty
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean update(Faculty fac) throws DaoException {
-		boolean result=false;
+		boolean result = false;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);
@@ -220,7 +227,6 @@ public class FacultyDAO extends AbstractDAO<Faculty> {
 			if (check != 0) {
 				result = true;
 			}
-			
 
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());

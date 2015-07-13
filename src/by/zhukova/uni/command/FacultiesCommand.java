@@ -19,9 +19,7 @@ public class FacultiesCommand implements ActionCommand {
 		String page = null;
 		HttpSession session = request.getSession(true);
 
-		
-			page = ConfigurationManager.getProperty(PAGE_SHOW_FACULTIES);
-		
+		page = ConfigurationManager.getProperty(PAGE_SHOW_FACULTIES);
 
 		List<Faculty> list = FacultyLogic.getFacultiesList();
 
@@ -36,11 +34,10 @@ public class FacultiesCommand implements ActionCommand {
 			}
 		}
 
-		int lastPage = FacultyLogic.getLastPageNum(list);
+		int lastPage = FacultyLogic.calcLastPageNum(list);
 
 		request.setAttribute("numpage", lastPage);
-		List<Faculty> listPart = FacultyLogic.getFacultiesPage(pageNum,
-				lastPage, list);
+		List<Faculty> listPart = FacultyLogic.getFacultiesPage(pageNum, lastPage, list);
 		request.setAttribute("facList", listPart);
 
 		return page;

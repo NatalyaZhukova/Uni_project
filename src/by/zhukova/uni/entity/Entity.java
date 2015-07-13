@@ -5,11 +5,11 @@ package by.zhukova.uni.entity;
 
 import java.io.Serializable;
 
-
 /**
  * 
  * Class {@code Entity} is the root of the entity hierarchy for this project.
- * All other classes in package {@code by.zhukova.uni.entity} has {@code Entity} as a superclass
+ * All other classes in package {@code by.zhukova.uni.entity} has {@code Entity}
+ * as a superclass
  * 
  * 
  * @author Natallya Zhukova
@@ -17,27 +17,29 @@ import java.io.Serializable;
  */
 
 public abstract class Entity implements Serializable {
-    
-    /**   Identifier of entity object . */
+
+	/** Identifier of entity object . */
 	private int id;
-	
+
 	/**
 	 * Instantiates a new entity.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 */
 	Entity(int id) {
 		this.setId(id);
 	}
-	
+
 	/**
 	 * Instantiates a new entity.
 	 */
-	Entity() {}
-	
+	Entity() {
+	}
+
 	/**
-	 *  
-	 * Getter  for field id.
+	 * 
+	 * Getter for field id.
 	 *
 	 * @return identifier of object
 	 */
@@ -45,21 +47,22 @@ public abstract class Entity implements Serializable {
 	public int getId() {
 		return id;
 	}
-	
+
 	/**
-	 *  
+	 * 
 	 * Setter for field id.
 	 *
-	 * @param id the new id
+	 * @param id
+	 *            the new id
 	 */
 
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -67,8 +70,9 @@ public abstract class Entity implements Serializable {
 		return "Entity [id=" + id + "]";
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -79,8 +83,9 @@ public abstract class Entity implements Serializable {
 		return result;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -101,5 +106,4 @@ public abstract class Entity implements Serializable {
 		return true;
 	}
 
-	
 }

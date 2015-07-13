@@ -4,26 +4,24 @@
 package by.zhukova.uni.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.PreparedStatement;
 
 import by.zhukova.uni.entity.Discipline;
 import by.zhukova.uni.exception.DaoException;
 
-
 /**
- *  Class {@code DisciplineDAO}  (data access object) is designed to work with database table {@code disciplines} 
- *  and {@code Discipline} objects.
- *  
- *  @author Natallya Zhukova
- *  @since 1.0
+ * Class {@code DisciplineDAO} (data access object) is designed to work with
+ * database table {@code disciplines} and {@code Discipline} objects.
+ * 
+ * @author Natallya Zhukova
+ * @since 1.0
  */
 public class DisciplineDAO extends AbstractDAO<Discipline> {
 
-	
 	private final String SELECT_ALL = "SELECT * FROM disciplines";
 	private final String SELECT_BY_ID = "SELECT * FROM disciplines WHERE id_discipline=?";
 	private final String DELETE = "DELETE FROM disciplines WHERE id_discipline=?";
@@ -33,24 +31,26 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 	/**
 	 * Instantiates a new discipline DAO.
 	 *
-	 * @param connection the connection
+	 * @param connection
+	 *            the connection
 	 */
 	public DisciplineDAO(Connection connection) {
 		super(connection);
 	}
 
-	/** 
+	/**
 	 * Gets list of all disciplines.
 	 * 
-	 * @return  list of {@code Discipline} objects - the list of disciplines
-	 * @throws  DaoException if there is SQLException
+	 * @return list of {@code Discipline} objects - the list of disciplines
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public List<Discipline> findAll() throws DaoException {
 		List<Discipline> list = new ArrayList<Discipline>();
 		PreparedStatement pst = null;
 		try {
-			 pst = connection.prepareStatement(SELECT_ALL);
+			pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Discipline dis = new Discipline();
@@ -58,12 +58,11 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 				dis.setName(res.getString(2));
 				list.add(dis);
 			}
-		
 
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
-		  	close(pst);
+			close(pst);
 		}
 		return list;
 
@@ -72,9 +71,11 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 	/**
 	 * Finds the discipline by given identifier
 	 * 
-	 * @param id id of discipline
+	 * @param id
+	 *            id of discipline
 	 * @return {@code Discipline} object - the discipline
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public Discipline findEntityById(int id) throws DaoException {
@@ -101,26 +102,27 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 	/**
 	 * Delete the discipline chosen by given identifier
 	 * 
-	 * @param id identifier
+	 * @param id
+	 *            identifier
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
-		boolean result=false;
+		boolean result = false;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;
-			} 
-			
+			}
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
-		}
-		finally {
+		} finally {
 			close(pst);
 		}
 		return result;
@@ -129,13 +131,15 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 	/**
 	 * Delete the discipline which was given as a parameter
 	 * 
-	 * @param {@code Discipline} dis - the discipline
+	 * @param dis
+	 *            - the discipline
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean delete(Discipline dis) throws DaoException {
-		boolean result=false;
+		boolean result = false;
 		int id = dis.getId();
 		PreparedStatement pst = null;
 		try {
@@ -144,8 +148,8 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;
-			} 
-			
+			}
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
@@ -156,15 +160,17 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 	}
 
 	/**
-	 * Create the new discipline 
+	 * Create the new discipline
 	 * 
-	 * @param {@code Discipline} dis - the discipline
+	 * @param dis
+	 *            - the discipline
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean create(Discipline dis) throws DaoException {
-		boolean result=false;
+		boolean result = false;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(CREATE);
@@ -174,7 +180,7 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 			if (check != 0) {
 				result = true;
 			}
-			
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
@@ -186,13 +192,15 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 	/**
 	 * Update the discipline which was given as a parameter
 	 * 
-	 * @param {@code Discipline} dis - the discipline
+	 * @param dis
+	 *            - the discipline
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean update(Discipline dis) throws DaoException {
-		boolean result=false;
+		boolean result = false;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);
@@ -201,13 +209,11 @@ public class DisciplineDAO extends AbstractDAO<Discipline> {
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;
-			} 
-		
+			}
 
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
-		}
-		finally {
+		} finally {
 			close(pst);
 		}
 		return result;

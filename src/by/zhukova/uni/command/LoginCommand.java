@@ -1,6 +1,5 @@
 package by.zhukova.uni.command;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import by.zhukova.uni.logic.AbiturientLogic;
@@ -19,7 +18,7 @@ public class LoginCommand implements ActionCommand {
 	private static final String PARAM_NAME_PASSWORD = "password";
 	private static final String ROLE_USER = "abiturient";
 	private static final String ROLE_ADMIN = "admin";
-	
+
 	private static final String ATTR_APPLIC = "exists";
 
 	private static final String PAGE_MAIN = "path.page.main";
@@ -27,16 +26,18 @@ public class LoginCommand implements ActionCommand {
 
 	private static final String MESSAGE_LOGINERROR = "message.loginerror";
 	private static final String MESSAGE_FORMATERROR = "validation.format";
-/**
-	 * The method gets user data from form, validates and checks it.
-	 * If such user and password exist, then method defines the main page as the page to redirect.
+
+	/**
+	 * The method gets user data from form, validates and checks it. If such
+	 * user and password exist, then method defines the main page as the page to
+	 * redirect.
 	 * 
 	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
 	 * @return page defined page
 	 */
 	public String execute(HttpServletRequest request) {
 		String page = null;
-		
+
 		String login = request.getParameter(PARAM_NAME_LOGIN);
 		String pass = request.getParameter(PARAM_NAME_PASSWORD);
 		if (Validation.userFieldValid(login, pass)) {
@@ -45,25 +46,21 @@ public class LoginCommand implements ActionCommand {
 				session.setAttribute("user", login);
 				page = ConfigurationManager.getProperty(PAGE_MAIN);
 				if (LoginLogic.isAdmin(login)) {
-			
+
 					session.setAttribute("role", ROLE_ADMIN);
-				}
-				else {
+				} else {
 					session.setAttribute("role", ROLE_USER);
 					if (AbiturientLogic.isApplicationExists(login)) {
 						session.setAttribute("application", ATTR_APPLIC);
 					}
 				}
 			} else {
-				request.setAttribute("errorLoginPassMessage",
-					MESSAGE_LOGINERROR);
+				request.setAttribute("errorLoginPassMessage", MESSAGE_LOGINERROR);
 				page = ConfigurationManager.getProperty(PAGE_LOGIN);
-			} 
-		
-		}
-		else {
-			request.setAttribute("errorLoginPassMessage",
-					MESSAGE_FORMATERROR);
+			}
+
+		} else {
+			request.setAttribute("errorLoginPassMessage", MESSAGE_FORMATERROR);
 			page = ConfigurationManager.getProperty(PAGE_LOGIN);
 		}
 		return page;

@@ -13,50 +13,50 @@ import java.util.List;
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.exception.DaoException;
 
-
 /**
- *  Class {@code AbiturientDAO} (data access object) is designed to work with database table {@code abiturients} 
- *  and {@code Abiturient} objects.
- *  
- *  @author Natallya Zhukova
- *  @since 1.0
+ * Class {@code AbiturientDAO} (data access object) is designed to work with
+ * database table {@code abiturients} and {@code Abiturient} objects.
+ * 
+ * @author Natallya Zhukova
+ * @since 1.0
  */
 public class AbiturientDAO extends AbstractDAO<Abiturient> {
 
-	
 	private final String SELECT_ALL = "SELECT * FROM abiturients";
 	private final String SELECT_BY_ID = "SELECT * FROM abiturients WHERE id=?";
-	private final String SELECT_BY_USERNAME = "SELECT * FROM abiturients WHERE username=?"; 
-	private final String SELECT_BY_FACULTY = "SELECT * FROM abiturients WHERE chosen_faculty=? and status='approved' ORDER BY score_sum DESC"; 
+	private final String SELECT_BY_USERNAME = "SELECT * FROM abiturients WHERE username=?";
+	private final String SELECT_BY_FACULTY = "SELECT * FROM abiturients WHERE chosen_faculty=? and status='approved' ORDER BY score_sum DESC";
 	private final String SELECT_BY_STATUS = "SELECT * FROM abiturients WHERE status=?";
 	private final String DELETE = "DELETE FROM abiturients WHERE id=?";
 	private final String CREATE = "INSERT INTO abiturients (id, username, first_name, middle_name, last_name, discipline1_score, discipline2_score, "
-				+ "discipline3_score, school_score, score_sum, chosen_faculty, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "discipline3_score, school_score, score_sum, chosen_faculty, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String UPDATE = "UPDATE abiturients SET username=?, first_name=?, middle_name=?, last_name=?, discipline1_score=?, discipline2_score=?, "
-				+ "discipline3_score=?, school_score=?, score_sum=?, chosen_faculty=?, status=? WHERE id=?";
+			+ "discipline3_score=?, school_score=?, score_sum=?, chosen_faculty=?, status=? WHERE id=?";
 
 	/**
 	 * Instantiates a new Abiturient data access object.
 	 *
-	 * @param connection the connection
+	 * @param connection
+	 *            the connection
 	 */
 	public AbiturientDAO(Connection connection) {
 		super(connection);
 
 	}
 
-	/** 
+	/**
 	 * Gets list of all registered applications.
 	 * 
-	 * @return  list of {@code Abiturient} objects - the list of applications
-	 * @throws DaoException if there is SQLException
+	 * @return list of {@code Abiturient} objects - the list of applications
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public List<Abiturient> findAll() throws DaoException {
 		List<Abiturient> list = new ArrayList<Abiturient>();
 		PreparedStatement pst = null;
 		try {
-			 pst = connection.prepareStatement(SELECT_ALL);
+			pst = connection.prepareStatement(SELECT_ALL);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
 				Abiturient ab = new Abiturient();
@@ -73,7 +73,6 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 				ab.setChosenFaculty(res.getInt(11));
 				list.add(ab);
 			}
-			
 
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
@@ -83,19 +82,21 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 		return list;
 
 	}
-	
+
 	/**
-	 * Find registered applications with status "approved"  by chosen faculty.
+	 * Find registered applications with status "approved" by chosen faculty.
 	 *
-	 * @param facultyId the faculty identifier
+	 * @param facultyId
+	 *            the faculty identifier
 	 * @return list of {@code Abiturient} objects) - the list of applications
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
-	public List<Abiturient> findAbitursByFaculty(int facultyId) throws DaoException {
+	public List<Abiturient> findApprovedAbitursByFaculty(int facultyId) throws DaoException {
 		List<Abiturient> list = new ArrayList<Abiturient>();
 		PreparedStatement pst = null;
 		try {
-			 pst = connection.prepareStatement(SELECT_BY_FACULTY);
+			pst = connection.prepareStatement(SELECT_BY_FACULTY);
 			pst.setInt(1, facultyId);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
@@ -114,7 +115,6 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 				ab.setStatus(res.getString(12));
 				list.add(ab);
 			}
-			
 
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
@@ -124,19 +124,21 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 		return list;
 
 	}
-	
+
 	/**
 	 * Find registered applications by given status.
 	 *
-	 * @param status the status
+	 * @param status
+	 *            the status
 	 * @return {@code List<Abiturient> list} - the list of applications
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	public List<Abiturient> findAbitursByStatus(String status) throws DaoException {
 		List<Abiturient> list = new ArrayList<Abiturient>();
 		PreparedStatement pst = null;
 		try {
-			 pst = connection.prepareStatement(SELECT_BY_STATUS);
+			pst = connection.prepareStatement(SELECT_BY_STATUS);
 			pst.setString(1, status);
 			ResultSet res = pst.executeQuery();
 			while (res.next()) {
@@ -155,7 +157,6 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 				ab.setStatus(res.getString(12));
 				list.add(ab);
 			}
-			
 
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
@@ -169,9 +170,11 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 	/**
 	 * Finds the application by given identifier
 	 * 
-	 * @param id id of application
+	 * @param id
+	 *            id of application
 	 * @return {@code Abiturient} object - the application
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public Abiturient findEntityById(int id) throws DaoException {
@@ -204,13 +207,15 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 
 		return ab;
 	}
-	
+
 	/**
 	 * Find the application by given username.
 	 *
-	 * @param username the username
+	 * @param username
+	 *            the username
 	 * @return {@code Abiturient} object - the application
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	public Abiturient findAbiturByUsername(String username) throws DaoException {
 		PreparedStatement pst = null;
@@ -246,42 +251,46 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 	/**
 	 * Delete the application chosen by given identifier
 	 * 
-	 * @param id identifier
+	 * @param id
+	 *            identifier
 	 * @return result - true if deleting was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		PreparedStatement pst = null;
-		boolean result=false;
+		boolean result = false;
 		try {
 			pst = connection.prepareStatement(DELETE);
 			pst.setInt(1, id);
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;
-			} 
-		
+			}
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
 			close(pst);
-			
+
 		}
 		return result;
-		
+
 	}
 
 	/**
 	 * Delete the application which was given as a parameter
 	 * 
-	 * @param {@code Abiturient} abitur - application
+	 * @param abitur
+	 *            - application
 	 * @return result - true if deleting was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean delete(Abiturient abitur) throws DaoException {
-		boolean result=false;
+		boolean result = false;
 		int id = abitur.getId();
 		PreparedStatement pst = null;
 		try {
@@ -290,7 +299,7 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;
-			} 
+			}
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
 		} finally {
@@ -300,11 +309,13 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 	}
 
 	/**
-	 * Create the new application 
+	 * Create the new application
 	 * 
-	 * @param {@code Abiturient} abitur - new application
+	 * @param abitur
+	 *            - new application
 	 * @return result - true if it was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean create(Abiturient abitur) throws DaoException {
@@ -327,11 +338,11 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 			int check = pst.executeUpdate();
 			if (check != 0) {
 				result = true;
-			} 
-		
+			}
+
 		} catch (SQLException e) {
 			throw new DaoException(e.toString());
-			
+
 		} finally {
 			close(pst);
 		}
@@ -341,13 +352,15 @@ public class AbiturientDAO extends AbstractDAO<Abiturient> {
 	/**
 	 * Update the application which was given as a parameter
 	 * 
-	 * @param {@code Abiturient} abitur - application
+	 * @param abitur
+	 *            - application
 	 * @return result - true if update was successful
-	 * @throws DaoException if there is SQLException
+	 * @throws DaoException
+	 *             if there is SQLException
 	 */
 	@Override
 	public boolean update(Abiturient abitur) throws DaoException {
-		boolean result=false;
+		boolean result = false;
 		PreparedStatement pst = null;
 		try {
 			pst = connection.prepareStatement(UPDATE);

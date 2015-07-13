@@ -10,7 +10,8 @@ import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
 
 /**
- * The Class ShowFacultiesCommand is command which shows list of existing faculties
+ * The Class ShowFacultiesCommand is command which shows list of existing
+ * faculties
  *
  * @author Natallya Zhukova
  * @since 1.0
@@ -19,11 +20,12 @@ public class ShowFacultiesCommand implements ActionCommand {
 
 	private static final String PAGE_SHOW_FACULTIES = "path.page.showfaculties";
 	private static final String PARAM_PAGE = "p";
-/**
-	 * The method gets list of faculties from database and shows it on defined page.
-	 * List of faculties is divided by pages.
+
+	/**
+	 * The method gets list of faculties from database and shows it on defined
+	 * page. List of faculties is divided by pages.
 	 *
-	 * @see by.zhukova.uni.logic.FacultyLogic#getFacultiesPage( int, int, List<Faculty>)
+	 * 
 	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
 	 * @return page defined page
 	 */
@@ -32,9 +34,7 @@ public class ShowFacultiesCommand implements ActionCommand {
 		String page = null;
 		HttpSession session = request.getSession(true);
 
-		
-			page = ConfigurationManager.getProperty(PAGE_SHOW_FACULTIES);
-		
+		page = ConfigurationManager.getProperty(PAGE_SHOW_FACULTIES);
 
 		List<Faculty> list = FacultyLogic.getFacultiesList();
 
@@ -49,11 +49,10 @@ public class ShowFacultiesCommand implements ActionCommand {
 			}
 		}
 
-		int lastPage = FacultyLogic.getLastPageNum(list);
+		int lastPage = FacultyLogic.calcLastPageNum(list);
 
 		request.setAttribute("numpage", lastPage);
-		List<Faculty> listPart = FacultyLogic.getFacultiesPage(pageNum,
-				lastPage, list);
+		List<Faculty> listPart = FacultyLogic.getFacultiesPage(pageNum, lastPage, list);
 		request.setAttribute("facList", listPart);
 
 		return page;

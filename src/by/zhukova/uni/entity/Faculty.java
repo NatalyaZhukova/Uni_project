@@ -3,47 +3,51 @@
  */
 package by.zhukova.uni.entity;
 
-
 /**
- *  Class {@code Faculty} stores information from database table {@code faculties}.
+ * Class {@code Faculty} stores information from database table
+ * {@code faculties}.
  */
 public class Faculty extends Entity {
 
-	
 	/** The name of faculty. */
 	private String name;
-	
-	/** The  admission plan to the faculty. */
+
+	/** The admission plan to the faculty. */
 	private int facultyPlan;
-	
+
 	/** The identifier of the first discipline. */
 	private int firstDiscipline;
-	
+
 	/** The identifier of the second discipline. */
 	private int secondDiscipline;
-	
-	/** The identifier of the  third discipline. */
+
+	/** The identifier of the third discipline. */
 	private int thirdDiscipline;
-	
+
 	/**
 	 * Instantiates a new faculty.
 	 */
-	public Faculty() {}
-	
-	
-	
+	public Faculty() {
+	}
+
 	/**
 	 * Instantiates a new faculty.
 	 *
-	 * @param id the id
-	 * @param name the name
-	 * @param facultyPlan the admission plan
-	 * @param firstDiscipline the id of the first discipline
-	 * @param secondDiscipline the id of the second discipline
-	 * @param thirdDiscipline the id of the third discipline
+	 * @param id
+	 *            the id
+	 * @param name
+	 *            the name
+	 * @param facultyPlan
+	 *            the admission plan
+	 * @param firstDiscipline
+	 *            the id of the first discipline
+	 * @param secondDiscipline
+	 *            the id of the second discipline
+	 * @param thirdDiscipline
+	 *            the id of the third discipline
 	 */
-	public Faculty(int id, String name, int facultyPlan, int firstDiscipline,
-			int secondDiscipline, int thirdDiscipline) {
+	public Faculty(int id, String name, int facultyPlan, int firstDiscipline, int secondDiscipline,
+			int thirdDiscipline) {
 		super(id);
 		this.name = name;
 		this.facultyPlan = facultyPlan;
@@ -51,7 +55,6 @@ public class Faculty extends Entity {
 		this.secondDiscipline = secondDiscipline;
 		this.thirdDiscipline = thirdDiscipline;
 	}
-
 
 	/**
 	 * Gets the faculty name.
@@ -65,7 +68,8 @@ public class Faculty extends Entity {
 	/**
 	 * Sets the faculty name.
 	 *
-	 * @param name the new faculty name
+	 * @param name
+	 *            the new faculty name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -83,7 +87,8 @@ public class Faculty extends Entity {
 	/**
 	 * Sets the admission plan of the faculty.
 	 *
-	 * @param facultyPlan the new admission plan
+	 * @param facultyPlan
+	 *            the new admission plan
 	 */
 	public void setFacultyPlan(int facultyPlan) {
 		this.facultyPlan = facultyPlan;
@@ -101,7 +106,8 @@ public class Faculty extends Entity {
 	/**
 	 * Sets the identifier of the first discipline.
 	 *
-	 * @param firstDiscipline the new id of the first discipline
+	 * @param firstDiscipline
+	 *            the new id of the first discipline
 	 */
 	public void setFirstDiscipline(int firstDiscipline) {
 		this.firstDiscipline = firstDiscipline;
@@ -119,7 +125,8 @@ public class Faculty extends Entity {
 	/**
 	 * Sets the identifier of the second discipline.
 	 *
-	 * @param secondDiscipline the new id of the second discipline
+	 * @param secondDiscipline
+	 *            the new id of the second discipline
 	 */
 	public void setSecondDiscipline(int secondDiscipline) {
 		this.secondDiscipline = secondDiscipline;
@@ -137,15 +144,16 @@ public class Faculty extends Entity {
 	/**
 	 * Sets the identifier of the third discipline.
 	 *
-	 * @param thirdDiscipline the new id of the third discipline
+	 * @param thirdDiscipline
+	 *            the new id of the third discipline
 	 */
 	public void setThirdDiscipline(int thirdDiscipline) {
 		this.thirdDiscipline = thirdDiscipline;
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#toString()
 	 */
 	@Override
@@ -155,9 +163,9 @@ public class Faculty extends Entity {
 				+ getId() + ", toString()=" + super.toString();
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#hashCode()
 	 */
 	@Override
@@ -172,9 +180,9 @@ public class Faculty extends Entity {
 		return result;
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see by.zhukova.uni.entity.Entity#equals(java.lang.Object)
 	 */
 	@Override

@@ -12,21 +12,25 @@ import by.zhukova.uni.logic.AbiturientLogic;
 import by.zhukova.uni.logic.DisciplineLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
+
 /**
- * The Class ShowAbiturientCommand is command which shows full user's application to administrator
+ * The Class ShowAbiturientCommand is command which shows full user's
+ * application to administrator
  *
  * @author Natallya Zhukova
  * @since 1.0
  */
 public class ShowAbiturientCommand implements ActionCommand {
-	
+
 	private static final String PAGE_INFO = "path.page.show_abiturient";
 	private static final String PARAM_ID = "id";
 	private final static String STATUS_APPROVED = "approved";
 	private final static String STATUS_WAITING = "waiting";
 	private final static String STATUS_DENIED = "denied";
-/**
-	 * The method gets user's application from database by given identifier and shows it on page
+
+	/**
+	 * The method gets user's application from database by given identifier and
+	 * shows it on page
 	 * 
 	 * @see by.zhukova.uni.command.ActionCommand#execute(javax.servlet.http.HttpServletRequest)
 	 * @return page defined page
@@ -34,24 +38,22 @@ public class ShowAbiturientCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_INFO);
-		
+
 		int abiturient;
 		String requestedId = request.getParameter(PARAM_ID);
-	
+
 		try {
-		 abiturient=Integer.parseInt(requestedId);
+			abiturient = Integer.parseInt(requestedId);
+		} catch (NumberFormatException e) {
+			abiturient = 1;
 		}
-		catch (NumberFormatException e) {
-			abiturient=1;
-		}
-		
-		
+
 		Abiturient abitur = AbiturientLogic.getAbiturApplication(abiturient);
-		if (abitur==null) {
-			abiturient=1;
+		if (abitur == null) {
+			abiturient = 1;
 			abitur = AbiturientLogic.getAbiturApplication(abiturient);
 		}
-		
+
 		Faculty fac = FacultyLogic.getChosenFaculty(abitur.getChosenFaculty());
 		List<Discipline> discList = DisciplineLogic.getFacultyDisciplines(fac);
 		request.setAttribute("abiturient", abitur);
@@ -66,9 +68,7 @@ public class ShowAbiturientCommand implements ActionCommand {
 		statusList.add(AbiturientLogic.getApplicationStatus(STATUS_WAITING));
 		statusList.add(AbiturientLogic.getApplicationStatus(STATUS_DENIED));
 		request.setAttribute("statusList", statusList);
-		
-		
-		
+
 		return page;
 	}
 

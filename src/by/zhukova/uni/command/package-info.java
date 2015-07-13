@@ -1,6 +1,6 @@
-/** 
-The package contains commands.
-
-*/
+/**
+ * The package contains commands.
+ * 
+ */
 
 package by.zhukova.uni.command;
