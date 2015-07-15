@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,13 +26,17 @@ import by.zhukova.uni.resource.MessageManager;
  * @author Natallya Zhukova
  * @since 1.0
  */
+
+@WebServlet(name="University", urlPatterns = "/controller")
 public class Controller extends HttpServlet {
 
-	private static final String PAGE_INDEX = "path.page.index";
-	private static final String PAGE_MAIN = "path.page.index";
-	private static final String MESSAGE_NULL = "message.nullpage";
-	private static final String ATTR_ROLE = "role";
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 
+	
 	/**
 	 * Instantiates a new controller.
 	 */
@@ -82,13 +87,13 @@ public class Controller extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			HttpSession session = request.getSession(true);
-			if (session.getAttribute(ATTR_ROLE) == null) {
-				page = ConfigurationManager.getProperty(PAGE_INDEX);
+			if (session.getAttribute("role") == null) {
+				page = ConfigurationManager.getProperty("path.page.index");
 			} else {
-				page = ConfigurationManager.getProperty(PAGE_MAIN);
+				page = ConfigurationManager.getProperty("path.page.main");
 			}
 
-			request.getSession().setAttribute("nullPage", MessageManager.getProperty(MESSAGE_NULL));
+			request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
 			response.sendRedirect(request.getContextPath() + page);
 		}
 	}

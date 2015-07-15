@@ -1,6 +1,7 @@
 package by.zhukova.uni.command;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.logic.RegisterLogic;
 import by.zhukova.uni.logic.Validation;
@@ -39,6 +40,11 @@ public class RegisterCommand implements ActionCommand {
 	 */
 	@Override
 	public String execute(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
+		
 		String page = ConfigurationManager.getProperty(PAGE_REGISTER);
 		if (request.getParameter(PARAM_NAME_LOGIN) != null) {
 			String login = request.getParameter(PARAM_NAME_LOGIN);

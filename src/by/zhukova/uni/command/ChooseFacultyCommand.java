@@ -12,7 +12,6 @@ import by.zhukova.uni.logic.DisciplineLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
 
 /**
  * The Class ChooseFacultyCommand is command which shows form with part of
@@ -43,7 +42,10 @@ public class ChooseFacultyCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_CHOOSE_FACULTY);
-		HttpSession session = request.getSession(true); // Locale
+		HttpSession session = request.getSession(true); 
+		
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
 
 		List<Faculty> list = FacultyLogic.getFacultiesList();
 		request.setAttribute("facList", list);

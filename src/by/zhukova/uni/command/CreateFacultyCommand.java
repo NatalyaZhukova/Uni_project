@@ -3,6 +3,7 @@ package by.zhukova.uni.command;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.entity.Discipline;
 import by.zhukova.uni.entity.Faculty;
@@ -10,7 +11,6 @@ import by.zhukova.uni.logic.DisciplineLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
 
 /**
  * The Class CreateFacultyCommand is command which creates the new faculty and
@@ -45,6 +45,10 @@ public class CreateFacultyCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_FORM);
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
 
 		List<Discipline> list = DisciplineLogic.getAllDisciplines();
 		request.setAttribute("discList", list);

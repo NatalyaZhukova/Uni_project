@@ -12,6 +12,11 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class FooterTag extends TagSupport {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Writes the html code of page footer on jsp page
 	 * 
 	 * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()

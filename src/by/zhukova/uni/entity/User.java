@@ -11,6 +11,9 @@ package by.zhukova.uni.entity;
  */
 public class User extends Entity {
 
+	
+	private static final long serialVersionUID = 1L;
+
 	/** The username. */
 	private String username;
 

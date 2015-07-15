@@ -3,6 +3,7 @@ package by.zhukova.uni.command;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Discipline;
@@ -12,7 +13,7 @@ import by.zhukova.uni.logic.DisciplineLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
+
 
 /**
  * The Class EditFacultyCommand is command which allows to edit faculty data
@@ -31,7 +32,7 @@ public class EditFacultyCommand implements ActionCommand {
 	private static final String MESSAGE_NOT_FILLED = "validation.notfilled";
 	private static final String MESSAGE_REPEAT = "validation.no_repeat";
 	private static final String MESSAGE_ERROR = "error.no_upd_faculty";
-	private static final String MESSAGE_ABITURS_EXIST = "error.upd_abiturs_exist";
+	
 
 	private static final String PARAM_ID = "id";
 	private static final String PARAM_NAME = "faculty_name";
@@ -50,6 +51,10 @@ public class EditFacultyCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_FORM);
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
 
 		String facultyId = request.getParameter(PARAM_ID);
 		try {
@@ -95,30 +100,30 @@ public class EditFacultyCommand implements ActionCommand {
 										request.setAttribute("applications", applicationsNum);
 										page = ConfigurationManager.getProperty(PAGE_SUCCESS);
 									} else {
-										request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_ERROR));
+										request.setAttribute("errorMessage", MESSAGE_ERROR);
 										page = ConfigurationManager.getProperty(PAGE_ERROR);
 									}
 
 								} else {
-									request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_REPEAT));
+									request.setAttribute("errorMessage", MESSAGE_REPEAT);
 								}
 
 							} else {
 								request.setAttribute("errorMessage",
-										MessageManager.getProperty(MESSAGE_VALIDATION_FORMAT));
+										MESSAGE_VALIDATION_FORMAT);
 							}
 						} else {
-							request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_NOT_FILLED));
+							request.setAttribute("errorMessage", MESSAGE_NOT_FILLED);
 						}
 					}
 
 				}
 			} else {
-				request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_INVALID_ID));
+				request.setAttribute("errorMessage",MESSAGE_INVALID_ID);
 				page = ConfigurationManager.getProperty(PAGE_ERROR);
 			}
 		} catch (NumberFormatException e) {
-			request.setAttribute("errorMessage", MessageManager.getProperty(MESSAGE_INVALID_ID));
+			request.setAttribute("errorMessage", MESSAGE_INVALID_ID);
 			page = ConfigurationManager.getProperty(PAGE_ERROR);
 		}
 

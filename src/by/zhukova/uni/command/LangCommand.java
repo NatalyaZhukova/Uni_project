@@ -27,13 +27,18 @@ public class LangCommand implements ActionCommand {
 		String page = null;
 		HttpSession session = request.getSession(true);
 		String lang = request.getParameter(PARAM_LOCALE);
+		
+		 page = (String)session.getAttribute("current");
+		
+
 		session.setAttribute("locale", lang);
+		if ((page==null) || (page.equals("index"))){
+			if (session.getAttribute("user") != null) {
+				page = ConfigurationManager.getProperty(PAGE_MAIN);
 
-		if (session.getAttribute("user") != null) {
-			page = ConfigurationManager.getProperty(PAGE_MAIN);
-
-		} else {
-			page = ConfigurationManager.getProperty(PAGE_INDEX);
+			} else {
+				page = ConfigurationManager.getProperty(PAGE_INDEX);
+			} 
 		}
 
 		return page;

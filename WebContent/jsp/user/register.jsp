@@ -27,7 +27,12 @@ $(document).ready(function(){
 <body>
 
 <%@include file="../header.jsp"%>
-
+<div class="menu">
+	<ul>
+	<li><a href="index.jsp"><fmt:message
+					key="usermain.main" bundle="${rb}" /></a> </li>
+	</ul>
+</div>
 <div class="register">
 	<form action="controller" method="POST" id="register">
 		<input type="hidden" name="command" value="register" /> 

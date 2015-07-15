@@ -38,6 +38,11 @@ public class ApplicationActionCommand implements ActionCommand {
 		String page = ConfigurationManager.getProperty(PAGE_APPLIC);
 
 		HttpSession session = request.getSession(true);
+		
+		
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
+		
 		String username = (String) session.getAttribute("user");
 		Abiturient abitur = AbiturientLogic.getAbiturApplication(username);
 		int faculty = abitur.getChosenFaculty();

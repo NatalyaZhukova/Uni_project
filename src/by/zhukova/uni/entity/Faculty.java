@@ -9,6 +9,8 @@ package by.zhukova.uni.entity;
  */
 public class Faculty extends Entity {
 
+	private static final long serialVersionUID = 1L;
+
 	/** The name of faculty. */
 	private String name;
 

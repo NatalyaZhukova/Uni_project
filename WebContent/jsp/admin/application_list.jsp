@@ -29,6 +29,7 @@
 			</c:forEach>
 			
 			<div class="pages">
+			<fmt:message key="list.pages" bundle="${rb}" />
 				<c:forEach var="i" begin="1" end="${numpage}">
 					<a href="controller?command=abitur&stat=${status}&p=${i}">${i}</a>
 				</c:forEach>

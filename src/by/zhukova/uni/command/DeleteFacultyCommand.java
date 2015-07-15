@@ -1,6 +1,7 @@
 package by.zhukova.uni.command;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
@@ -31,6 +32,10 @@ public class DeleteFacultyCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
 
 		String facultyId = request.getParameter("id");
 		try {

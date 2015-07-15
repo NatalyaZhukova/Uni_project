@@ -27,6 +27,10 @@ public class EmptyCommand implements ActionCommand {
 	public String execute(HttpServletRequest request) {
 		String page = null;
 		HttpSession session = request.getSession(true);
+		
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
+		
 		if (session.getAttribute("user") != null) {
 			page = ConfigurationManager.getProperty(PAGE_MAIN);
 		} else {

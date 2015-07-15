@@ -37,12 +37,15 @@ public class LoginCommand implements ActionCommand {
 	 */
 	public String execute(HttpServletRequest request) {
 		String page = null;
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
 
 		String login = request.getParameter(PARAM_NAME_LOGIN);
 		String pass = request.getParameter(PARAM_NAME_PASSWORD);
 		if (Validation.userFieldValid(login, pass)) {
 			if (LoginLogic.checkLogin(login, pass)) {
-				HttpSession session = request.getSession(true);
 				session.setAttribute("user", login);
 				page = ConfigurationManager.getProperty(PAGE_MAIN);
 				if (LoginLogic.isAdmin(login)) {

@@ -3,13 +3,13 @@ package by.zhukova.uni.command;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Faculty;
 import by.zhukova.uni.logic.AbiturientLogic;
 import by.zhukova.uni.logic.FacultyLogic;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
 
 /**
  * The Class ShowAbiturientsListCommand is command which shows list of user's
@@ -47,6 +47,11 @@ public class ShowAbiturientsListCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
+		
 		String status = request.getParameter(PARAM_STATUS);
 		if ((status != null) && ((status.equals(STATUS_WAITING)) || (status.equals(STATUS_DENIED)))) {
 

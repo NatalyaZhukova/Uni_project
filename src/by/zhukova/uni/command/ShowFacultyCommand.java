@@ -3,6 +3,7 @@ package by.zhukova.uni.command;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Discipline;
@@ -34,6 +35,11 @@ public class ShowFacultyCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
+		
 		int faculty;
 		String requestedId = request.getParameter(PARAM_ID);
 

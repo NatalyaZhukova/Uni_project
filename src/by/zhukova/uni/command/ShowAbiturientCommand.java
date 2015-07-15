@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Discipline;
@@ -38,6 +39,10 @@ public class ShowAbiturientCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty(PAGE_INFO);
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
 
 		int abiturient;
 		String requestedId = request.getParameter(PARAM_ID);

@@ -9,7 +9,6 @@ import by.zhukova.uni.db.AbiturientDAO;
 import by.zhukova.uni.db.ConnectionPool;
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.exception.DaoException;
-import by.zhukova.uni.resource.MessageManager;
 
 /**
  * The Class AbiturientLogic contains the methods which work with

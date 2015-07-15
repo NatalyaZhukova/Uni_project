@@ -49,6 +49,10 @@ public class AddScoresCommand implements ActionCommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
+
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
+		
 		String page = ConfigurationManager.getProperty(PAGE_ADD_SCORES);
 
 		Abiturient abitur = (Abiturient) session.getAttribute(ATTR_ABITUR);

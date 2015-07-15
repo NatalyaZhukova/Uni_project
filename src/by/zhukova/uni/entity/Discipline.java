@@ -12,6 +12,8 @@ package by.zhukova.uni.entity;
  */
 public class Discipline extends Entity {
 
+	
+	private static final long serialVersionUID = 1L;
 	/** The name of discipline. */
 	private String name;
 

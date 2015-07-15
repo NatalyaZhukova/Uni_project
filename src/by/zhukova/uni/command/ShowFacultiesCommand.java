@@ -33,6 +33,9 @@ public class ShowFacultiesCommand implements ActionCommand {
 	public String execute(HttpServletRequest request) {
 		String page = null;
 		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
+		
 
 		page = ConfigurationManager.getProperty(PAGE_SHOW_FACULTIES);
 

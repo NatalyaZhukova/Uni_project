@@ -16,6 +16,9 @@ package by.zhukova.uni.entity;
 
 public class Abiturient extends User {
 
+	
+	private static final long serialVersionUID = 1L;
+
 	/** The first name. */
 	private String firstName;
 

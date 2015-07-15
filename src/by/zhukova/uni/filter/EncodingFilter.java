@@ -17,9 +17,9 @@ import javax.servlet.annotation.WebInitParam;
  * The Class EncodingFilter is designed to change encoding of requests and
  * responses to "UTF-8".
  */
+
 @WebFilter(urlPatterns = { "/*" }, initParams = {
 		@WebInitParam(name = "encoding", value = "UTF-8", description = "Encoding Param") })
-
 public class EncodingFilter implements Filter {
 
 	private String code;

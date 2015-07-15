@@ -13,13 +13,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class LocaleSwitcherTag extends TagSupport {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Writes the html code of locale switcher on jsp page
 	 * 
 	 * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
 	 */
 	@Override
 	public int doStartTag() throws JspException {
-		String textTag = "<div class='locale'>" + "<a href='controller?command=lang&loс=ru_RU'>RU</a> | "
+		String textTag = "<div class='locale'>" + "<a href='controller?command=lang&loc=ru_RU'>RU</a> | "
 				+ "<a href='controller?command=lang&loc=en_US'>EN</a></div>";
 
 		try {

@@ -1,6 +1,7 @@
 package by.zhukova.uni.command;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.logic.AbiturientLogic;
@@ -37,6 +38,11 @@ public class ChangeStatusCommand implements ActionCommand {
 	 */
 	@Override
 	public String execute(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession(true);
+		String current = request.getServletPath()+"?"+request.getQueryString();
+		session.setAttribute("current", current);
+		
 		String page = null;
 		int id = Integer.parseInt(request.getParameter(PARAM_ID));
 		String statusId = request.getParameter(PARAM_STATUS);
