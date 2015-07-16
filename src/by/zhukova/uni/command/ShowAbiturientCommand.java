@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Discipline;
 import by.zhukova.uni.entity.Faculty;
@@ -23,6 +25,8 @@ import by.zhukova.uni.resource.ConfigurationManager;
  */
 public class ShowAbiturientCommand implements ActionCommand {
 
+	static Logger logger = Logger.getLogger(ShowAbiturientCommand.class);
+	
 	private static final String PAGE_INFO = "path.page.show_abiturient";
 	private static final String PARAM_ID = "id";
 	private final static String STATUS_APPROVED = "approved";
@@ -50,7 +54,8 @@ public class ShowAbiturientCommand implements ActionCommand {
 		try {
 			abiturient = Integer.parseInt(requestedId);
 		} catch (NumberFormatException e) {
-			abiturient = 1;
+			logger.warn(e.toString());
+			abiturient=1;
 		}
 
 		Abiturient abitur = AbiturientLogic.getAbiturApplication(abiturient);

@@ -2,6 +2,8 @@ package by.zhukova.uni.command;
 
 import javax.servlet.http.HttpServletRequest;
 
+
+
 /**
  * The Interface ActionCommand is template for commands.
  *
@@ -16,6 +18,7 @@ public interface ActionCommand {
 	 * @param request
 	 *            the request
 	 * @return the string - the page path
+	 * @throws URLInputException 
 	 * @see by.zhukova.uni.control.Controller
 	 */
 	String execute(HttpServletRequest request);

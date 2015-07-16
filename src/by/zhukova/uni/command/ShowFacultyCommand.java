@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import by.zhukova.uni.entity.Abiturient;
 import by.zhukova.uni.entity.Discipline;
 import by.zhukova.uni.entity.Faculty;
@@ -23,6 +25,7 @@ public class ShowFacultyCommand implements ActionCommand {
 
 	private static final String PAGE_FACULTY = "path.page.showfaculty";
 	private static final String PARAM_ID = "id";
+	static Logger logger = Logger.getLogger(ShowFacultyCommand.class);
 
 	/**
 	 * The method gets data of faculty from database by given identifier and
@@ -46,6 +49,7 @@ public class ShowFacultyCommand implements ActionCommand {
 		try {
 			faculty = Integer.parseInt(requestedId);
 		} catch (NumberFormatException e) {
+			logger.warn(e.toString());
 			faculty = 1;
 		}
 

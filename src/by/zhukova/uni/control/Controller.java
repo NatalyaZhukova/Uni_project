@@ -11,15 +11,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
 
 import by.zhukova.uni.command.ActionCommand;
 import by.zhukova.uni.command.ActionFactory;
 import by.zhukova.uni.resource.ConfigurationManager;
 import by.zhukova.uni.resource.MessageManager;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Class {@code Controller} is the servlet which manages commands and pages
  * 
@@ -35,6 +36,7 @@ public class Controller extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	static Logger logger = Logger.getLogger(Controller.class);
 
 	
 	/**
@@ -43,6 +45,7 @@ public class Controller extends HttpServlet {
 	public Controller() {
 
 	}
+
 
 	/**
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
@@ -77,9 +80,13 @@ public class Controller extends HttpServlet {
 		String page = null;
 
 		ActionFactory client = new ActionFactory();
-		ActionCommand command = client.defineCommand(request);
+		ActionCommand command;
+		
+			command = client.defineCommand(request);
+			page = command.execute(request);
+		
 
-		page = command.execute(request);
+		
 
 		if (page != null) {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);

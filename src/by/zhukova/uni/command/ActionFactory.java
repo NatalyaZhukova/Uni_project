@@ -2,7 +2,8 @@ package by.zhukova.uni.command;
 
 import javax.servlet.http.HttpServletRequest;
 
-import by.zhukova.uni.resource.MessageManager;
+import org.apache.log4j.Logger;
+
 
 /**
  * A factory for creating ActionCommand objects.
@@ -12,7 +13,7 @@ import by.zhukova.uni.resource.MessageManager;
  */
 public class ActionFactory {
 	private static final String PARAM_COMMAND = "command";
-	private static final String MESSAGE_WRONGACTION = "message.wrongaction";
+	static Logger logger = Logger.getLogger(ActionFactory.class);
 
 	/**
 	 * Define command.
@@ -20,8 +21,9 @@ public class ActionFactory {
 	 * @param request
 	 *            the request
 	 * @return the action command
+	 * @throws URLInputException 
 	 */
-	public ActionCommand defineCommand(HttpServletRequest request) {
+	public ActionCommand defineCommand(HttpServletRequest request)  {
 		ActionCommand current = new EmptyCommand();
 
 		String action = request.getParameter(PARAM_COMMAND);
@@ -35,7 +37,7 @@ public class ActionFactory {
 
 			current = currentEnum.getCurrentCommand();
 		} catch (IllegalArgumentException e) {
-			request.setAttribute("wrongAction", action + MessageManager.getProperty(MESSAGE_WRONGACTION));
+			logger.warn("wrong command: "+e.getMessage());	
 		}
 		return current;
 	}
