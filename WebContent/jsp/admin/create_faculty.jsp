@@ -15,7 +15,7 @@ $(document).ready(function(){
 		 var disc2 = $('select[name=disc2]').val();
 		 var disc3 = $('select[name=disc3]').val();
 		 if ((disc1==disc2) || (disc1==disc3) || (disc2==disc3)) {
-			 $('#submit').after('<br/><span class="error"><fmt:message key="validation.no_repeat" bundle="${ rb }" /></span>');
+			 $('#error').html('<fmt:message key="validation.no_repeat" bundle="${ rb }" />');
 		     return false;}
 
 	});
@@ -58,6 +58,7 @@ $(document).ready(function(){
 					</select> <input type="submit"
 						value="<fmt:message key="faculty.add" bundle="${ rb }" />"
 						id="submit"> <br> 
+						<div id="error" class="error"></div>
 						<c:if test="${not empty errorMessage }">
 						<span class="error"><fmt:message key="${errorMessage}" bundle="${rb }" /></span>
 						</c:if>

@@ -15,7 +15,7 @@ $(document).ready(function(){
 		 if (text1!=text2){
 		     $('#password1').css('background-color','#FF7171')
 		     $('#password2').css('background-color','#FF7171')
-		     $('#submit').after('<br/><span class="error"><fmt:message key="validation.repeat" bundle="${ rb }" /></span>');
+		     $('#error').html('<fmt:message key="validation.repeat" bundle="${ rb }" />');
 		     return false;}
 		 else{
 		    $('#password1').css('background-color','white')
@@ -56,6 +56,7 @@ $(document).ready(function(){
 			value="<fmt:message key="register.submit" bundle="${ rb }" />"
 			id="submit">
 			<br>
+			<div id="error" class="error"></div>
 			<c:if test="${not empty errorUserMessage }">
 			 <span class="error"><fmt:message key="${errorUserMessage }" bundle="${rb}" /></span>
 			 </c:if>

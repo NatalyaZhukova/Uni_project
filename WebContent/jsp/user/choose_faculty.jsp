@@ -15,7 +15,7 @@ $(document).ready(function(){
 		 var middleName = $('input[name=middle_name]').val();
 		var pattern = new RegExp("[\u0410-\u042F\u0401\][\u0430-\u044F\u0451]{1,20}");
 		 if ((middleName!="") && (!pattern.test(middleName))) {
-			 $('#submit').after('<br/><span class="error"><fmt:message key="validation.middle_name" bundle="${ rb }" /></span>');
+			 $('#error').html('<fmt:message key="validation.middle_name" bundle="${ rb }" />');
 		     return false;
 		 }
 	});
@@ -46,6 +46,7 @@ $(document).ready(function(){
 			</select>
 			<br> 
 				<input type="submit" value="<fmt:message key="chfaculty.next" bundle="${rb}" />" id="submit"> <br>
+				<div id="error" class="error"></div>
 				<c:if test="${not empty errorMessage }">
 				<span class="error"><fmt:message key="${errorMessage }" bundle="${rb}" /></span>
 				</c:if>

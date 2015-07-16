@@ -1,4 +1,5 @@
 <%@include file="libs.jsp"%>
+<c:set var="current" value="index" scope="session"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
