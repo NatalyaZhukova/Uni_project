@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 import by.zhukova.uni.logic.RegisterLogic;
 import by.zhukova.uni.logic.Validation;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
 
 /**
  * The Class ApplicationActionCommand is command which allows to register new
@@ -63,7 +62,7 @@ public class RegisterCommand implements ActionCommand {
 							}
 
 						} else {
-							request.setAttribute("errorUserMessage", MessageManager.getProperty(MESSAGE_USER_EXISTS));
+							request.setAttribute("errorUserMessage", MESSAGE_USER_EXISTS);
 						}
 					} else {
 						request.setAttribute("errorUserMessage", MESSAGE_INVALID_FORMAT);

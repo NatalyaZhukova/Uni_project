@@ -18,7 +18,6 @@ import org.apache.log4j.Logger;
 import by.zhukova.uni.command.ActionCommand;
 import by.zhukova.uni.command.ActionFactory;
 import by.zhukova.uni.resource.ConfigurationManager;
-import by.zhukova.uni.resource.MessageManager;
 
 
 /**
@@ -100,7 +99,7 @@ public class Controller extends HttpServlet {
 				page = ConfigurationManager.getProperty("path.page.main");
 			}
 
-			request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
+			logger.warn("null page");
 			response.sendRedirect(request.getContextPath() + page);
 		}
 	}

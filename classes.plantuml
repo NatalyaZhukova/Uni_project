@@ -1,0 +1,297 @@
+@startuml
+left to right direction
+skinparam headerFontSize 30
+skinparam headerFontStyle bold
+skinparam classAttributeIconSize 0
+scale 1.0
+package by.zhukova.uni.command {
+enum by.zhukova.uni.command.CommandEnum  {
+.. Fields  ..
+~command : ActionCommand
+.. Methods ..
++getCurrentCommand() : ActionCommand
+.. Static ..
++ {static} ABITUR : CommandEnum
++ {static} ADDSCORES : CommandEnum
++ {static} APPLIC : CommandEnum
++ {static} CHANGESTAT : CommandEnum
++ {static} CHFAC : CommandEnum
++ {static} CREATEFAC : CommandEnum
++ {static} DELFAC : CommandEnum
++ {static} EDITFAC : CommandEnum
++ {static} FAC : CommandEnum
++ {static} LANG : CommandEnum
++ {static} LOGIN : CommandEnum
++ {static} LOGOUT : CommandEnum
++ {static} REGISTER : CommandEnum
++ {static} SHOWABITUR : CommandEnum
++ {static} SHOWFAC : CommandEnum
++ {static} valueOf() : CommandEnum
++ {static} values() : CommandEnum[]
+}
+
+}
+package by.zhukova.uni.db {
+class by.zhukova.uni.db.DisciplineDAO <? extends AbstractDAO>  {
+.. Fields  ..
+-CREATE : String
+-DELETE : String
+-SELECT_ALL : String
+-SELECT_BY_ID : String
+-UPDATE : String
+.. Methods ..
++create(Discipline) : boolean
++delete(Discipline) : boolean
++delete(int) : boolean
++findAll() : List
++findEntityById(int) : Discipline
++update(Discipline) : boolean
+}
+class by.zhukova.uni.db.UserDAO <? extends AbstractDAO>  {
+.. Fields  ..
+-CREATE : String
+-DELETE : String
+-SELECT_ALL : String
+-SELECT_BY_ID : String
+-SELECT_BY_USERNAME : String
+-UPDATE : String
+.. Methods ..
++create(User) : boolean
++delete(User) : boolean
++delete(int) : boolean
++findAll() : List
++findEntityById(int) : User
++findUserByUsername(String) : User
++update(User) : boolean
+}
+class by.zhukova.uni.db.FacultyDAO <? extends AbstractDAO>  {
+.. Fields  ..
+-CREATE : String
+-DELETE : String
+-SELECT_ALL : String
+-SELECT_BY_ID : String
+-UPDATE : String
+.. Methods ..
++create(Faculty) : boolean
++delete(Faculty) : boolean
++delete(int) : boolean
++findAll() : List
++findEntityById(int) : Faculty
++update(Faculty) : boolean
+}
+class by.zhukova.uni.db.AbiturientDAO <? extends AbstractDAO>  {
+.. Fields  ..
+-CREATE : String
+-DELETE : String
+-SELECT_ALL : String
+-SELECT_BY_FACULTY : String
+-SELECT_BY_ID : String
+-SELECT_BY_STATUS : String
+-SELECT_BY_USERNAME : String
+-UPDATE : String
+.. Methods ..
++create(Abiturient) : boolean
++delete(int) : boolean
++delete(Abiturient) : boolean
++findAbiturByUsername(String) : Abiturient
++findAbitursByStatus(String) : List
++findAll() : List
++findApprovedAbitursByFaculty(int) : List
++findEntityById(int) : Abiturient
++update(Abiturient) : boolean
+}
+
+}
+package by.zhukova.uni.entity {
+class by.zhukova.uni.entity.Abiturient <? extends User>  {
+.. Fields  ..
+-chosenFaculty : int
+-firstName : String
+-firstScore : int
+-lastName : String
+-middleName : String
+-overallScore : int
+-schoolScore : double
+-secondScore : int
+-status : String
+-thirdScore : int
+.. Methods ..
++equals(Object) : boolean
++getChosenFaculty() : int
++getFirstName() : String
++getFirstScore() : int
++getLastName() : String
++getMiddleName() : String
++getOverallScore() : int
++getSchoolScore() : double
++getSecondScore() : int
++getStatus() : String
++getThirdScore() : int
++hashCode() : int
++setChosenFaculty(int) : void
++setFirstName(String) : void
++setFirstScore(int) : void
++setLastName(String) : void
++setMiddleName(String) : void
++setOverallScore(int) : void
++setSchoolScore(double) : void
++setSecondScore(int) : void
++setStatus(String) : void
++setThirdScore(int) : void
++toString() : String
+.. Static ..
+- {static} serialVersionUID : long
+}
+class by.zhukova.uni.entity.Discipline <? extends Entity>  {
+.. Fields  ..
+-name : String
+.. Methods ..
++equals(Object) : boolean
++getName() : String
++hashCode() : int
++setName(String) : void
++toString() : String
+.. Static ..
+- {static} serialVersionUID : long
+}
+abstract class by.zhukova.uni.entity.Entity  <<Serializable>>  {
+.. Fields  ..
+-id : int
+.. Methods ..
++equals(Object) : boolean
++getId() : int
++hashCode() : int
++setId(int) : void
++toString() : String
+.. Static ..
+- {static} serialVersionUID : long
+}
+class by.zhukova.uni.entity.User <? extends Entity>  {
+.. Fields  ..
+-password : String
+-userType : String
+-username : String
+.. Methods ..
++equals(Object) : boolean
++getPassword() : String
++getUserType() : String
++getUsername() : String
++hashCode() : int
++setPassword(String) : void
++setUserType(String) : void
++setUsername(String) : void
++toString() : String
+.. Static ..
+- {static} serialVersionUID : long
+}
+class by.zhukova.uni.entity.Faculty <? extends Entity>  {
+.. Fields  ..
+-facultyPlan : int
+-firstDiscipline : int
+-name : String
+-secondDiscipline : int
+-thirdDiscipline : int
+.. Methods ..
++equals(Object) : boolean
++getFacultyPlan() : int
++getFirstDiscipline() : int
++getName() : String
++getSecondDiscipline() : int
++getThirdDiscipline() : int
++hashCode() : int
++setFacultyPlan(int) : void
++setFirstDiscipline(int) : void
++setName(String) : void
++setSecondDiscipline(int) : void
++setThirdDiscipline(int) : void
++toString() : String
+.. Static ..
+- {static} serialVersionUID : long
+}
+
+}
+package by.zhukova.uni.exception {
+class by.zhukova.uni.exception.DaoException << (E,yellow) >>  {
+.. Fields  ..
+.. Static ..
+- {static} serialVersionUID : long
+}
+
+}
+package by.zhukova.uni.logic {
+class by.zhukova.uni.logic.Validation {
+.. Methods ..
+.. Static ..
++ {static} isAllFieldFilled() : boolean
++ {static} noRepeatDisciplines() : boolean
++ {static} passwordsEquals() : boolean
++ {static} userFieldValid() : boolean
++ {static} validFIO() : boolean
++ {static} validFaculty() : boolean
++ {static} validScores() : boolean
+}
+
+}
+package by.zhukova.uni.resource {
+class by.zhukova.uni.resource.ConfigurationManager {
+.. Fields  ..
+.. Methods ..
+.. Static ..
++ {static} getProperty() : String
+- {static} resourceBundle : ResourceBundle
+}
+
+}
+package by.zhukova.uni.test {
+class by.zhukova.uni.test.ConnectionPoolTest {
+.. Methods ..
++getConnectionTest() : void
++getInstanceTest() : void
+}
+class by.zhukova.uni.test.LoginLogicTest {
+.. Methods ..
++checkLoginTest() : void
+}
+class by.zhukova.uni.test.ValidationTest {
+.. Methods ..
++emptyFieldsExistsTest() : void
++isAllFieldFilledTest() : void
++userFieldValidTest() : void
+}
+class by.zhukova.uni.test.AbiturientLogicTest {
+.. Methods ..
++calculateSchoolScoreTest() : void
+}
+
+}
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.LangCommand
+by.zhukova.uni.command.CommandEnum o-- "1..1" by.zhukova.uni.command.ActionCommand
+by.zhukova.uni.db.AbstractDAO <|-- by.zhukova.uni.db.DisciplineDAO
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.AddScoresCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.ChangeStatusCommand
+by.zhukova.uni.entity.User <|-- by.zhukova.uni.entity.Abiturient
+by.zhukova.uni.entity.Entity <|-- by.zhukova.uni.entity.Discipline
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.ChooseFacultyCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.ShowFacultyCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.EmptyCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.ShowAbiturientCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.FacultiesCommand
+by.zhukova.uni.entity.Entity <|-- by.zhukova.uni.entity.User
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.EditFacultyCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.CreateFacultyCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.ApplicationActionCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.DeleteFacultyCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.RegisterCommand
+by.zhukova.uni.db.AbstractDAO <|-- by.zhukova.uni.db.UserDAO
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.LoginCommand
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.ShowFacultiesCommand
+by.zhukova.uni.entity.Entity <|-- by.zhukova.uni.entity.Faculty
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.ShowAbiturientsListCommand
+by.zhukova.uni.db.AbstractDAO <|-- by.zhukova.uni.db.FacultyDAO
+by.zhukova.uni.command.ActionCommand <|.. by.zhukova.uni.command.LogoutCommand
+by.zhukova.uni.db.AbstractDAO <|-- by.zhukova.uni.db.AbiturientDAO
+by.zhukova.uni.exception.DaoException <.. by.zhukova.uni.db.DisciplineDAO
+by.zhukova.uni.exception.DaoException <.. by.zhukova.uni.db.AbiturientDAO
+by.zhukova.uni.exception.DaoException <.. by.zhukova.uni.db.UserDAO
+by.zhukova.uni.exception.DaoException <.. by.zhukova.uni.db.FacultyDAO
+@enduml
