@@ -1,4 +1,5 @@
 <%@include file="..\libs.jsp"%>
+<c:set var="current" value="/jsp/admin/success_fac_delete.jsp" scope="session"></c:set>
 <!DOCTYPE html>
 <html>
 <head>

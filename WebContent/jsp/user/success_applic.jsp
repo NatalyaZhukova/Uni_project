@@ -1,5 +1,6 @@
 
 <%@include file="..\libs.jsp"%>
+<c:set var="current" value="/jsp/user/success_applic.jsp" scope="session"></c:set>
 <!DOCTYPE html>
 <html>
 <head>

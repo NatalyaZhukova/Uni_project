@@ -24,7 +24,7 @@ public class ConnectionPool {
 	/** The logger. */
 	private static Logger logger = Logger.getLogger(ConnectionPool.class);
 
-	public static final String PATH_LOG4J = "log4j.properties";
+	
 	private static final String PARAM_URL = "db.url";
 	private static final String PARAM_USER = "db.user";
 	private static final String PARAM_PASSWORD = "db.password";
